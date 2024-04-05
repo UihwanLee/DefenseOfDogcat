@@ -4,6 +4,16 @@
  > 게임 이름 : 디펜스 오브 도그캣 (Defence of Dogcat)
 
 > 개발 컨셉
+> 
+![22](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/bd273d7d-308c-401d-afcc-811823fb6d85)
+
+ * 2011년 안드로이드용 국산 게임으로 출시된 '팔라독' 게임 컨셉을 기반으로 한 디펜스 게임
+ * 다양한 유닛을 소환하여 적의 기지를 부셔 각기 다른 난이도의 스테이즈를 클리어하자!
+
+  
+> 개발 범위
+
+![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
 
  * 시작화면-로비-인게임 단계의 3가지 Scene 구현
    - 안드로이드 스튜디오의 다양한 레이아웃을 활용하여 3가지 단계의 Scene 구현
@@ -16,13 +26,6 @@
    - 스테이지 마다 1개의 유닛을 추가 배치하여 게임의 재미와 UI & 유닛 추가 시스템 구현
   * 게임 스코어 시스템 구현
    - 게임 클리어 시간을 활용하여 게임 스코어 계산 및 게임 마무리 구현   
-  
-> 개발 범위
-
-![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
- * 2011년 안드로이드용 국산 게임으로 출시된 '팔라독' 게임 컨셉을 기반으로 한 디펜스 게임
- * 다양한 유닛을 소환하여 적의 기지를 부셔 각기 다른 난이도의 스테이즈를 클리어하자!
-
 > 예상 게임 실행 흐름
 
 ![49d88598a18746f88bc4f381b3044b1f-2](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/c3d09c7d-500a-42ef-a429-fe5dad3d2482)

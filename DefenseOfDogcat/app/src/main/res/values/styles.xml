@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Widget.Theme.DefenseOfDogcat.MyView" parent="">
-        <item name="android:background">@color/gray_400</item>
-        <item name="exampleColor">@color/light_blue_400</item>
+    <style name="unitAllySlot">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="android:layout_marginTop">270dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:onClick">onBtnAllySlot</item>
     </style>
 </resources>

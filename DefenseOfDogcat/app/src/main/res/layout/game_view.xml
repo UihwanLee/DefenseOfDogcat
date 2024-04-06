@@ -17,64 +17,44 @@
 
     <ImageButton
         android:id="@+id/unit_ally_slot_01"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
-        android:scaleType="fitXY"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="15dp"
 
         />
 
     <ImageButton
         android:id="@+id/unit_ally_slot_02"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="95dp"
-        android:scaleType="fitXY"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_03"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="175dp"
-        android:scaleType="fitXY"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_04"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="255dp"
-        android:scaleType="fitXY"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_05"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="335dp"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_06"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="415dp"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_07"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="495dp"
         />
     <ImageButton
         android:id="@+id/unit_ally_slot_empty"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="270dp"
+        style="@style/unitAllySlot"
         android:layout_marginLeft="575dp"
         />
 

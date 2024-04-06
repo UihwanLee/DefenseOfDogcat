@@ -2,6 +2,7 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
 
 import android.os.Bundle;
 import android.view.View;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
@@ -50,5 +51,9 @@ public class GameAcitvity extends AppCompatActivity {
             iv.setImageResource(UI_ALLY_IDS[i]);
             iv.setTag(UI_ALLY_IDS[i]);
         }
+    }
+
+    public void onBtnAllySlot(View view) {
+        Log.d("Tag", "Slot clicked. ID=" + view.getId());
     }
 }

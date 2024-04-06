@@ -12,14 +12,17 @@
 
   
 ## 개발 범위
-> 주요 개발 범위  
+> 주요 개발 범위
+
 ![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
 
-> 플레이어  
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+> 플레이어
+
+|제목|내용|설명|
+|---|---|---|
+|테스트1|테스트2|테스트3|
+|테스트1|테스트2|테스트3|
+|테스트1|테스트2|테스트3|
 
 ## 예상 게임 흐름
 

@@ -12,15 +12,14 @@
 
   
 ## 개발 범위
-> 주요 개발 범위
+> 주요 개발 범위  
 ![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
 
-> 플레이어
-|  | Dogcat |
+> 플레이어  
+| First Header  | Second Header |
 | ------------- | ------------- |
-| Image  |   |
-| HP  | 100  |
-| Attack  | 20  |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
 
 ## 예상 게임 흐름
 

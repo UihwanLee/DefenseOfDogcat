@@ -22,7 +22,7 @@ public class GameView extends View {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
-    private int curStageIDX = 0;
+    private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
             R.mipmap.scene03_background_type_1,
     };
@@ -47,6 +47,9 @@ public class GameView extends View {
 
         // StateBar 제거
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        // Stage 기본 세팅
+        curStageIDX = 0;
 
         Resources res = getResources();
         bgBitmap = BitmapFactory.decodeResource(res, STAGE_IDS[curStageIDX]);
@@ -81,13 +84,16 @@ public class GameView extends View {
         canvas.save();
         canvas.translate(transformOffset.x, transformOffset.y);
         canvas.scale(transformScale, transformScale);
-        canvas.drawBitmap(bgBitmap, null, bgRect, null);
-        canvas.drawBitmap(controlBitmap, null, controlRect, null);
+        drawStage(canvas);
+        drawUI(canvas);
         canvas.restore();
     }
 
-    private void drawPaint(Canvas canvas, float tx, float ty, float scale, int depth) {
-
+    private void drawStage(Canvas canvas) {
+        canvas.drawBitmap(bgBitmap, null, bgRect, null);
     }
 
+    private void drawUI(Canvas canvas) {
+        canvas.drawBitmap(controlBitmap, null, controlRect, null);
+    }
 }

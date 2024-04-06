@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
 
 public class GameAcitvity extends AppCompatActivity {
+
+    private GameViewBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +17,8 @@ public class GameAcitvity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(new GameView(this));
+        binding = GameViewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        //setContentView(new GameView(this));
     }
 }

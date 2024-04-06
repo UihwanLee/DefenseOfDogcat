@@ -25,6 +25,18 @@ public class GameView extends View {
     private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
             R.mipmap.scene03_background_type_1,
+            R.mipmap.scene03_background_type_2,
+            R.mipmap.scene03_background_type_3,
+    };
+
+    private static int[] UI_ALLY_IDS = new int[] {
+            R.mipmap.ui_ally_01_rat,
+            R.mipmap.ui_ally_02_rabbit,
+            R.mipmap.ui_ally_03_bear,
+            R.mipmap.ui_ally_04_turtle,
+            R.mipmap.ui_ally_05_rhinoceros,
+            R.mipmap.ui_ally_06_penguin,
+            R.mipmap.ui_ally_07_dragon,
     };
 
     public GameView(Context context) {
@@ -94,6 +106,10 @@ public class GameView extends View {
     }
 
     private void drawUI(Canvas canvas) {
+        // 슬롯 UI 배치
         canvas.drawBitmap(controlBitmap, null, controlRect, null);
+
+        // 아군 슬롯 버튼 UI
+
     }
 }

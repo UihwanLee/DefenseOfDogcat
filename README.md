@@ -12,9 +12,10 @@
 
   
 ## 개발 범위
-> 주요 개발 범위
 
 ![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
+
+## 유닛
 
 > 플레이어
 
@@ -52,6 +53,18 @@
 
 * 적군 유닛은 기본적으로 아군 유닛보다 공력력이 한 단계 낮지만 코스트 시스템이 존재하지 않는다.
 * 적군 유닛은 아군 유닛과 달리 스테이지 마다 추가 유닛은 없다.
+
+## 레벨 디자인
+
+|STAGE|stage_01|stage_02|stage_03|
+|---|:-----------:|:-----------:|:-----------:|
+|Image|![level_desing_01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4f4b2a7c-5a0d-4db1-8a13-e25f18b2c472)|![level_desing_02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/50f647c2-a734-47ed-9bd3-85dfa86478f7)|![level_desing_03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/dc0b7a2f-5acf-47e9-8e7e-d95471627401)|
+|Enemy|zombie|skel_pirate&skel_ninja|witch&frankenstein|
+|Boss|X|X|O|
+
+* 스테이지는 총 3가지 단계로 각각의 스테이지마다 소환되는 적군 유닛이 다르다.
+* 마지막 3단계 스테이지에서는 중간 보스와 최종 보스가 존재하며 최종 보스까지 클리어 시 게임이 종료된다.
+
 
 ## 예상 게임 흐름
 

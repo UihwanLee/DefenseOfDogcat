@@ -27,6 +27,7 @@
 * 플레이어는 조이스틱 움직임을 통해 상하좌우 이동할 수 있다.
 * 플레이어는 공력력은 20이고, 다른 스킬은 따로 없다.
 
+
 > 아군 유닛
 
 |Type|rat|rabbit|bear|tutrle|rhinoceros|penguin|dragon|
@@ -34,6 +35,10 @@
 |Image|![ui_ally_01_rat](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/9c81a555-24f4-47d3-a0b2-dc4a21b8b62c)|![ui_ally_02_rabbit](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/0d31a63d-08da-4100-89b0-12823e2399fd)|![ui_ally_03_bear](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/7770bd0d-c5ea-4a9a-89aa-b6713ca742ca)|![ui_ally_04_turtle](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/1d8f5cbf-40ac-480c-8b83-c1496a4efee7)|![ui_ally_05_rhinoceros](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/b988f3d4-c17e-400f-a6bc-937ddfcea6bf)|![ui_ally_06_penguin](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4c85b1d9-f89f-4e09-ad14-cc234c2ade4e)|![ui_ally_07_dragon](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/311ed828-848d-4400-910a-779fdb30659b)|
 |HP|20|15|40|50|70|90|150|
 |ATK|5|8|10|20|50|60|100|
+|Feat|기본유닛|기본유닛|기본유닛|기본유닛|기본유닛|추가유닛|추가유닛|
+
+* 기본으로 제공되는 유닛은 총 5종류이며 스테이지 클리어 시 추가 유닛이 추가로 배치된다.
+* 방어력은 존재하지 않으며 간단하게 공격력으로 인해 HP가 변경되는 전투 시스템을 갖는다.
 
 ## 예상 게임 흐름
 

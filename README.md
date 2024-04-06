@@ -40,6 +40,18 @@
 * 기본으로 제공되는 유닛은 총 5종류이며 스테이지 클리어 시 추가 유닛이 추가로 배치된다.
 * 방어력은 존재하지 않으며 간단하게 공격력으로 인해 HP가 변경되는 전투 시스템을 갖는다.
 
+> 적군 유닛
+
+|Type|zombie|skel_pirate|skel_ninja|witch|frankenstein|
+|---|:----:|:----:|:----:|:----:|:----:|
+|Image|![zombie_base](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/88a7b09c-af0c-4471-9484-5f5060d54c0e)|![skeleton_pirate_base](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/69553157-c390-4f82-83b4-fa40a0305be9)|![skeleton_ninja](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/51c15ece-83cd-47a9-b776-37754eeba033)|![witch_base](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/b1c81488-21ad-4fcb-8ed3-58e6c7169120)|![frankenstein_base](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/300a1bf8-8110-4e53-a122-a175a6021eff)|
+|HP|10|8|30|70|120|
+|ATK|5|8|20|30|50|
+|Feat|기본유닛|기본유닛|기본유닛|기본유닛|기본유닛|
+
+* 적군 유닛은 기본적으로 아군 유닛보다 공력력이 한 단계 낮지만 코스트 시스템이 존재하지 않는다.
+* 적군 유닛은 아군 유닛과 달리 스테이지 마다 추가 유닛은 없다.
+
 ## 예상 게임 흐름
 
 ![49d88598a18746f88bc4f381b3044b1f-2](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/c3d09c7d-500a-42ef-a429-fe5dad3d2482)

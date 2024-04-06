@@ -18,11 +18,11 @@
 
 > 플레이어
 
-|제목|내용|설명|
-|---|---|---|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
+|Type|Player|
+|---|-----|
+|Image|![dogcat_idle](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/ff7a1e39-86a0-47af-afd1-bd47483ca33d)|
+|HP|100|
+|Attack|20|
 
 ## 예상 게임 흐름
 

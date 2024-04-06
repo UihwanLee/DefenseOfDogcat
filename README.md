@@ -57,9 +57,14 @@
 
 ## 레벨 디자인
 
+|SCENE02|stage_select|
+|---|:-----------:|
+|Image|![level_desing_select_stage](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/af9e8df1-21a6-48ac-bd69-db450764cccc)|
+
 |STAGE|stage_01|stage_02|stage_03|
 |---|:-----------:|:-----------:|:-----------:|
-|Image|![level_desing_01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4f4b2a7c-5a0d-4db1-8a13-e25f18b2c472)|![level_desing_02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/50f647c2-a734-47ed-9bd3-85dfa86478f7)|![level_desing_03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/dc0b7a2f-5acf-47e9-8e7e-d95471627401)|
+|Select|![scene02_stage01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/d1da6d0d-fc5b-40e8-92ad-4b4c047ce769)|![scene02_stage02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/58a80984-9363-4a0b-aaea-34c6dc473bf2)|![scene02_stage03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/e9e0ed58-2cd1-4fa9-9128-2952c2c6afa1)|
+|InGame|![level_desing_01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4f4b2a7c-5a0d-4db1-8a13-e25f18b2c472)|![level_desing_02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/50f647c2-a734-47ed-9bd3-85dfa86478f7)|![level_desing_03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/dc0b7a2f-5acf-47e9-8e7e-d95471627401)|
 |Enemy|zombie|skel_pirate&skel_ninja|witch&frankenstein|
 |Boss|X|X|O|
 

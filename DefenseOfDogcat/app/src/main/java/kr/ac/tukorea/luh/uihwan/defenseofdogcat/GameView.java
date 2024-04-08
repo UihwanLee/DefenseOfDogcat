@@ -34,7 +34,7 @@ public class GameView extends View {
     RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     int TOTAL_NUMBER_OF_FRAMES = 2;
-    Rect[] playerFrames = new Rect[TOTAL_NUMBER_OF_FRAMES];
+    Rect[] playerIDLEFrames = new Rect[TOTAL_NUMBER_OF_FRAMES];
 
     private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
@@ -73,8 +73,8 @@ public class GameView extends View {
 
         // 플레이어 애니메이션 세팅
         playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
-        playerFrames[0] = new Rect(0, 0, 200, 200);
-        playerFrames[1] = new Rect(200, 0, 400, 200);
+        playerIDLEFrames[0] = new Rect(0, 0, 200, 200);
+        playerIDLEFrames[1] = new Rect(200, 0, 400, 200);
     }
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -109,11 +109,11 @@ public class GameView extends View {
     }
 
     private void drawPlayer(Canvas canvas) {
-        float left = 5.0f;
-        float top = 2.0f;
-        float right = 4.0f;
-        float bottom = 6.0f;
-        canvas.drawBitmap(playerSheet, playerFrames[0], new RectF(left, top, right, bottom), null);
+        float playerPosX = 5.0f;
+        float playerPosY = 3.0f;
+        float playerEndX = playerPosX + 5.0f;
+        float playerEndY = playerPosY + 5.0f;
+        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], new RectF(playerPosX, playerPosY, playerEndX, playerEndY), null);
     }
 
     private void drawUI(Canvas canvas) {

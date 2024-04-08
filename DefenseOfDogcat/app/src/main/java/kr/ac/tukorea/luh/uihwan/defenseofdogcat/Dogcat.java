@@ -11,18 +11,26 @@ public class Dogcat {
 
     private float playerPosX;
     private float playerPosY;
+    private float playerStartX;
+    private float playerStartY;
     private float playerEndX;
     private float playerEndY;
 
     private static Bitmap playerSheet;
 
     public Dogcat() {
-        playerPosX = 5.0f;
-        playerPosY = 5.0f;
-        playerEndX = playerPosX + 5.0f;
-        playerEndY = playerPosY + 4.0f;
+        playerPosX = 3.0f;
+        playerPosY = 3.5f;
 
-        playerIDLEFrames[0] = new Rect(0, 0, 600, 600);
+        float playerOffsetX = 2.5f;
+        float playerOffsetY = 1.5f;
+
+        playerStartX = playerPosX - playerOffsetX;
+        playerStartY = playerPosY - playerOffsetY;
+        playerEndX = playerPosX + playerOffsetX;
+        playerEndY = playerPosY + playerOffsetY;
+
+        playerIDLEFrames[0] = new Rect(0, 280, 100, 600);
         playerIDLEFrames[1] = new Rect(200, 400, 400, 600);
     }
 
@@ -35,6 +43,6 @@ public class Dogcat {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], new RectF(playerPosX, playerPosY, playerEndX, playerEndY), null);
+        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], new RectF(playerStartX, playerStartY, playerEndX, playerEndY), null);
     }
 }

@@ -26,16 +26,13 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
-    private Bitmap playerSheet;
-
     private static final float SCREEN_WIDTH = 16.0f;
     private static final float SCREEN_HEIGHT = 9.0f;
     private final Matrix transformMatrix = new Matrix();
     RectF bgRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    int TOTAL_NUMBER_OF_FRAMES = 2;
-    Rect[] playerIDLEFrames = new Rect[TOTAL_NUMBER_OF_FRAMES];
+    private final Dogcat dogcat = new Dogcat();
 
     private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
@@ -72,10 +69,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
         bgBitmap = BitmapFactory.decodeResource(res, STAGE_IDS[curStageIDX]);
         controlBitmap = BitmapFactory.decodeResource(res, R.mipmap.scene03_ui_background);
 
-        // 플레이어 애니메이션 세팅
-        playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
-        playerIDLEFrames[0] = new Rect(0, 0, 200, 200);
-        playerIDLEFrames[1] = new Rect(200, 0, 400, 200);
+        // 플레이어 초기화
+        Bitmap playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
+        Dogcat.setBitmap(playerSheet);
 
         scheduleUpdate();
     }
@@ -129,11 +125,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     private void drawPlayer(Canvas canvas) {
-        float playerPosX = 5.0f;
-        float playerPosY = 3.0f;
-        float playerEndX = playerPosX + 5.0f;
-        float playerEndY = playerPosY + 5.0f;
-        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], new RectF(playerPosX, playerPosY, playerEndX, playerEndY), null);
+        dogcat.draw(canvas);
     }
 
     private void drawUI(Canvas canvas) {
@@ -146,5 +138,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void update() {
         // update
+        dogcat.update();
     }
 }

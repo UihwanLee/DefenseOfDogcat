@@ -12,13 +12,14 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Choreographer;
 import android.view.View;
 import android.widget.ImageView;
 
 /**
  * TODO: document your custom view class.
  */
-public class GameView extends View {
+public class GameView extends View implements Choreographer.FrameCallback {
 
     private static final String TAG = GameView.class.getSimpleName();
 
@@ -75,7 +76,25 @@ public class GameView extends View {
         playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
         playerIDLEFrames[0] = new Rect(0, 0, 200, 200);
         playerIDLEFrames[1] = new Rect(200, 0, 400, 200);
+
+        scheduleUpdate();
     }
+
+    // Handler is android.os.Handler.
+    // do not import java.util.logging.Handler
+    private void scheduleUpdate() {
+        Choreographer.getInstance().postFrameCallback(this);
+    }
+
+
+    @Override
+    public void doFrame(long nanos) {
+        update();
+        invalidate();
+        if (isShown()) {
+            scheduleUpdate();
+        }
+    };
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -123,5 +142,9 @@ public class GameView extends View {
 
         // 아군 슬롯 버튼 UI
 
+    }
+
+    private void update() {
+        // update
     }
 }

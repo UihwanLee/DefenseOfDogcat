@@ -29,7 +29,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
-    private final Dogcat dogcat = new Dogcat();
+    private Dogcat player;
 
     private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
@@ -70,7 +70,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         // 플레이어 초기화
         Bitmap playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
-        Dogcat.setBitmap(playerSheet);
+        this.player = new Dogcat(playerSheet);
 
         scheduleUpdate();
     }
@@ -156,7 +156,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     }
 
     private void drawPlayer(Canvas canvas) {
-        dogcat.draw(canvas);
+        player.draw(canvas);
     }
 
     private void drawUI(Canvas canvas) {
@@ -175,7 +175,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
                 pointsBuffer[0] = event.getX();
                 pointsBuffer[1] = event.getY();
                 invertedMatrix.mapPoints(pointsBuffer);
-                dogcat.setTargetPosition(pointsBuffer[0], pointsBuffer[1]);
+                player.setTargetPosition(pointsBuffer[0], pointsBuffer[1]);
                 return true;
         }
         return  super.onTouchEvent(event);
@@ -183,6 +183,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void update() {
         // update
-        dogcat.update(elapsedSeconds);
+        player.update(elapsedSeconds);
     }
 }

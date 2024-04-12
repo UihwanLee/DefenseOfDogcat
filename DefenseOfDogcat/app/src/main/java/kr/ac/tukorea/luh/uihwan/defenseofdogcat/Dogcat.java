@@ -2,6 +2,7 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 public class Dogcat {
@@ -16,9 +17,14 @@ public class Dogcat {
     private float x, y, angle;
     private float tx, ty, dx, dy;
 
-    private static Bitmap playerSheet;
+    private Bitmap playerSheet;
+    private Bitmap originSheet;
 
-    public Dogcat() {
+    //좌우 반전 이미지 효과 및 Bitmap 만들기
+    private Matrix sideInversion = new Matrix();
+    private Bitmap invertSheet;
+
+    public Dogcat(Bitmap playerSheet) {
         x = 8.0f;
         y = 2.0f;
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
@@ -26,10 +32,14 @@ public class Dogcat {
 
         playerIDLEFrames[0] = new Rect(0, 130, 70, 300);
         playerIDLEFrames[1] = new Rect(200, 400, 400, 600);
-    }
 
-    public static void setBitmap(Bitmap bitmap) { // Alt+Insert -> Setter
-        Dogcat.playerSheet = bitmap;
+        // 이미지 생성
+        this.playerSheet = playerSheet;
+        originSheet = playerSheet;
+
+        // 좌우 반전 이미지 생성
+        sideInversion.setScale(-1, 1);
+        invertSheet = Bitmap.createBitmap(playerSheet, 0, 0, playerSheet.getWidth(), playerSheet.getHeight(), sideInversion, false);
     }
 
     public void update(float elapsedSeconds) {
@@ -56,5 +66,8 @@ public class Dogcat {
         angle = (float) Math.toDegrees(radian) + 90;
         this.dx = SPEED * (float) Math.cos(radian);
         //this.dy = SPEED * (float) Math.sin(radian);
+
+        // 목표 위치에 따른 이미지 반전
+        this.playerSheet = (dx>=0) ? originSheet : invertSheet;
     }
 }

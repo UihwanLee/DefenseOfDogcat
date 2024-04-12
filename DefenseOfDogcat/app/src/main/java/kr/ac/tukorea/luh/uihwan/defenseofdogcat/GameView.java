@@ -15,6 +15,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Choreographer;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -117,6 +118,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private static final float SCREEN_WIDTH = 16.0f;
     private static final float SCREEN_HEIGHT = 9.0f;
     private final Matrix transformMatrix = new Matrix();
+    private final Matrix invertedMatrix = new Matrix();
+    private final float[] pointsBuffer = new float[2];
     RectF bgRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -134,6 +137,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
             transformMatrix.setTranslate(0, (h - w / game_ratio) / 2);
             transformMatrix.preScale(scale, scale);
         }
+        transformMatrix.invert(invertedMatrix);
     }
 
     @Override
@@ -161,6 +165,20 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         // 아군 슬롯 버튼 UI
 
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+                pointsBuffer[0] = event.getX();
+                pointsBuffer[1] = event.getY();
+                invertedMatrix.mapPoints(pointsBuffer);
+                dogcat.setTargetPosition(pointsBuffer[0], pointsBuffer[1]);
+                return true;
+        }
+        return  super.onTouchEvent(event);
     }
 
     private void update() {

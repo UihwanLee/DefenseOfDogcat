@@ -14,6 +14,7 @@ public class Dogcat {
     private static final float SPEED = 8.0f;
     private RectF dstRect = new RectF();
     private float x, y, angle;
+    private float tx, ty, dx, dy;
 
     private static Bitmap playerSheet;
 
@@ -32,12 +33,28 @@ public class Dogcat {
     }
 
     public void update(float elapsedSeconds) {
-
+        x += dx * elapsedSeconds;
+        // dx 의 부호를 고려하지 않으면 왔다갔다 덜덜떨린다
+        if ((dx < 0 && x < tx) || (dx > 0 && x > tx)) {
+            x = tx; dx = 0;
+        }
+        dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
     }
 
     public void draw(Canvas canvas) {
         canvas.save();
         canvas.drawBitmap(playerSheet, playerIDLEFrames[0], dstRect, null);
         canvas.restore();
+    }
+
+    public void setTargetPosition(float targetX, float targetY) {
+        tx = targetX;
+        ty = targetY;
+        float dx = tx - this.x;
+        float dy = ty - this.y;
+        double radian = Math.atan2(dy, dx);
+        angle = (float) Math.toDegrees(radian) + 90;
+        this.dx = SPEED * (float) Math.cos(radian);
+        //this.dy = SPEED * (float) Math.sin(radian);
     }
 }

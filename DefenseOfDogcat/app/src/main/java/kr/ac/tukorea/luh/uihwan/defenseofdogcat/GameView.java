@@ -82,14 +82,20 @@ public class GameView extends View implements Choreographer.FrameCallback {
         Choreographer.getInstance().postFrameCallback(this);
     }
 
-
+    private long previousNanos = 0;
+    private float elapsedSeconds;
     @Override
     public void doFrame(long nanos) {
-        update();
+        long elapsedNanos = nanos - previousNanos;
+        elapsedSeconds = elapsedNanos / 1_000_000_000f;
+        if (previousNanos != 0) {
+            update();
+        }
         invalidate();
         if (isShown()) {
             scheduleUpdate();
         }
+        previousNanos = nanos;
     };
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -138,6 +144,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void update() {
         // update
-        dogcat.update();
+        dogcat.update(elapsedSeconds);
     }
 }

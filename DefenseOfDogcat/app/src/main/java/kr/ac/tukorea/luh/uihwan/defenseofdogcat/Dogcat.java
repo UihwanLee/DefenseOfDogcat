@@ -38,7 +38,7 @@ public class Dogcat {
         Dogcat.playerSheet = bitmap;
     }
 
-    public void update() {
+    public void update(float elapsedSeconds) {
 
     }
 

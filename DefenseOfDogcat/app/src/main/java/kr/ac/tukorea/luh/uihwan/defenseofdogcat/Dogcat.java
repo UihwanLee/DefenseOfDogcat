@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
-public class Dogcat {
+public class Dogcat implements IGameObject {
 
     int TOTAL_NUMBER_OF_FRAMES = 2;
     Rect[] playerIDLEFrames;
@@ -49,6 +49,7 @@ public class Dogcat {
         playerIDLEFrames = playerIDLEOriginFrame;
     }
 
+    @Override
     public void update(float elapsedSeconds) {
         x += dx * elapsedSeconds;
         // dx 의 부호를 고려하지 않으면 왔다갔다 덜덜떨린다
@@ -58,6 +59,7 @@ public class Dogcat {
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
     }
 
+    @Override
     public void draw(Canvas canvas) {
         canvas.save();
         canvas.drawBitmap(playerSheet, playerIDLEFrames[0], dstRect, null);

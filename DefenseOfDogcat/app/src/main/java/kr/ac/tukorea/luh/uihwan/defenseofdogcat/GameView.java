@@ -19,6 +19,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 /**
  * TODO: document your custom view class.
  */
@@ -29,6 +31,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
+    private final ArrayList<IGameObject> gameObjects = new ArrayList<>();
     private Dogcat player;
 
     private int curStageIDX;
@@ -71,6 +74,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         // 플레이어 초기화
         Bitmap playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
         this.player = new Dogcat(playerSheet);
+        gameObjects.add(player);
 
         scheduleUpdate();
     }
@@ -147,7 +151,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         canvas.concat(transformMatrix);
         drawStage(canvas);
         drawUI(canvas);
-        drawPlayer(canvas);
+        drawObject(canvas);
         canvas.restore();
     }
 
@@ -155,8 +159,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
         canvas.drawBitmap(bgBitmap, null, bgRect, null);
     }
 
-    private void drawPlayer(Canvas canvas) {
-        player.draw(canvas);
+    private void drawObject(Canvas canvas) {
+        for (IGameObject gameObject : gameObjects) {
+            gameObject.draw(canvas);
+        }
     }
 
     private void drawUI(Canvas canvas) {
@@ -183,6 +189,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void update() {
         // update
-        player.update(elapsedSeconds);
+        for (IGameObject gameObject : gameObjects) {
+            gameObject.update(elapsedSeconds);
+        }
     }
 }

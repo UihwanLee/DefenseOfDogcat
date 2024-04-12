@@ -1,6 +1,8 @@
 package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,12 +27,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
-
-    private static final float SCREEN_WIDTH = 16.0f;
-    private static final float SCREEN_HEIGHT = 9.0f;
-    private final Matrix transformMatrix = new Matrix();
-    RectF bgRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     private final Dogcat dogcat = new Dogcat();
 
@@ -61,6 +57,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         // StateBar 제거
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+
+        setFullScreen(); // default behavior?
 
         // Stage 기본 세팅
         curStageIDX = 0;
@@ -98,6 +96,29 @@ public class GameView extends View implements Choreographer.FrameCallback {
         previousNanos = nanos;
     };
 
+    public void setFullScreen() {
+        int flags = View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                View.SYSTEM_UI_FLAG_FULLSCREEN |
+                View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        setSystemUiVisibility(flags);
+    }
+
+    public Activity getActivity() {
+        Context context = getContext();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity)context;
+            }
+            context = ((ContextWrapper)context).getBaseContext();
+        }
+        return null;
+    }
+
+    private static final float SCREEN_WIDTH = 16.0f;
+    private static final float SCREEN_HEIGHT = 9.0f;
+    private final Matrix transformMatrix = new Matrix();
+    RectF bgRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 

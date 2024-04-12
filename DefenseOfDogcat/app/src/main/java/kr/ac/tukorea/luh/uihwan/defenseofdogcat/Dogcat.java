@@ -9,28 +9,21 @@ public class Dogcat {
     int TOTAL_NUMBER_OF_FRAMES = 2;
     Rect[] playerIDLEFrames = new Rect[TOTAL_NUMBER_OF_FRAMES];
 
-    private float playerPosX;
-    private float playerPosY;
-    private float playerStartX;
-    private float playerStartY;
-    private float playerEndX;
-    private float playerEndY;
+    private static final float RADIUS_X = 2.5f;
+    private static final float RADIUS_Y = 1.5f;
+    private static final float SPEED = 8.0f;
+    private RectF dstRect = new RectF();
+    private float x, y, angle;
 
     private static Bitmap playerSheet;
 
     public Dogcat() {
-        playerPosX = 3.0f;
-        playerPosY = 3.5f;
+        x = 8.0f;
+        y = 2.0f;
+        dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
+        //dstRect.set(0.0f, 0.0f, 16.0f, 9.0f);
 
-        float playerOffsetX = 2.5f;
-        float playerOffsetY = 1.5f;
-
-        playerStartX = playerPosX - playerOffsetX;
-        playerStartY = playerPosY - playerOffsetY;
-        playerEndX = playerPosX + playerOffsetX;
-        playerEndY = playerPosY + playerOffsetY;
-
-        playerIDLEFrames[0] = new Rect(0, 280, 100, 600);
+        playerIDLEFrames[0] = new Rect(0, 130, 70, 300);
         playerIDLEFrames[1] = new Rect(200, 400, 400, 600);
     }
 
@@ -43,6 +36,8 @@ public class Dogcat {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], new RectF(playerStartX, playerStartY, playerEndX, playerEndY), null);
+        canvas.save();
+        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], dstRect, null);
+        canvas.restore();
     }
 }

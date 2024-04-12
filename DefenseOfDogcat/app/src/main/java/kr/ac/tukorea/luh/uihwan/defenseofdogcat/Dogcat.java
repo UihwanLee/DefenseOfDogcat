@@ -8,7 +8,9 @@ import android.graphics.RectF;
 public class Dogcat {
 
     int TOTAL_NUMBER_OF_FRAMES = 2;
-    Rect[] playerIDLEFrames = new Rect[TOTAL_NUMBER_OF_FRAMES];
+    Rect[] playerIDLEFrames;
+    Rect[] playerIDLEOriginFrame = new Rect[TOTAL_NUMBER_OF_FRAMES];
+    Rect[] playerIDLEInvertFrame = new Rect[TOTAL_NUMBER_OF_FRAMES];
 
     private static final float RADIUS_X = 2.5f;
     private static final float RADIUS_Y = 1.5f;
@@ -30,16 +32,21 @@ public class Dogcat {
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
         //dstRect.set(0.0f, 0.0f, 16.0f, 9.0f);
 
-        playerIDLEFrames[0] = new Rect(0, 130, 70, 300);
-        playerIDLEFrames[1] = new Rect(200, 400, 400, 600);
+        playerIDLEOriginFrame[0] = new Rect(0, 130, 70, 300);
+        playerIDLEOriginFrame[1] = new Rect(200, 400, 400, 600);
+
+        playerIDLEInvertFrame[0] = new Rect(320, 130, 600, 300);
+        playerIDLEInvertFrame[1] = new Rect(200, 400, 400, 600);
 
         // 이미지 생성
-        this.playerSheet = playerSheet;
         originSheet = playerSheet;
 
         // 좌우 반전 이미지 생성
         sideInversion.setScale(-1, 1);
         invertSheet = Bitmap.createBitmap(playerSheet, 0, 0, playerSheet.getWidth(), playerSheet.getHeight(), sideInversion, false);
+
+        this.playerSheet = originSheet;
+        playerIDLEFrames = playerIDLEOriginFrame;
     }
 
     public void update(float elapsedSeconds) {
@@ -69,5 +76,6 @@ public class Dogcat {
 
         // 목표 위치에 따른 이미지 반전
         this.playerSheet = (dx>=0) ? originSheet : invertSheet;
+        this.playerIDLEFrames = (dx>=0) ? playerIDLEOriginFrame : playerIDLEInvertFrame;
     }
 }

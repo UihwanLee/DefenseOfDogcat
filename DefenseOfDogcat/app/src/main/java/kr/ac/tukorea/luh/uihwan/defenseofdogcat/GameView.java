@@ -31,6 +31,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
+    //////////////////////////////////////////////////
+    // Global Variable (static member) for Resources
+    public static Resources res;
     private final ArrayList<IGameObject> gameObjects = new ArrayList<>();
     private Dogcat player;
 
@@ -59,6 +62,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
     private void init(AttributeSet attrs, int defStyle) {
         // Load attributes
 
+        // Resource 초기화
+        res = getResources();
+
         // StateBar 제거
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
@@ -67,13 +73,11 @@ public class GameView extends View implements Choreographer.FrameCallback {
         // Stage 기본 세팅
         curStageIDX = 0;
 
-        Resources res = getResources();
-        bgBitmap = BitmapFactory.decodeResource(res, STAGE_IDS[curStageIDX]);
-        controlBitmap = BitmapFactory.decodeResource(res, R.mipmap.scene03_ui_background);
+        bgBitmap = BitmapPool.get(STAGE_IDS[curStageIDX]);
+        controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
 
         // 플레이어 초기화
-        Bitmap playerSheet = BitmapFactory.decodeResource(res, R.mipmap.player_animation_sheet);
-        this.player = new Dogcat(playerSheet);
+        this.player = new Dogcat();
         gameObjects.add(player);
 
         scheduleUpdate();

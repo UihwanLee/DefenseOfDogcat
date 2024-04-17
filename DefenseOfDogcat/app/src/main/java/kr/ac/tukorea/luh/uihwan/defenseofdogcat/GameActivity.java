@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
 
-public class GameAcitvity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     private GameViewBinding binding;
 

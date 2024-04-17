@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onBtnStartGame(View view) {
         Log.d(TAG, "Open GameView");
-        Intent intent = new Intent(this, GameAcitvity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 }

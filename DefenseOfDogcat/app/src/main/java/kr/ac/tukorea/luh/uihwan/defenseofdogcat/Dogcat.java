@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 public class Dogcat implements IGameObject {
 
+    private final Bitmap invertSheet;
     int TOTAL_NUMBER_OF_FRAMES = 2;
     Rect[] playerIDLEFrames;
     Rect[] playerIDLEOriginFrame = new Rect[TOTAL_NUMBER_OF_FRAMES];
@@ -24,26 +25,25 @@ public class Dogcat implements IGameObject {
 
     //좌우 반전 이미지 효과 및 Bitmap 만들기
     private Matrix sideInversion = new Matrix();
-    private Bitmap invertSheet;
 
-    public Dogcat(Bitmap playerSheet) {
+    public Dogcat() {
         x = 8.0f;
         y = 2.0f;
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
         //dstRect.set(0.0f, 0.0f, 16.0f, 9.0f);
 
-        playerIDLEOriginFrame[0] = new Rect(0, 130, 70, 300);
+        playerIDLEOriginFrame[0] = new Rect(0, 200, 100, 300);
         playerIDLEOriginFrame[1] = new Rect(200, 400, 400, 600);
 
         playerIDLEInvertFrame[0] = new Rect(320, 130, 600, 300);
         playerIDLEInvertFrame[1] = new Rect(200, 400, 400, 600);
 
         // 이미지 생성
-        originSheet = playerSheet;
+        originSheet = BitmapPool.get(R.mipmap.player_animation_sheet);
 
         // 좌우 반전 이미지 생성
         sideInversion.setScale(-1, 1);
-        invertSheet = Bitmap.createBitmap(playerSheet, 0, 0, playerSheet.getWidth(), playerSheet.getHeight(), sideInversion, false);
+        invertSheet = Bitmap.createBitmap(originSheet, 0, 0, originSheet.getWidth(), originSheet.getHeight(), sideInversion, false);
 
         this.playerSheet = originSheet;
         playerIDLEFrames = playerIDLEOriginFrame;

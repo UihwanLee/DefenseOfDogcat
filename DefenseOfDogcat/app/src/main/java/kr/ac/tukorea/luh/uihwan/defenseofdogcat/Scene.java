@@ -48,7 +48,7 @@ public class Scene {
         scene.onResume();
     }
 
-    private static void finishActivity() {
+    public static void finishActivity() {
         //GameView gameView = null;
         //gaveView.getActivity().finish();
         GameActivity.activity.finish();
@@ -85,5 +85,9 @@ public class Scene {
     protected void onPause() {
     }
     protected void onResume() {
+    }
+
+    public boolean onBackPressed() {
+        return false;
     }
 }

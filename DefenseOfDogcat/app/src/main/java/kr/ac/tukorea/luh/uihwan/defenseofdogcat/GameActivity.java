@@ -13,6 +13,7 @@ public class GameActivity extends AppCompatActivity {
 
     private GameViewBinding binding;
     public static GameActivity activity;
+    private GameView gameView;
 
     private static int[] UI_ALLY_IDS = new int[] {
             R.mipmap.ui_ally_01_rat,
@@ -47,6 +48,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         //setContentView(new GameView(this));
 
+        gameView = new GameView(this);
+
         activity = this;
 
         new InGameScene(STAGE_IDS[0]).push();
@@ -57,7 +60,7 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        gameView.onBackPressed();
     }
 
     private void init_unit_slot() {

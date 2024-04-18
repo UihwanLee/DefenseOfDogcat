@@ -15,6 +15,8 @@ public class InGameScene extends Scene {
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
 
+    private final JoyStick joyStick;
+
     RectF bgRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
     RectF controlRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
 
@@ -23,9 +25,13 @@ public class InGameScene extends Scene {
         bgBitmap = BitmapPool.get(stage);
         controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
 
-        // 플레이어 초기화
+        // player 초기화
         this.player = new Dogcat();
         gameObjects.add(player);
+
+        // joyStick 초기화
+        this.joyStick = new JoyStick();
+        gameObjects.add(joyStick);
     }
 
     @Override
@@ -40,14 +46,6 @@ public class InGameScene extends Scene {
 
     @Override
     public boolean onTouch(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                float[] pts = Metrics.fromScreen(event.getX(), event.getY());
-                player.setTargetPosition(pts[0], pts[1]);
-                Log.d(TAG, "X Y = " + pts[0] + pts[1]);
-                return true;
-        }
-        return false;
+        return joyStick.onTouch(event);
     }
 }

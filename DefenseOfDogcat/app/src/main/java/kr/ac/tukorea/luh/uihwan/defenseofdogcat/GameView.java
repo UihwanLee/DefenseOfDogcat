@@ -5,21 +5,14 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -130,34 +123,19 @@ public class GameView extends View implements Choreographer.FrameCallback {
         return null;
     }
 
-    private final Matrix transformMatrix = new Matrix();
-    private final Matrix invertedMatrix = new Matrix();
-    private final float[] pointsBuffer = new float[2];
     RectF bgRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
     RectF controlRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        float view_ratio = (float)w / (float)h;
-        float game_ratio = Metrics.SCREEN_WIDTH / Metrics.SCREEN_HEIGHT;
-
-        if (view_ratio > game_ratio) {
-            float scale = h / Metrics.SCREEN_HEIGHT;
-            transformMatrix.setTranslate((w - h * game_ratio) / 2, 0);
-            transformMatrix.preScale(scale, scale);
-        } else {
-            float scale = w / Metrics.SCREEN_WIDTH;
-            transformMatrix.setTranslate(0, (h - w / game_ratio) / 2);
-            transformMatrix.preScale(scale, scale);
-        }
-        transformMatrix.invert(invertedMatrix);
+        Metrics.onSize(w, h);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
-        canvas.concat(transformMatrix);
+        Metrics.concat(canvas);
         drawStage(canvas);
         drawUI(canvas);
         drawObject(canvas);
@@ -194,10 +172,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
-                pointsBuffer[0] = event.getX();
-                pointsBuffer[1] = event.getY();
-                invertedMatrix.mapPoints(pointsBuffer);
-                player.setTargetPosition(pointsBuffer[0], pointsBuffer[1]);
+                float[] pts = Metrics.fromScreen(event.getX(), event.getY());
+                player.setTargetPosition(pts[0], pts[1]);
                 return true;
         }
         return  super.onTouchEvent(event);

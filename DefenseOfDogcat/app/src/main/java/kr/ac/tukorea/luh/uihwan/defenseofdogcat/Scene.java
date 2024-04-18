@@ -7,17 +7,25 @@ import android.view.MotionEvent;
 
 public class Scene {
 
-    protected static Scene currentScene;
+    private static ArrayList<Scene> stack = new ArrayList<>();
 
     public static Scene top() {
-        return currentScene;
+        int top = stack.size() - 1;
+        if (top < 0) return null;
+        return stack.get(top);
     }
     public static void push(Scene scene) {
-        currentScene = scene;
+        stack.add(scene);
     }
 
     public void push() {
         push(this);
+    }
+
+    public static void pop() {
+        int top = stack.size() - 1;
+        if (top < 0) return;
+        stack.remove(top);
     }
 
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();

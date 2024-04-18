@@ -130,25 +130,23 @@ public class GameView extends View implements Choreographer.FrameCallback {
         return null;
     }
 
-    private static final float SCREEN_WIDTH = 16.0f;
-    private static final float SCREEN_HEIGHT = 9.0f;
     private final Matrix transformMatrix = new Matrix();
     private final Matrix invertedMatrix = new Matrix();
     private final float[] pointsBuffer = new float[2];
-    RectF bgRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    RectF controlRect = new RectF(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    RectF bgRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
+    RectF controlRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
         float view_ratio = (float)w / (float)h;
-        float game_ratio = SCREEN_WIDTH / SCREEN_HEIGHT;
+        float game_ratio = Metrics.SCREEN_WIDTH / Metrics.SCREEN_HEIGHT;
 
         if (view_ratio > game_ratio) {
-            float scale = h / SCREEN_HEIGHT;
+            float scale = h / Metrics.SCREEN_HEIGHT;
             transformMatrix.setTranslate((w - h * game_ratio) / 2, 0);
             transformMatrix.preScale(scale, scale);
         } else {
-            float scale = w / SCREEN_WIDTH;
+            float scale = w / Metrics.SCREEN_WIDTH;
             transformMatrix.setTranslate(0, (h - w / game_ratio) / 2);
             transformMatrix.preScale(scale, scale);
         }

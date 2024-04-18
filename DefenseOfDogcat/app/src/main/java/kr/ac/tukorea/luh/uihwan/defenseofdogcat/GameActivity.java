@@ -40,6 +40,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         //setContentView(new GameView(this));
 
+        InGameScene inGameScene = new InGameScene(R.mipmap.scene03_background_type_1);
+        Scene.push(inGameScene);
+
         // ally unit slot image 적용
         init_unit_slot();
     }

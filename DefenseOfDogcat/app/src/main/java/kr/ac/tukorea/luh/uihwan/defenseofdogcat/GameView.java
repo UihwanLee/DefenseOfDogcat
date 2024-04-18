@@ -23,8 +23,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private static final String TAG = GameView.class.getSimpleName();
 
-    private Bitmap bgBitmap;
-    private Bitmap controlBitmap;
 
     //////////////////////////////////////////////////
     // Global Variable (static member) for Resources
@@ -73,9 +71,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
         // Stage 기본 세팅
         curStageIDX = 0;
 
-        bgBitmap = BitmapPool.get(STAGE_IDS[curStageIDX]);
-        controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
-
         // 플레이어 초기화
         this.player = new Dogcat();
         gameObjects.add(player);
@@ -123,8 +118,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
         return null;
     }
 
-    RectF bgRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
-    RectF controlRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
@@ -136,29 +129,14 @@ public class GameView extends View implements Choreographer.FrameCallback {
         super.onDraw(canvas);
         canvas.save();
         Metrics.concat(canvas);
-        drawStage(canvas);
-        drawUI(canvas);
         drawObject(canvas);
         canvas.restore();
         drawFPS(canvas);
     }
 
-    private void drawStage(Canvas canvas) {
-        canvas.drawBitmap(bgBitmap, null, bgRect, null);
-    }
-
     private void drawObject(Canvas canvas) {
-        for (IGameObject gameObject : gameObjects) {
-            gameObject.draw(canvas);
-        }
-    }
-
-    private void drawUI(Canvas canvas) {
-        // 슬롯 UI 배치
-        canvas.drawBitmap(controlBitmap, null, controlRect, null);
-
-        // 아군 슬롯 버튼 UI
-
+        Scene scene = Scene.top();
+        scene.draw(canvas);
     }
 
     private void drawFPS(Canvas canvas)
@@ -169,20 +147,14 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-                float[] pts = Metrics.fromScreen(event.getX(), event.getY());
-                player.setTargetPosition(pts[0], pts[1]);
-                return true;
-        }
+        boolean handled = Scene.top().onTouch(event);
+        if (handled) return true;
         return  super.onTouchEvent(event);
     }
 
     private void update() {
         // update
-        for (IGameObject gameObject : gameObjects) {
-            gameObject.update(elapsedSeconds);
-        }
+        Scene scene = Scene.top();
+        scene.update(elapsedSeconds);
     }
 }

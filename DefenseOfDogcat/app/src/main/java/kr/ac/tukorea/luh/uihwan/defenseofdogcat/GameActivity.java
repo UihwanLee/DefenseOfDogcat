@@ -55,6 +55,11 @@ public class GameActivity extends AppCompatActivity {
         init_unit_slot();
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     private void init_unit_slot() {
         for(int i=0; i < ALLY_SLOT_VIEW_IDS.length; i++) {
             ImageView iv = findViewById(ALLY_SLOT_VIEW_IDS[i]);

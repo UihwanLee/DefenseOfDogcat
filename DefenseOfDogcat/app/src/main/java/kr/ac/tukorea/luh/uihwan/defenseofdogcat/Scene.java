@@ -3,15 +3,21 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
+
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class Scene {
 
+    private static final String TAG = Scene.class.getSimpleName();
     private static ArrayList<Scene> stack = new ArrayList<>();
 
     public static Scene top() {
         int top = stack.size() - 1;
-        if (top < 0) return null;
+        if (top < 0) {
+            Log.e(TAG, "Scene Stack is empty in Scene.top()");
+            return null;
+        }
         return stack.get(top);
     }
     public static void push(Scene scene) {
@@ -29,7 +35,11 @@ public class Scene {
 
     public static void pop() {
         Scene scene = top();
-        if (scene == null) return;
+        if (scene == null) {
+            Log.i(TAG, "Last scene is being popped");
+            finishActivity();
+            return;
+        }
         scene.onEnd();
         stack.remove(scene);
 
@@ -37,6 +47,13 @@ public class Scene {
         if (scene == null) return;
         scene.onResume();
     }
+
+    private static void finishActivity() {
+        //GameView gameView = null;
+        //gaveView.getActivity().finish();
+        GameActivity.activity.finish();
+    }
+
 
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
 

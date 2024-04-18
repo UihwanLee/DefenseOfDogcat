@@ -32,12 +32,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private final Paint fpsPaint = new Paint();
 
-    private int curStageIDX;
-    private static int[] STAGE_IDS = new int[] {
-            R.mipmap.scene03_background_type_1,
-            R.mipmap.scene03_background_type_2,
-            R.mipmap.scene03_background_type_3,
-    };
 
     public GameView(Context context) {
         super(context);
@@ -67,13 +61,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         fpsPaint.setColor(Color.BLUE);
         fpsPaint.setTextSize(100f);
-
-        // Stage 기본 세팅
-        curStageIDX = 0;
-
-        // 플레이어 초기화
-        this.player = new Dogcat();
-        gameObjects.add(player);
 
         scheduleUpdate();
     }
@@ -107,17 +94,6 @@ public class GameView extends View implements Choreographer.FrameCallback {
         setSystemUiVisibility(flags);
     }
 
-    public Activity getActivity() {
-        Context context = getContext();
-        while (context instanceof ContextWrapper) {
-            if (context instanceof Activity) {
-                return (Activity)context;
-            }
-            context = ((ContextWrapper)context).getBaseContext();
-        }
-        return null;
-    }
-
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
@@ -136,6 +112,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void drawObject(Canvas canvas) {
         Scene scene = Scene.top();
+        if (scene == null) {
+            return;
+        }
         scene.draw(canvas);
     }
 
@@ -147,14 +126,19 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean handled = Scene.top().onTouch(event);
-        if (handled) return true;
+        Scene scene = Scene.top();
+        if (scene != null) {
+            boolean handled = scene.onTouch(event);
+            if (handled) return true;
+        }
         return  super.onTouchEvent(event);
     }
 
     private void update() {
         // update
         Scene scene = Scene.top();
-        scene.update(elapsedSeconds);
+        if (scene != null) {
+            scene.update(elapsedSeconds);
+        }
     }
 }

@@ -12,6 +12,7 @@ import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
 public class GameActivity extends AppCompatActivity {
 
     private GameViewBinding binding;
+    public static GameActivity activity;
 
     private static int[] UI_ALLY_IDS = new int[] {
             R.mipmap.ui_ally_01_rat,
@@ -29,6 +30,12 @@ public class GameActivity extends AppCompatActivity {
             R.id.unit_ally_slot_07,
     };
 
+    private static int[] STAGE_IDS = new int[] {
+            R.mipmap.scene03_background_type_1,
+            R.mipmap.scene03_background_type_2,
+            R.mipmap.scene03_background_type_3,
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +47,9 @@ public class GameActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         //setContentView(new GameView(this));
 
-        new InGameScene(R.mipmap.scene03_background_type_1).push();
+        activity = this;
+
+        new InGameScene(STAGE_IDS[0]).push();
 
         // ally unit slot image 적용
         init_unit_slot();

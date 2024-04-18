@@ -146,6 +146,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         Scene scene = Scene.top();
         if (scene == null) {
             Scene.finishActivity();
+            return;
         }
         boolean handled = scene.onBackPressed();
         if (handled) return;

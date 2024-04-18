@@ -5,6 +5,7 @@ import android.view.View;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import androidx.activity.OnBackPressedCallback;
 
 import androidx.appcompat.app.AppCompatActivity;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
@@ -56,12 +57,16 @@ public class GameActivity extends AppCompatActivity {
 
         // ally unit slot image 적용
         init_unit_slot();
+
+        getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
     }
 
-    @Override
-    public void onBackPressed() {
-        gameView.onBackPressed();
-    }
+    private final OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            gameView.onBackPressed();
+        }
+    };
 
     private void init_unit_slot() {
         for(int i=0; i < ALLY_SLOT_VIEW_IDS.length; i++) {

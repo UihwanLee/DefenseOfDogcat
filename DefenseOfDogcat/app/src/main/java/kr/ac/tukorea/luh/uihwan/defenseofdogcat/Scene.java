@@ -15,7 +15,12 @@ public class Scene {
         return stack.get(top);
     }
     public static void push(Scene scene) {
+        Scene prev = top();
+        if (prev != null) {
+            prev.onPause();
+        }
         stack.add(scene);
+        scene.onStart();
     }
 
     public void push() {
@@ -23,9 +28,14 @@ public class Scene {
     }
 
     public static void pop() {
-        int top = stack.size() - 1;
-        if (top < 0) return;
-        stack.remove(top);
+        Scene scene = top();
+        if (scene == null) return;
+        scene.onEnd();
+        stack.remove(scene);
+
+        scene = top();
+        if (scene == null) return;
+        scene.onResume();
     }
 
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
@@ -44,5 +54,19 @@ public class Scene {
 
     public boolean onTouch(MotionEvent event) {
         return false;
+    }
+
+    //////////////////////////////////////////////////
+    // Overridables
+
+
+    protected void onStart() {
+    }
+    protected void onEnd() {
+    }
+
+    protected void onPause() {
+    }
+    protected void onResume() {
     }
 }

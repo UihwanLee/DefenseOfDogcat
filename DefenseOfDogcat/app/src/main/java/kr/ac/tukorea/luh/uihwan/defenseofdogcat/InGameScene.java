@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -26,9 +27,13 @@ public class InGameScene extends Scene {
         // 플레이어 초기화
         this.player = new Dogcat();
         gameObjects.add(player);
+    }
 
-        //canvas.drawBitmap(bgBitmap, null, bgRect, null);
-        //canvas.drawBitmap(controlBitmap, null, controlRect, null);
+    @Override
+    public void update(float elapsedSeconds) {
+        for (IGameObject gameObject : gameObjects) {
+            gameObject.update(elapsedSeconds);
+        }
     }
 
     @Override
@@ -48,6 +53,7 @@ public class InGameScene extends Scene {
             case MotionEvent.ACTION_MOVE:
                 float[] pts = Metrics.fromScreen(event.getX(), event.getY());
                 player.setTargetPosition(pts[0], pts[1]);
+                Log.d(TAG, "X Y = " + pts[0] + pts[1]);
                 return true;
         }
         return false;

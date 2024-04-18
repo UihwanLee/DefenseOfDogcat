@@ -16,6 +16,10 @@ public class Scene {
         currentScene = scene;
     }
 
+    public void push() {
+        push(this);
+    }
+
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
 
     public void update(float elapsedSeconds) {

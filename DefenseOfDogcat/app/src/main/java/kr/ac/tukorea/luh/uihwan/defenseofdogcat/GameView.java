@@ -7,7 +7,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -36,6 +38,8 @@ public class GameView extends View implements Choreographer.FrameCallback {
     public static Resources res;
     private final ArrayList<IGameObject> gameObjects = new ArrayList<>();
     private Dogcat player;
+
+    private final Paint fpsPaint = new Paint();
 
     private int curStageIDX;
     private static int[] STAGE_IDS = new int[] {
@@ -69,6 +73,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
         setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
 
         setFullScreen(); // default behavior?
+
+        fpsPaint.setColor(Color.BLUE);
+        fpsPaint.setTextSize(100f);
 
         // Stage 기본 세팅
         curStageIDX = 0;
@@ -157,6 +164,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         drawUI(canvas);
         drawObject(canvas);
         canvas.restore();
+        drawFPS(canvas);
     }
 
     private void drawStage(Canvas canvas) {
@@ -175,6 +183,12 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         // 아군 슬롯 버튼 UI
 
+    }
+
+    private void drawFPS(Canvas canvas)
+    {
+        int fps = (int) (1.0f / elapsedSeconds);
+        canvas.drawText("FPS: " + fps, 100f, 200f, fpsPaint);
     }
 
     @Override

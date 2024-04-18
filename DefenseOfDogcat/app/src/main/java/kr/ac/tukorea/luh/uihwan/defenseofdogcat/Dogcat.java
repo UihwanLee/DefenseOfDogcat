@@ -23,10 +23,12 @@ public class Dogcat implements IGameObject {
     private Bitmap playerSheet;
     private Bitmap originSheet;
 
+    private final JoyStick joyStick;
+
     //좌우 반전 이미지 효과 및 Bitmap 만들기
     private Matrix sideInversion = new Matrix();
 
-    public Dogcat() {
+    public Dogcat(JoyStick joyStick) {
         x = 8.0f;
         y = 2.0f;
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
@@ -35,7 +37,7 @@ public class Dogcat implements IGameObject {
         playerIDLEOriginFrame[0] = new Rect(0, 200, 100, 300);
         playerIDLEOriginFrame[1] = new Rect(200, 400, 400, 600);
 
-        playerIDLEInvertFrame[0] = new Rect(320, 130, 600, 300);
+        playerIDLEInvertFrame[0] = new Rect(500, 200, 600, 300);
         playerIDLEInvertFrame[1] = new Rect(200, 400, 400, 600);
 
         // 이미지 생성
@@ -47,16 +49,22 @@ public class Dogcat implements IGameObject {
 
         this.playerSheet = originSheet;
         playerIDLEFrames = playerIDLEOriginFrame;
+
+        this.joyStick = joyStick;
     }
 
     @Override
     public void update(float elapsedSeconds) {
-        x += dx * elapsedSeconds;
-        // dx 의 부호를 고려하지 않으면 왔다갔다 덜덜떨린다
-        if ((dx < 0 && x < tx) || (dx > 0 && x > tx)) {
-            x = tx; dx = 0;
+        if (joyStick.power > 0) {
+            float distance = SPEED * joyStick.power * elapsedSeconds;
+            x += (float) (distance * Math.cos(joyStick.angle_radian));
+            dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
+            angle = (float) Math.toDegrees(joyStick.angle_radian) + 90;
+
+            // 목표 위치에 따른 이미지 반전
+            this.playerSheet = (Math.cos(joyStick.angle_radian)>=0) ? originSheet : invertSheet;
+            this.playerIDLEFrames = (Math.cos(joyStick.angle_radian)>=0) ? playerIDLEOriginFrame : playerIDLEInvertFrame;
         }
-        dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
     }
 
     @Override
@@ -64,20 +72,5 @@ public class Dogcat implements IGameObject {
         canvas.save();
         canvas.drawBitmap(playerSheet, playerIDLEFrames[0], dstRect, null);
         canvas.restore();
-    }
-
-    public void setTargetPosition(float targetX, float targetY) {
-        tx = targetX;
-        ty = targetY;
-        float dx = tx - this.x;
-        float dy = ty - this.y;
-        double radian = Math.atan2(dy, dx);
-        angle = (float) Math.toDegrees(radian) + 90;
-        this.dx = SPEED * (float) Math.cos(radian);
-        //this.dy = SPEED * (float) Math.sin(radian);
-
-        // 목표 위치에 따른 이미지 반전
-        this.playerSheet = (dx>=0) ? originSheet : invertSheet;
-        this.playerIDLEFrames = (dx>=0) ? playerIDLEOriginFrame : playerIDLEInvertFrame;
     }
 }

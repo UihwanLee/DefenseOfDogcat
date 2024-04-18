@@ -25,13 +25,13 @@ public class InGameScene extends Scene {
         bgBitmap = BitmapPool.get(stage);
         controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
 
-        // player 초기화
-        this.player = new Dogcat();
-        gameObjects.add(player);
-
         // joyStick 초기화
         this.joyStick = new JoyStick();
         gameObjects.add(joyStick);
+
+        // player 초기화
+        this.player = new Dogcat(joyStick);
+        gameObjects.add(player);
     }
 
     @Override

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class InGameScene extends Scene {
     private static final String TAG = InGameScene.class.getSimpleName();
-    private final ArrayList<IGameObject> gameObjects = new ArrayList<>();
     private Dogcat player;
     private Bitmap bgBitmap;
     private Bitmap controlBitmap;
@@ -27,13 +26,6 @@ public class InGameScene extends Scene {
         // 플레이어 초기화
         this.player = new Dogcat();
         gameObjects.add(player);
-    }
-
-    @Override
-    public void update(float elapsedSeconds) {
-        for (IGameObject gameObject : gameObjects) {
-            gameObject.update(elapsedSeconds);
-        }
     }
 
     @Override

@@ -1,10 +1,13 @@
 package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
+import android.graphics.RectF;
+
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
-public class Friendly extends Sprite {
+public class Friendly extends Sprite implements IBoxCollidable {
     private static final float SPEED = 1.0f;
 
     public Friendly(int index) {
@@ -19,5 +22,10 @@ public class Friendly extends Sprite {
         if (dstRect.right > Metrics.width) {
             Scene.top().remove(this);
         }
+    }
+
+    @Override
+    public RectF getCollisionRect() {
+        return dstRect;
     }
 }

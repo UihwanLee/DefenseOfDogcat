@@ -3,11 +3,13 @@ package kr.ac.tukorea.luh.uihwan.framework.objects;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
 public class Sprite implements IGameObject {
+    private static final String TAG = Sprite.class.getSimpleName();
     protected Bitmap bitmap;
     protected final RectF dstRect = new RectF();
     protected float x, y, dx, dy;
@@ -17,6 +19,7 @@ public class Sprite implements IGameObject {
         if (mipmapId != 0) {
             bitmap = BitmapPool.get(mipmapId);
         }
+        Log.v(TAG, "Created " + this.getClass().getSimpleName() + "@" + System.identityHashCode(this));
     }
 
     public void setPosition(float x, float y, float radius) {

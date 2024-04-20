@@ -37,14 +37,23 @@ public class InGameScene extends Scene {
         add(player);
     }
 
+    private float enemyTime = 0;
+    @Override
+    public void update(float elapsedSeconds) {
+        super.update(elapsedSeconds);
+        enemyTime -= elapsedSeconds;
+        if (enemyTime < 0) {
+            add(new Friendly(R.mipmap.unit_01_rat_animation_sheet));
+            enemyTime = 5.0f;
+        }
+    }
+
     @Override
     public void draw(Canvas canvas)
     {
         canvas.drawBitmap(bgBitmap, null, bgRect, null);
         canvas.drawBitmap(controlBitmap, null, controlRect, null);
-        for (IGameObject gameObject : gameObjects) {
-            gameObject.draw(canvas);
-        }
+        super.draw(canvas);
     }
 
     @Override

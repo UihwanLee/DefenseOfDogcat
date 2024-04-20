@@ -27,7 +27,7 @@ public class InGameScene extends Scene {
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
     public enum Layer {
-        bg, enemy, friendly, player, controller, UI, COUNT
+        bg, player, enemy, friendly, controller, UI, COUNT
     }
 
     public InGameScene(int stage) {

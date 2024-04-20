@@ -93,24 +93,44 @@ public class Scene {
         }
     }
 
-    protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
+    protected ArrayList<ArrayList<IGameObject>> layers = new ArrayList<>();
 
     public int count() {
-        return gameObjects.size();
+        int count = 0;
+        for (ArrayList<IGameObject> objects: layers) {
+            count += objects.size();
+        }
+        return count;
+    }
+
+    protected <E extends Enum<E>> void initLayers(E enumCount) {
+        layers = new ArrayList<>();
+        int layerCount = enumCount.ordinal();
+        for (int i = 0; i < layerCount; i++) {
+            layers.add(new ArrayList<>());
+        }
+    }
+
+    public <E extends Enum<E>> ArrayList<IGameObject> objectsAt(E layerEnum) {
+        return layers.get(layerEnum.ordinal());
     }
 
     public void update(float elapsedSeconds) {
-        int count = gameObjects.size();
-        for (int i = count - 1; i >= 0; i--) {
-            IGameObject gameObject = gameObjects.get(i);
-            gameObject.update(elapsedSeconds);
+        for (ArrayList<IGameObject> objects : layers) {
+            int count = objects.size();
+            for (int i = count - 1; i >= 0; i--) {
+                IGameObject gameObject = objects.get(i);
+                gameObject.update(elapsedSeconds);
+            }
         }
     }
 
     protected static Paint bboxPaint;
     public void draw(Canvas canvas) {
-        for (IGameObject gameObject : gameObjects) {
-            gameObject.draw(canvas);
+        for (ArrayList<IGameObject> objects: layers) {
+            for (IGameObject gobj : objects) {
+                gobj.draw(canvas);
+            }
         }
         if (BuildConfig.DEBUG) {
             if (bboxPaint == null) {
@@ -118,10 +138,12 @@ public class Scene {
                 bboxPaint.setStyle(Paint.Style.STROKE);
                 bboxPaint.setColor(Color.RED);
             }
-            for (IGameObject gobj : gameObjects) {
-                if (gobj instanceof IBoxCollidable) {
-                    RectF rect = ((IBoxCollidable) gobj).getCollisionRect();
-                    canvas.drawRect(rect, bboxPaint);
+            for (ArrayList<IGameObject> objects: layers) {
+                for (IGameObject gobj : objects) {
+                    if (gobj instanceof IBoxCollidable) {
+                        RectF rect = ((IBoxCollidable) gobj).getCollisionRect();
+                        canvas.drawRect(rect, bboxPaint);
+                    }
                 }
             }
         }
@@ -151,14 +173,14 @@ public class Scene {
 
     //////////////////////////////////////////////////
     // Game Object Management
-    public void add(IGameObject gameObject) {
-        gameObjects.add(gameObject);
-        //Log.d(TAG, gameObjects.size() + " objects in [+]" + getClass().getSimpleName());
+    public <E extends Enum<E>> void add(E layer, IGameObject gameObject) {
+        ArrayList<IGameObject> objects = layers.get(layer.ordinal());
+        objects.add(gameObject);
     }
 
-    public void remove(IGameObject gameObject) {
-        gameObjects.remove(gameObject);
-        //Log.d(TAG, gameObjects.size() + " objects in [-]" + getClass().getSimpleName());
+    public <E extends Enum<E>> void remove(E layer, IGameObject gameObject) {
+        ArrayList<IGameObject> objects = layers.get(layer.ordinal());
+        objects.remove(gameObject);
         if (gameObject instanceof IRecyclable) {
             RecycleBin.collect((IRecyclable) gameObject);
         }

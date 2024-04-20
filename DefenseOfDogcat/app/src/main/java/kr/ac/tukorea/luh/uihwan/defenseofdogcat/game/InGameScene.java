@@ -6,9 +6,10 @@ import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import java.util.ArrayList;
+
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
-import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
@@ -26,21 +27,28 @@ public class InGameScene extends Scene {
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
+    public enum Layer {
+        enemy, friendly, player, controller, COUNT
+    }
+
     public InGameScene(int stage) {
 
         bgBitmap = BitmapPool.get(stage);
         controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
 
+        // Layer 초기화
+        initLayers(Layer.COUNT);
+
         // Unit Generator 생성
-        add(new UnitGenerator());
+        add(Layer.controller, new UnitGenerator());
 
         // joyStick 초기화
         this.joyStick = new JoyStick();
-        add(joyStick);
+        add(Layer.controller, joyStick);
 
         // player 초기화
         this.player = Dogcat.get(joyStick);
-        add(player);
+        add(Layer.player, player);
     }
 
     @Override
@@ -50,26 +58,13 @@ public class InGameScene extends Scene {
     }
 
     private void checkCollision() {
-        int count = gameObjects.size();
-        for (int i1 = count - 1; i1 >= 0; i1--) {
-            count = gameObjects.size();
-            if (i1 >= count) {
-                i1 = count - 1; // o1 와 o2 이 모두 삭제된 경우 count 가 더 많이 줄었을 수도 있다.
-            }
-            IGameObject o1 = gameObjects.get(i1);
-            if (!(o1 instanceof Friendly)) {
-                continue;
-            }
-            Friendly enemy = (Friendly) o1;
-//            boolean removed = false;
-            count = gameObjects.size();
-            for (int i2 = count - 1; i2 >= 0; i2--) {
-                IGameObject o2 = gameObjects.get(i2);
-                if (!(o2 instanceof Dogcat)) {
-                    continue;
-                }
-                Dogcat dogcat = (Dogcat) o2;
-                if (CollisionHelper.collides(enemy, dogcat)) {
+        ArrayList<IGameObject> friedlyes = layers.get(Layer.friendly.ordinal());
+        for (int e = friedlyes.size() - 1; e >= 0; e--) {
+            Friendly friendly = (Friendly)friedlyes.get(e);
+            ArrayList<IGameObject> bullets = layers.get(Layer.player.ordinal());
+            for (int b = bullets.size() - 1; b >= 0; b--) {
+                Dogcat dogcat = (Dogcat)bullets.get(b);
+                if (CollisionHelper.collides(friendly, dogcat)) {
                     Log.d(TAG, "Collision !!");
                     //remove(enemy);
 //                    removed = true;

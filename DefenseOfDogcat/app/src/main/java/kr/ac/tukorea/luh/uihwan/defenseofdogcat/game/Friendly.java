@@ -37,7 +37,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     public void update(float elapsedSeconds) {
         super.update(elapsedSeconds);
         if (dstRect.right > Metrics.width) {
-            Scene.top().remove(this);
+            Scene.top().remove(InGameScene.Layer.friendly, this);
         }
     }
 

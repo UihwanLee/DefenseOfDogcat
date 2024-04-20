@@ -3,6 +3,7 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
@@ -10,6 +11,7 @@ import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
+import kr.ac.tukorea.luh.uihwan.framework.util.CollisionHelper;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
 public class InGameScene extends Scene {
@@ -38,6 +40,34 @@ public class InGameScene extends Scene {
         // player 초기화
         this.player = new Dogcat(joyStick);
         add(player);
+    }
+
+    @Override
+    public void update(float elapsedSeconds) {
+        super.update(elapsedSeconds);
+        checkCollision();
+    }
+
+    private void checkCollision() {
+        for (IGameObject o1 : gameObjects) {
+            if (!(o1 instanceof Friendly)) {
+                continue;
+            }
+            Friendly enemy = (Friendly) o1;
+//            boolean removed = false;
+            for (IGameObject o2 : gameObjects) {
+                if (!(o2 instanceof Dogcat)) {
+                    continue;
+                }
+                Dogcat dogcat = (Dogcat) o2;
+                if (CollisionHelper.collides(enemy, dogcat)) {
+                    Log.d(TAG, "Collision !!");
+                    remove(enemy);
+//                    removed = true;
+                    break;
+                }
+            }
+        }
     }
 
     @Override

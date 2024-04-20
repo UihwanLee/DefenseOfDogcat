@@ -41,10 +41,6 @@ public class InGameScene extends Scene {
         // player 초기화
         this.player = new Dogcat(joyStick);
         add(player);
-
-        AnimSprite animSprite = new AnimSprite(R.mipmap.unit_01_rat_animation_sheet, 10);
-        animSprite.setPosition(4.5f, 4.5f, 0.9f);
-        add(animSprite);
     }
 
     @Override
@@ -75,7 +71,7 @@ public class InGameScene extends Scene {
                 Dogcat dogcat = (Dogcat) o2;
                 if (CollisionHelper.collides(enemy, dogcat)) {
                     Log.d(TAG, "Collision !!");
-                    remove(enemy);
+                    //remove(enemy);
 //                    removed = true;
                     break;
                 }

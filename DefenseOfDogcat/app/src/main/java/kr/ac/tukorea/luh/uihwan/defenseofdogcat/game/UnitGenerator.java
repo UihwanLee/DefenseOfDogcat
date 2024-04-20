@@ -19,7 +19,7 @@ public class UnitGenerator implements IGameObject {
 
     private void generateFriendly()
     {
-        Scene.top().add(new Friendly(R.mipmap.unit_01_rat_animation_sheet));
+        Scene.top().add(new Friendly(0, 3 ));
     }
 
     @Override

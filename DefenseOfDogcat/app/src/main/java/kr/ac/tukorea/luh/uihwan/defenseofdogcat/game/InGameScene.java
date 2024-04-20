@@ -41,6 +41,7 @@ public class InGameScene extends Scene {
 
         // Unit Generator 생성
         add(Layer.controller, new UnitGenerator());
+        add(Layer.controller, new CollisionChecker());
 
         // joyStick 초기화
         this.joyStick = new JoyStick();
@@ -54,24 +55,6 @@ public class InGameScene extends Scene {
     @Override
     public void update(float elapsedSeconds) {
         super.update(elapsedSeconds);
-        checkCollision();
-    }
-
-    private void checkCollision() {
-        ArrayList<IGameObject> friedlyes = layers.get(Layer.friendly.ordinal());
-        for (int e = friedlyes.size() - 1; e >= 0; e--) {
-            Friendly friendly = (Friendly)friedlyes.get(e);
-            ArrayList<IGameObject> bullets = layers.get(Layer.player.ordinal());
-            for (int b = bullets.size() - 1; b >= 0; b--) {
-                Dogcat dogcat = (Dogcat)bullets.get(b);
-                if (CollisionHelper.collides(friendly, dogcat)) {
-                    Log.d(TAG, "Collision !!");
-                    //remove(enemy);
-//                    removed = true;
-                    break;
-                }
-            }
-        }
     }
 
     @Override

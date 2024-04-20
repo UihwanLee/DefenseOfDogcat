@@ -15,12 +15,7 @@ import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
 public class Dogcat extends Sprite implements IBoxCollidable {
-
-    private final Bitmap invertSheet;
-    int TOTAL_NUMBER_OF_FRAMES = 2;
-    Rect[] playerIDLEFrames;
-    Rect[] playerIDLEOriginFrame = new Rect[TOTAL_NUMBER_OF_FRAMES];
-    Rect[] playerIDLEInvertFrame = new Rect[TOTAL_NUMBER_OF_FRAMES];
+    protected Rect srcRect = new Rect();
 
     private static final float RADIUS_X = 2.5f;
     private static final float RADIUS_Y = 1.5f;
@@ -32,6 +27,11 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
     private Bitmap playerSheet;
     private Bitmap originSheet;
+    private final Bitmap invertSheet;
+
+    private int frameIndex, frameCount, frameWidth, frameHeight, frameState, sheetWidth, sheetHeight;
+    private float fps;
+    private final long createdOn;
 
     private final JoyStick joyStick;
 
@@ -45,21 +45,25 @@ public class Dogcat extends Sprite implements IBoxCollidable {
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
         //dstRect.set(0.0f, 0.0f, 16.0f, 9.0f);
 
-        playerIDLEOriginFrame[0] = new Rect(0, 200, 100, 300);
-        playerIDLEOriginFrame[1] = new Rect(200, 400, 400, 600);
-
-        playerIDLEInvertFrame[0] = new Rect(500, 200, 600, 300);
-        playerIDLEInvertFrame[1] = new Rect(200, 400, 400, 600);
-
         // 이미지 생성
         originSheet = BitmapPool.get(R.mipmap.player_animation_sheet);
+
+        // 변수 지정
+        frameWidth = frameHeight = 100;
+        frameState = 0;
+        frameCount = 3;
+
+        sheetWidth = bitmap.getWidth();
+        sheetHeight = bitmap.getHeight();
+
+        createdOn = System.currentTimeMillis();
+        fps = 10.0f;
 
         // 좌우 반전 이미지 생성
         sideInversion.setScale(-1, 1);
         invertSheet = Bitmap.createBitmap(originSheet, 0, 0, originSheet.getWidth(), originSheet.getHeight(), sideInversion, false);
 
         this.playerSheet = originSheet;
-        playerIDLEFrames = playerIDLEOriginFrame;
 
         this.joyStick = joyStick;
     }
@@ -77,19 +81,38 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
             // 목표 위치에 따른 이미지 반전
             this.playerSheet = (Math.cos(joyStick.angle_radian)>=0) ? originSheet : invertSheet;
-            this.playerIDLEFrames = (Math.cos(joyStick.angle_radian)>=0) ? playerIDLEOriginFrame : playerIDLEInvertFrame;
 
             // 별도의 collisionRect
             collisionRect.set(dstRect);
             collisionRect.inset(0.11f, 0.11f);
+
+            // walk animation 표시
+            frameCount = 6;
+            frameState = 1;
+        }
+        else {
+            // idle animation 표시
+            frameCount = 3;
+            frameState = 0;
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.save();
-        canvas.drawBitmap(playerSheet, playerIDLEFrames[0], dstRect, null);
-        canvas.restore();
+        // AnimSprite 는 단순반복하는 이미지이므로 time 을 update 에서 꼼꼼히 누적하지 않아도 된다.
+        // draw 에서 생성시각과의 차이로 frameIndex 를 계산한다.
+        long now = System.currentTimeMillis();
+        float time = (now - createdOn) / 1000.0f;
+        int frameIndex = Math.round(time * fps) % frameCount;
+        if((Math.cos(joyStick.angle_radian)>=0))
+        {
+            srcRect.set(frameIndex * frameWidth, sheetHeight - (frameHeight * (frameState + 1)), (frameIndex + 1) * frameWidth, sheetHeight - (frameHeight * frameState));
+        }
+        else
+        {
+            srcRect.set(sheetWidth - ((frameIndex+1) * frameWidth), sheetHeight - (frameHeight * (frameState + 1)), sheetWidth - (frameIndex * frameWidth), sheetHeight - (frameHeight * frameState));
+        }
+        canvas.drawBitmap(playerSheet, srcRect, dstRect, null);
     }
 
     @Override

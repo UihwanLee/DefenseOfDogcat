@@ -12,6 +12,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.BuildConfig;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.game.Dogcat;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
@@ -23,14 +24,26 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private static final String TAG = GameView.class.getSimpleName();
 
+    //////////////////////////////////////////////////
+    // Debug Helper
+    private Paint borderPaint;
+    private Paint fpsPaint;
+    private void initDebugObjects() {
+        borderPaint = new Paint();
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(0.1f);
+        borderPaint.setColor(Color.RED);
+
+        fpsPaint = new Paint();
+        fpsPaint.setColor(Color.BLUE);
+        fpsPaint.setTextSize(100f);
+    }
 
     //////////////////////////////////////////////////
     // Global Variable (static member) for Resources
     public static Resources res;
     private final ArrayList<IGameObject> gameObjects = new ArrayList<>();
     private Dogcat player;
-
-    private final Paint fpsPaint = new Paint();
 
 
     public GameView(Context context) {
@@ -59,8 +72,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
         setFullScreen(); // default behavior?
 
-        fpsPaint.setColor(Color.BLUE);
-        fpsPaint.setTextSize(100f);
+        if (BuildConfig.DEBUG) {
+            initDebugObjects();
+        }
 
         scheduleUpdate();
     }
@@ -105,6 +119,9 @@ public class GameView extends View implements Choreographer.FrameCallback {
         super.onDraw(canvas);
         canvas.save();
         Metrics.concat(canvas);
+        if (BuildConfig.DEBUG) {
+            canvas.drawRect(Metrics.borderRect, borderPaint);
+        }
         drawObject(canvas);
         canvas.restore();
         drawFPS(canvas);
@@ -120,8 +137,10 @@ public class GameView extends View implements Choreographer.FrameCallback {
 
     private void drawFPS(Canvas canvas)
     {
-        int fps = (int) (1.0f / elapsedSeconds);
-        canvas.drawText("FPS: " + fps, 100f, 200f, fpsPaint);
+        if(BuildConfig.DEBUG) {
+            int fps = (int) (1.0f / elapsedSeconds);
+            canvas.drawText("FPS: " + fps, 100f, 200f, fpsPaint);
+        }
     }
 
     @Override

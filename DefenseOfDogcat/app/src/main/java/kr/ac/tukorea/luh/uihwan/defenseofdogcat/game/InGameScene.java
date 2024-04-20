@@ -20,8 +20,8 @@ public class InGameScene extends Scene {
 
     private final JoyStick joyStick;
 
-    RectF bgRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
-    RectF controlRect = new RectF(0, 0, Metrics.SCREEN_WIDTH, Metrics.SCREEN_HEIGHT);
+    RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
+    RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
     public InGameScene(int stage) {
 

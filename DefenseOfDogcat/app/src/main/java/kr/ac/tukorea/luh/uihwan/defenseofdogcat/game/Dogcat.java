@@ -9,9 +9,10 @@ import android.graphics.RectF;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
+import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
-public class Dogcat implements IGameObject {
+public class Dogcat extends Sprite {
 
     private final Bitmap invertSheet;
     int TOTAL_NUMBER_OF_FRAMES = 2;
@@ -35,6 +36,7 @@ public class Dogcat implements IGameObject {
     private Matrix sideInversion = new Matrix();
 
     public Dogcat(JoyStick joyStick) {
+        super(R.mipmap.player_animation_sheet);
         x = 8.0f;
         y = 2.0f;
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);

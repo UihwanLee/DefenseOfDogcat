@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
@@ -40,6 +41,10 @@ public class InGameScene extends Scene {
         // player 초기화
         this.player = new Dogcat(joyStick);
         add(player);
+
+        AnimSprite animSprite = new AnimSprite(R.mipmap.unit_01_rat_animation_sheet, 10);
+        animSprite.setPosition(4.5f, 4.5f, 0.9f);
+        add(animSprite);
     }
 
     @Override

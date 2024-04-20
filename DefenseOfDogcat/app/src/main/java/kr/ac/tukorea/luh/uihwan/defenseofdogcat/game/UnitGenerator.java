@@ -19,7 +19,7 @@ public class UnitGenerator implements IGameObject {
 
     private void generateFriendly()
     {
-        Scene.top().add(new Friendly(0, 3 ));
+        Scene.top().add(Friendly.get(0, 3));
     }
 
     @Override

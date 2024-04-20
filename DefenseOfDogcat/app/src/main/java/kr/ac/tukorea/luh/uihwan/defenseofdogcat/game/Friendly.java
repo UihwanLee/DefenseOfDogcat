@@ -20,7 +20,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable {
         setPosition(1.0f, 4.0f, 1.5f, 1.5f);
         dx = SPEED;
     }
-    public Friendly get(int index, int frameCount) {
+    public static Friendly get(int index, int frameCount) {
         return new Friendly(index, frameCount);
     }
 

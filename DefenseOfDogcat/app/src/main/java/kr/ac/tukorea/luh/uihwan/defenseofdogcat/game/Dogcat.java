@@ -62,7 +62,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
         this.joyStick = joyStick;
     }
-    public Dogcat get(JoyStick joyStick) {
+    public static Dogcat get(JoyStick joyStick) {
         return new Dogcat(joyStick);
     }
 

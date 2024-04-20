@@ -39,7 +39,7 @@ public class InGameScene extends Scene {
         add(joyStick);
 
         // player 초기화
-        this.player = new Dogcat(joyStick);
+        this.player = Dogcat.get(joyStick);
         add(player);
     }
 

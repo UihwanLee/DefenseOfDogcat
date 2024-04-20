@@ -24,6 +24,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     private static final float RADIUS_X = 2.5f;
     private static final float RADIUS_Y = 1.5f;
     private static final float SPEED = 8.0f;
+    protected RectF collisionRect = new RectF();
     private RectF dstRect = new RectF();
     private float x, y, angle;
     private float tx, ty, dx, dy;
@@ -73,6 +74,10 @@ public class Dogcat extends Sprite implements IBoxCollidable {
             // 목표 위치에 따른 이미지 반전
             this.playerSheet = (Math.cos(joyStick.angle_radian)>=0) ? originSheet : invertSheet;
             this.playerIDLEFrames = (Math.cos(joyStick.angle_radian)>=0) ? playerIDLEOriginFrame : playerIDLEInvertFrame;
+
+            // 별도의 collisionRect
+            collisionRect.set(dstRect);
+            collisionRect.inset(0.11f, 0.11f);
         }
     }
 
@@ -85,6 +90,6 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
     @Override
     public RectF getCollisionRect() {
-        return dstRect;
+        return collisionRect;
     }
 }

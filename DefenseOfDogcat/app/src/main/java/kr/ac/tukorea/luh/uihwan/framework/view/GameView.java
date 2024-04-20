@@ -1,20 +1,20 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.framework.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.game.Dogcat;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 
 /**
  * TODO: document your custom view class.

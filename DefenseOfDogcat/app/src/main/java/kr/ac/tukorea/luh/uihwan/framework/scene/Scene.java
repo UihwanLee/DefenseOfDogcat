@@ -1,4 +1,4 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.framework.scene;
 
 import android.graphics.Canvas;
 
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import android.util.Log;
 import android.view.MotionEvent;
+
+import kr.ac.tukorea.luh.uihwan.framework.activity.GameActivity;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 
 public class Scene {
 

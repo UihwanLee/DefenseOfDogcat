@@ -1,10 +1,15 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.framework.objects;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
 public class JoyStick implements IGameObject {
     private static final String TAG = JoyStick.class.getSimpleName();

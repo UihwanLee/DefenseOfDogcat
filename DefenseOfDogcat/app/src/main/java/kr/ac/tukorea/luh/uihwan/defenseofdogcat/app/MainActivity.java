@@ -1,4 +1,4 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.defenseofdogcat.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import kr.ac.tukorea.luh.uihwan.framework.activity.GameActivity;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.framework.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +8,10 @@ import android.widget.ImageView;
 import androidx.activity.OnBackPressedCallback;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import kr.ac.tukorea.luh.uihwan.framework.view.GameView;
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.game.InGameScene;
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
 
 public class GameActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package kr.ac.tukorea.luh.uihwan.defenseofdogcat;
+package kr.ac.tukorea.luh.uihwan.framework.interfaces;
 
 import android.graphics.Canvas;
 

@@ -117,29 +117,22 @@ public class GameView extends View implements Choreographer.FrameCallback {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        Scene scene = Scene.top();
+        if (scene == null) {
+            return;
+        }
         canvas.save();
         Metrics.concat(canvas);
         if (BuildConfig.DEBUG) {
             canvas.drawRect(Metrics.borderRect, borderPaint);
         }
-        drawObject(canvas);
-        canvas.restore();
-        drawFPS(canvas);
-    }
-
-    private void drawObject(Canvas canvas) {
-        Scene scene = Scene.top();
-        if (scene == null) {
-            return;
-        }
         scene.draw(canvas);
-    }
+        canvas.restore();
 
-    private void drawFPS(Canvas canvas)
-    {
         if(BuildConfig.DEBUG) {
             int fps = (int) (1.0f / elapsedSeconds);
-            canvas.drawText("FPS: " + fps, 100f, 200f, fpsPaint);
+            int count = scene.count();
+            canvas.drawText("FPS: " + fps + " objs: " + count, 100f, 200f, fpsPaint);
         }
     }
 

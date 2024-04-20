@@ -6,14 +6,20 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 
 public class UnitGenerator implements IGameObject {
-    private float enemyTime = 0;
+    private float spawnTime = 0;
     @Override
     public void update(float elapsedSeconds) {
-        enemyTime -= elapsedSeconds;
-        if (enemyTime < 0) {
+        spawnTime -= elapsedSeconds;
+        if (spawnTime < 0) {
+            generateEnemy();
             generateFriendly();
-            enemyTime = 5.0f;
+            spawnTime = 5.0f;
         }
+    }
+
+    private void generateEnemy()
+    {
+        Scene.top().add(InGameScene.Layer.enemy, Enemy.get(0, 5));
     }
 
     private void generateFriendly()

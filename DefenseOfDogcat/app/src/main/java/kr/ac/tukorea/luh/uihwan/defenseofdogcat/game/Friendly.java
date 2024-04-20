@@ -15,10 +15,13 @@ public class Friendly extends AnimSprite implements IBoxCollidable {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
     };
 
-    public Friendly(int index, int frameCount) {
+    private Friendly(int index, int frameCount) {
         super(resIds[index], ANIM_FPS, frameCount);
         setPosition(1.0f, 4.0f, 1.5f, 1.5f);
         dx = SPEED;
+    }
+    public Friendly get(int index, int frameCount) {
+        return new Friendly(index, frameCount);
     }
 
     @Override

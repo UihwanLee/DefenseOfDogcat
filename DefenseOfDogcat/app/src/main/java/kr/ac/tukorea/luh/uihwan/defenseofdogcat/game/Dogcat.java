@@ -37,7 +37,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     //좌우 반전 이미지 효과 및 Bitmap 만들기
     private Matrix sideInversion = new Matrix();
 
-    public Dogcat(JoyStick joyStick) {
+    private Dogcat(JoyStick joyStick) {
         super(R.mipmap.player_animation_sheet);
         x = 8.0f;
         y = 2.0f;
@@ -61,6 +61,9 @@ public class Dogcat extends Sprite implements IBoxCollidable {
         playerIDLEFrames = playerIDLEOriginFrame;
 
         this.joyStick = joyStick;
+    }
+    public Dogcat get(JoyStick joyStick) {
+        return new Dogcat(joyStick);
     }
 
     @Override

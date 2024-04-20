@@ -61,7 +61,9 @@ public class Scene {
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
 
     public void update(float elapsedSeconds) {
-        for (IGameObject gameObject : gameObjects) {
+        int count = gameObjects.size();
+        for (int i = count - 1; i >= 0; i--) {
+            IGameObject gameObject = gameObjects.get(i);
             gameObject.update(elapsedSeconds);
         }
     }

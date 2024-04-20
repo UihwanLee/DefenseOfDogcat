@@ -14,6 +14,7 @@ import kr.ac.tukorea.luh.uihwan.defenseofdogcat.BuildConfig;
 import kr.ac.tukorea.luh.uihwan.framework.activity.GameActivity;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
 
 public class Scene {
 
@@ -158,5 +159,8 @@ public class Scene {
     public void remove(IGameObject gameObject) {
         gameObjects.remove(gameObject);
         //Log.d(TAG, gameObjects.size() + " objects in [-]" + getClass().getSimpleName());
+        if (gameObject instanceof IRecyclable) {
+            RecycleBin.collect((IRecyclable) gameObject);
+        }
     }
 }

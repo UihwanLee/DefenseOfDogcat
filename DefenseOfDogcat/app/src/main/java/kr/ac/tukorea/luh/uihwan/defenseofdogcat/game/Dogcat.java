@@ -14,7 +14,7 @@ import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
-public class Dogcat extends Sprite implements IBoxCollidable, IRecyclable {
+public class Dogcat extends Sprite implements IBoxCollidable {
 
     private final Bitmap invertSheet;
     int TOTAL_NUMBER_OF_FRAMES = 2;
@@ -95,10 +95,5 @@ public class Dogcat extends Sprite implements IBoxCollidable, IRecyclable {
     @Override
     public RectF getCollisionRect() {
         return collisionRect;
-    }
-
-    @Override
-    public void onRecycle() {
-
     }
 }

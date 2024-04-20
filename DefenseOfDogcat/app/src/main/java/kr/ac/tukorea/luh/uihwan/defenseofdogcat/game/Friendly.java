@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
 import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
-public class Friendly extends AnimSprite implements IBoxCollidable {
+public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final float SPEED = 1.0f;
     public static final float ANIM_FPS = 10.0f;
     private static final int[] resIds = {
@@ -49,5 +50,10 @@ public class Friendly extends AnimSprite implements IBoxCollidable {
     @Override
     public RectF getCollisionRect() {
         return dstRect;
+    }
+
+    @Override
+    public void onRecycle() {
+
     }
 }

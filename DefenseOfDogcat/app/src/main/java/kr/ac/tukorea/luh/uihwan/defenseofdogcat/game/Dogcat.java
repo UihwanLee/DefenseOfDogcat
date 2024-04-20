@@ -9,11 +9,12 @@ import android.graphics.RectF;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
-public class Dogcat extends Sprite implements IBoxCollidable {
+public class Dogcat extends Sprite implements IBoxCollidable, IRecyclable {
 
     private final Bitmap invertSheet;
     int TOTAL_NUMBER_OF_FRAMES = 2;
@@ -94,5 +95,10 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     @Override
     public RectF getCollisionRect() {
         return collisionRect;
+    }
+
+    @Override
+    public void onRecycle() {
+
     }
 }

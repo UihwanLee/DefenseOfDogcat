@@ -47,7 +47,11 @@ public class Scene {
         stack.remove(scene);
 
         scene = top();
-        if (scene == null) return;
+        if (scene == null) {
+            Log.i(TAG, "Last scene is being popped");
+            finishActivity();
+            return;
+        }
         scene.onResume();
     }
 
@@ -94,5 +98,12 @@ public class Scene {
 
     public boolean onBackPressed() {
         return false;
+    }
+
+    //////////////////////////////////////////////////
+    // Game Object Management
+    public void add(IGameObject gameObject) {
+        gameObjects.add(gameObject);
+        Log.d(TAG, gameObjects.size() + " objects in " + getClass().getSimpleName());
     }
 }

@@ -30,11 +30,11 @@ public class InGameScene extends Scene {
 
         // joyStick 초기화
         this.joyStick = new JoyStick();
-        gameObjects.add(joyStick);
+        add(joyStick);
 
         // player 초기화
         this.player = new Dogcat(joyStick);
-        gameObjects.add(player);
+        add(player);
     }
 
     @Override

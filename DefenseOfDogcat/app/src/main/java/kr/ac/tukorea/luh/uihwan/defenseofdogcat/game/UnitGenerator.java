@@ -2,7 +2,6 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import android.graphics.Canvas;
 
-import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 

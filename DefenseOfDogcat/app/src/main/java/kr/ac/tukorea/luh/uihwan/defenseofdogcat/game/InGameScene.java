@@ -1,20 +1,13 @@
 package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import android.util.Log;
 import android.view.MotionEvent;
 
-import java.util.ArrayList;
-
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
-import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Background;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
-import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
-import kr.ac.tukorea.luh.uihwan.framework.util.CollisionHelper;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
 public class InGameScene extends Scene {

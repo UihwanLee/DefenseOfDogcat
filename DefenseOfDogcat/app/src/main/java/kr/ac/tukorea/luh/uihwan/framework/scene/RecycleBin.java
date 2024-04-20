@@ -1,7 +1,5 @@
 package kr.ac.tukorea.luh.uihwan.framework.scene;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

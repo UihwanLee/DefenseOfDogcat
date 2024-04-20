@@ -2,8 +2,6 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import android.graphics.RectF;
 
-import java.util.ArrayList;
-
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;

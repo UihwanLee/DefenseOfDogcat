@@ -8,8 +8,6 @@ import android.graphics.RectF;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
-import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
-import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;

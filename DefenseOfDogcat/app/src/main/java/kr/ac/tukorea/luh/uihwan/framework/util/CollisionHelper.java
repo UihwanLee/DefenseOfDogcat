@@ -3,7 +3,6 @@ package kr.ac.tukorea.luh.uihwan.framework.util;
 import android.graphics.RectF;
 
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
-import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 
 public class CollisionHelper {
     public static boolean collides(IBoxCollidable obj1, IBoxCollidable obj2) {

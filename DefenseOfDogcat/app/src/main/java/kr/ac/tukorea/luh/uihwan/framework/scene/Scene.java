@@ -55,12 +55,37 @@ public class Scene {
         scene.onResume();
     }
 
+    public static void popAll() {
+        int count = stack.size();
+        for (int i = count - 1; i >= 0; i--) {
+            Scene scene = stack.get(i);
+            scene.onEnd();
+        }
+        stack.clear();
+        finishActivity();
+    }
+
     public static void finishActivity() {
         //GameView gameView = null;
         //gaveView.getActivity().finish();
         GameActivity.activity.finish();
     }
 
+    public static void pauseTop() {
+        Log.i(TAG, "Pausing Game");
+        Scene scene = top();
+        if (scene != null) {
+            scene.onPause();
+        }
+    }
+
+    public static void resumeTop() {
+        Log.i(TAG, "Resuming Game");
+        Scene scene = top();
+        if (scene != null) {
+            scene.onResume();
+        }
+    }
 
     protected final ArrayList<IGameObject> gameObjects = new ArrayList<>();
 
@@ -108,10 +133,11 @@ public class Scene {
     // Game Object Management
     public void add(IGameObject gameObject) {
         gameObjects.add(gameObject);
-        Log.d(TAG, gameObjects.size() + " objects in " + getClass().getSimpleName());
+        Log.d(TAG, gameObjects.size() + " objects in [+]" + getClass().getSimpleName());
     }
 
     public void remove(IGameObject gameObject) {
         gameObjects.remove(gameObject);
+        Log.d(TAG, gameObjects.size() + " objects in [-]" + getClass().getSimpleName());
     }
 }

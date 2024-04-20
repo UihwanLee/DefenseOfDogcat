@@ -28,6 +28,9 @@ public class InGameScene extends Scene {
         bgBitmap = BitmapPool.get(stage);
         controlBitmap = BitmapPool.get(R.mipmap.scene03_ui_background);
 
+        // Unit Generator 생성
+        add(new UnitGenerator());
+
         // joyStick 초기화
         this.joyStick = new JoyStick();
         add(joyStick);
@@ -35,17 +38,6 @@ public class InGameScene extends Scene {
         // player 초기화
         this.player = new Dogcat(joyStick);
         add(player);
-    }
-
-    private float enemyTime = 0;
-    @Override
-    public void update(float elapsedSeconds) {
-        super.update(elapsedSeconds);
-        enemyTime -= elapsedSeconds;
-        if (enemyTime < 0) {
-            add(new Friendly(R.mipmap.unit_01_rat_animation_sheet));
-            enemyTime = 5.0f;
-        }
     }
 
     @Override

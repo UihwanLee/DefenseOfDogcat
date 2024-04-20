@@ -84,4 +84,22 @@ public class GameActivity extends AppCompatActivity {
     public void onBtnAllySlot(View view) {
         Log.d("Tag", "Slot clicked. ID=" + view.getId());
     }
+
+    @Override
+    protected void onPause() {
+        gameView.pauseGame();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gameView.resumeGame();
+    }
+
+    @Override
+    protected void onDestroy() {
+        gameView.destroyGame();
+        super.onDestroy();
+    }
 }

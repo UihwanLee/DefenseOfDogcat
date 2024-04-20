@@ -85,6 +85,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
         Choreographer.getInstance().postFrameCallback(this);
     }
 
+    private boolean running = true;
     private long previousNanos = 0;
     private float elapsedSeconds;
     @Override
@@ -95,7 +96,7 @@ public class GameView extends View implements Choreographer.FrameCallback {
             update();
         }
         invalidate();
-        if (isShown()) {
+        if (running) {
             scheduleUpdate();
         }
         previousNanos = nanos;
@@ -164,5 +165,21 @@ public class GameView extends View implements Choreographer.FrameCallback {
         if (handled) return;
 
         Scene.pop();
+    }
+
+    public void pauseGame() {
+        running = false;
+        Scene.pauseTop();
+    }
+
+    public void resumeGame() {
+        if (running) return;
+        running = true;
+        scheduleUpdate();
+        Scene.resumeTop();
+    }
+
+    public void destroyGame() {
+        Scene.popAll();
     }
 }

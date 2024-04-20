@@ -12,9 +12,14 @@ public class UnitGenerator implements IGameObject {
     public void update(float elapsedSeconds) {
         enemyTime -= elapsedSeconds;
         if (enemyTime < 0) {
-            Scene.top().add(new Friendly(R.mipmap.unit_01_rat_animation_sheet));
+            generateFriendly();
             enemyTime = 5.0f;
         }
+    }
+
+    private void generateFriendly()
+    {
+        Scene.top().add(new Friendly(R.mipmap.unit_01_rat_animation_sheet));
     }
 
     @Override

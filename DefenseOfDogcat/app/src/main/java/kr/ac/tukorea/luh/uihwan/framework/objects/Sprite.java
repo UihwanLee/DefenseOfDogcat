@@ -36,6 +36,19 @@ public class Sprite implements IGameObject {
         radius = Math.min(width, height) / 2;
         dstRect.set(x - width / 2, y - height / 2, x + width / 2, y + height / 2);
     }
+
+    public void setBitmap(int mipmapId)
+    {
+        if (mipmapId != 0) {
+            bitmap = BitmapPool.get(mipmapId);
+        }
+    }
+
+    public void setSpeed(float speed)
+    {
+        this.dx = speed;
+    }
+
     @Override
     public void update(float elapsedSeconds) {
         float timedDx = dx * elapsedSeconds;

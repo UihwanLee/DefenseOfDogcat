@@ -13,20 +13,25 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
 public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable {
-    private static final float SPEED = 1.0f;
-    public static final float ANIM_FPS = 10.0f;
+    private static final float ANIM_FPS = 10.0f;
     private static final int[] resIds = {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
+    };
+
+    public static final float[] resSpeed =  {
+            1.0f, 0.5f, 1.0f,
     };
 
     private Friendly(int index, int frameCount) {
         super(resIds[index], ANIM_FPS, frameCount);
         setPosition(1.0f, 4.0f, 1.5f, 1.5f);
-        dx = SPEED;
+        setSpeed(resSpeed[index]);
     }
     public static Friendly get(int index, int frameCount) {
         Friendly friendly = (Friendly) RecycleBin.get(Friendly.class);
         if (friendly != null) {
+            friendly.setBitmap(resIds[index]);
+            friendly.setSpeed(resSpeed[index]);
             friendly.setPosition(1.0f, 4.0f, 1.5f, 1.5f);
             return friendly;
         }

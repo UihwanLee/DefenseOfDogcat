@@ -4,10 +4,15 @@ import android.graphics.Canvas;
 
 import java.util.ArrayList;
 
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.BuildConfig;
 import kr.ac.tukorea.luh.uihwan.framework.activity.GameActivity;
+import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 
 public class Scene {
@@ -101,9 +106,23 @@ public class Scene {
         }
     }
 
+    protected static Paint bboxPaint;
     public void draw(Canvas canvas) {
         for (IGameObject gameObject : gameObjects) {
             gameObject.draw(canvas);
+        }
+        if (BuildConfig.DEBUG) {
+            if (bboxPaint == null) {
+                bboxPaint = new Paint();
+                bboxPaint.setStyle(Paint.Style.STROKE);
+                bboxPaint.setColor(Color.RED);
+            }
+            for (IGameObject gobj : gameObjects) {
+                if (gobj instanceof IBoxCollidable) {
+                    RectF rect = ((IBoxCollidable) gobj).getCollisionRect();
+                    canvas.drawRect(rect, bboxPaint);
+                }
+            }
         }
     }
 

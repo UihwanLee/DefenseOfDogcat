@@ -110,4 +110,8 @@ public class Scene {
         gameObjects.add(gameObject);
         Log.d(TAG, gameObjects.size() + " objects in " + getClass().getSimpleName());
     }
+
+    public void remove(IGameObject gameObject) {
+        gameObjects.remove(gameObject);
+    }
 }

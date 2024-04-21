@@ -82,7 +82,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
             // 별도의 collisionRect
             collisionRect.set(dstRect);
-            collisionRect.inset(0.11f, 0.11f);
+            collisionRect.inset(0.5f, 0.3f);
 
             // walk animation 표시
             frameCount = 6;

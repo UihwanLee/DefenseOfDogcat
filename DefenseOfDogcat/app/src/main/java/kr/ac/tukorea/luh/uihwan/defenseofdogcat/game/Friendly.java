@@ -14,6 +14,8 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     private static final float ANIM_FPS = 10.0f;
     private static final int[] resIds = {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
+            R.mipmap.unit_04_turtle_animation_sheet, R.mipmap.unit_05_rhinoceros_animation_sheet, R.mipmap.unit_06_penguin_animation_sheet,
+            R.mipmap.unit_07_dragon_animation_sheet,
     };
 
     public static final float[] resSpeed =  {

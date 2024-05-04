@@ -6,6 +6,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
+import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.util.CollisionHelper;
 
@@ -25,10 +26,28 @@ public class CollisionChecker implements IGameObject {
                 Enemy enemy = (Enemy)enemies.get(b);
                 if (CollisionHelper.collides(friendly, enemy)) {
                     Log.d(TAG, "Collision !!");
+                    friendly.setState(AnimSprite.State.attacking);
+                    enemy.setState(AnimSprite.State.attacking);
+                    boolean enemyDead = enemy.decreaseLife(friendly.getATK());
+                    boolean friendlyDead = friendly.decreaseLife(enemy.getATK());
+
+                    if(enemyDead)
+                    {
+                        enemy.setState(AnimSprite.State.dying);
+                    }
+                    if(friendlyDead)
+                    {
+                        friendly.setState(AnimSprite.State.dying);
+                    }
                     //scene.remove(InGameScene.Layer.player.ordinal(), player);
                     //scene.remove(InGameScene.Layer.friendly.ordinal(), friendly);
 //                    removed = true;
                     break;
+                }
+                else
+                {
+                    friendly.setState(AnimSprite.State.walking);
+                    enemy.setState(AnimSprite.State.walking);
                 }
             }
         }

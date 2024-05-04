@@ -77,6 +77,15 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
             case attacking:
                 frameState = 1;
                 break;
+            case dying:
+                frameState = 2;
+                long now = System.currentTimeMillis();
+                float time = (now - createdOn) / 1000.0f;
+                if(time > 2.0f)
+                {
+                    Scene.top().remove(InGameScene.Layer.friendly, this);
+                }
+                break;
         }
     }
 
@@ -88,5 +97,15 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     @Override
     public void onRecycle() {
 
+    }
+
+    public int getATK()
+    {
+        return atk;
+    }
+
+    public boolean decreaseLife(int atk) {
+        hp -= atk;
+        return hp <= 0;
     }
 }

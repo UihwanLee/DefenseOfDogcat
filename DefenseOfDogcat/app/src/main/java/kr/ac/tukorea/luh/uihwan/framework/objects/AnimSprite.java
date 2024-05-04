@@ -14,7 +14,7 @@ public class AnimSprite extends Sprite {
     private float fps;
     private int frameWidth, frameHeight;
     public int frameCount, frameState;
-    private final long createdOn;
+    public final long createdOn;
 
     private int sheetWidth, sheetHeight;
 

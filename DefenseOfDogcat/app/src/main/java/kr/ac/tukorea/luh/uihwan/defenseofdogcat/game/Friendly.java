@@ -12,10 +12,20 @@ import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
 public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final float ANIM_FPS = 10.0f;
+    private int hp, maxHp;
+    private int atk;
     private static final int[] resIds = {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
             R.mipmap.unit_04_turtle_animation_sheet, R.mipmap.unit_05_rhinoceros_animation_sheet, R.mipmap.unit_06_penguin_animation_sheet,
             R.mipmap.unit_07_dragon_animation_sheet,
+    };
+
+    private static final int[] resHP = {
+            20,	15,	40,	50,	70,	90,	150,
+    };
+
+    private static final int[] resATK = {
+            5,	8,	10,	20,	50,	60,	100
     };
 
     public static final float[] resSpeed =  {
@@ -24,18 +34,23 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
 
     private Friendly(int index, int frameCount) {
         super(resIds[index], ANIM_FPS, frameCount);
-        setPosition(1.0f, 4.0f, 1.5f, 1.5f);
-        setSpeed(resSpeed[index]);
+        init(index);
     }
     public static Friendly get(int index, int frameCount) {
         Friendly friendly = (Friendly) RecycleBin.get(Friendly.class);
         if (friendly != null) {
-            friendly.setBitmap(resIds[index]);
-            friendly.setSpeed(resSpeed[index]);
-            friendly.setPosition(1.0f, 4.0f, 1.5f, 1.5f);
+            friendly.init(index);
             return friendly;
         }
         return new Friendly(index, frameCount);
+    }
+
+    private void init(int index)
+    {
+        this.hp = this.maxHp = resHP[index];
+        this.atk = resATK[index];
+        setPosition(1.0f, 4.0f, 1.5f, 1.5f);
+        setSpeed(resSpeed[index]);
     }
 
     @Override

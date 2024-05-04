@@ -17,13 +17,13 @@ public class CollisionChecker implements IGameObject {
         Scene scene = Scene.top();
         if (scene == null) return;
 
-        ArrayList<IGameObject> friendlyes = scene.objectsAt(InGameScene.Layer.friendly);
-        for (int e = friendlyes.size() - 1; e >= 0; e--) {
-            Friendly friendly = (Friendly)friendlyes.get(e);
-            ArrayList<IGameObject> bullets = scene.objectsAt(InGameScene.Layer.player);
-            for (int b = bullets.size() - 1; b >= 0; b--) {
-                Dogcat player = (Dogcat)bullets.get(b);
-                if (CollisionHelper.collides(friendly, player)) {
+        ArrayList<IGameObject> friendlies = scene.objectsAt(InGameScene.Layer.friendly);
+        for (int e = friendlies.size() - 1; e >= 0; e--) {
+            Friendly friendly = (Friendly)friendlies.get(e);
+            ArrayList<IGameObject> enemies = scene.objectsAt(InGameScene.Layer.enemy);
+            for (int b = enemies.size() - 1; b >= 0; b--) {
+                Enemy enemy = (Enemy)enemies.get(b);
+                if (CollisionHelper.collides(friendly, enemy)) {
                     Log.d(TAG, "Collision !!");
                     //scene.remove(InGameScene.Layer.player.ordinal(), player);
                     //scene.remove(InGameScene.Layer.friendly.ordinal(), friendly);

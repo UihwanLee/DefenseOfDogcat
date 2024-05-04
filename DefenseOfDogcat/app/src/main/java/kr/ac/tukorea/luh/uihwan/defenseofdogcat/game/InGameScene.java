@@ -38,6 +38,9 @@ public class InGameScene extends Scene {
         this.joyStick = new JoyStick();
         add(Layer.controller, joyStick);
 
+        // Cost System 초기화
+        add(Layer.controller, new CostGenerator());
+
         // player 초기화
         this.player = Dogcat.get(joyStick);
         add(Layer.player, player);

@@ -17,6 +17,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
 
     private float maxAttackCoolTime;
     private float attackCoolTime;
+    private float dyingTime = 0.5f;
     private static final int[] resIds = {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
             R.mipmap.unit_04_turtle_animation_sheet, R.mipmap.unit_05_rhinoceros_animation_sheet, R.mipmap.unit_06_penguin_animation_sheet,
@@ -88,9 +89,8 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
                 break;
             case dying:
                 frameState = 2;
-                long now = System.currentTimeMillis();
-                float time = (now - createdOn) / 1000.0f;
-                if(time > 2.0f)
+                dyingTime -= elapsedSeconds;
+                if(dyingTime > 0.0f)
                 {
                     Scene.top().remove(InGameScene.Layer.friendly, this);
                 }

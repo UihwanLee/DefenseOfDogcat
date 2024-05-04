@@ -16,6 +16,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private int atk;
     private float maxAttackCoolTime;
     private float attackCoolTime;
+
+    private float dyingTime = 0.5f;
     private static final int[] resIds = {
             R.mipmap.enemy_01_zomibe_animation_sheet, R.mipmap.enemy_02_skeleton_pirate_animation_sheet, R.mipmap.enemy_03_skeleton_ninja_animation_sheet,
             R.mipmap.enemy_04_witch_animation_sheet, R.mipmap.enemy_05_frankenstein_animation_sheet,
@@ -86,9 +88,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
                 break;
             case dying:
                 frameState = 2;
-                long now = System.currentTimeMillis();
-                float time = (now - createdOn) / 1000.0f;
-                if(time > 2.0f)
+                dyingTime -= elapsedSeconds;
+                if(dyingTime > 0.0f)
                 {
                     Scene.top().remove(InGameScene.Layer.enemy, this);
                 }

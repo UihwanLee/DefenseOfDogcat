@@ -8,11 +8,12 @@ import android.graphics.RectF;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
+import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
-public class Dogcat extends Sprite implements IBoxCollidable {
+public class Dogcat extends AnimSprite implements IBoxCollidable {
     protected Rect srcRect = new Rect();
 
     private static final float RADIUS_X = 2.5f;
@@ -22,6 +23,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     private RectF dstRect = new RectF();
     private float x, y, angle;
     private float tx, ty, dx, dy;
+
 
     private Bitmap playerSheet;
     private Bitmap originSheet;
@@ -37,7 +39,7 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     private Matrix sideInversion = new Matrix();
 
     private Dogcat(JoyStick joyStick) {
-        super(R.mipmap.player_animation_sheet);
+        super(R.mipmap.player_animation_sheet, 10.0f, 3);
         x = 8.0f;
         y = 2.0f;
         dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
@@ -63,6 +65,9 @@ public class Dogcat extends Sprite implements IBoxCollidable {
 
         this.playerSheet = originSheet;
 
+        // State 설정
+        setState(State.idle);
+
         this.joyStick = joyStick;
     }
     public static Dogcat get(JoyStick joyStick) {
@@ -72,26 +77,36 @@ public class Dogcat extends Sprite implements IBoxCollidable {
     @Override
     public void update(float elapsedSeconds) {
         if (joyStick.power > 0) {
-            float distance = SPEED * joyStick.power * elapsedSeconds;
-            x += (float) (distance * Math.cos(joyStick.angle_radian));
-            dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
-            angle = (float) Math.toDegrees(joyStick.angle_radian) + 90;
-
-            // 목표 위치에 따른 이미지 반전
-            this.playerSheet = (Math.cos(joyStick.angle_radian)>=0) ? originSheet : invertSheet;
-
-            // 별도의 collisionRect
-            collisionRect.set(dstRect);
-            collisionRect.inset(0.5f, 0.3f);
-
-            // walk animation 표시
-            frameCount = 6;
-            frameState = 1;
+            setState(State.walking);
         }
         else {
             // idle animation 표시
-            frameCount = 3;
-            frameState = 0;
+            setState(State.idle);
+        }
+
+        switch (state) {
+            case idle:
+                // idle animation 표시
+                frameCount = 3;
+                frameState = 0;
+                break;
+            case walking:
+                float distance = SPEED * joyStick.power * elapsedSeconds;
+                x += (float) (distance * Math.cos(joyStick.angle_radian));
+                dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
+                angle = (float) Math.toDegrees(joyStick.angle_radian) + 90;
+
+                // 목표 위치에 따른 이미지 반전
+                this.playerSheet = (Math.cos(joyStick.angle_radian)>=0) ? originSheet : invertSheet;
+
+                // 별도의 collisionRect
+                collisionRect.set(dstRect);
+                collisionRect.inset(0.5f, 0.3f);
+
+                // walk animation 표시
+                frameCount = 6;
+                frameState = 1;
+                break;
         }
     }
 

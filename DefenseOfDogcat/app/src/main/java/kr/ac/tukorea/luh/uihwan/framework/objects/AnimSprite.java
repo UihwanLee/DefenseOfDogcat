@@ -7,6 +7,10 @@ import kr.ac.tukorea.luh.uihwan.framework.res.BitmapPool;
 
 public class AnimSprite extends Sprite {
     protected Rect srcRect = new Rect();
+    public enum State {
+        idle, walking, attacking, dying, COUNT
+    }
+    protected State state = State.idle;
     private float fps;
     private int frameWidth, frameHeight;
     private int frameCount, frameState;
@@ -44,5 +48,9 @@ public class AnimSprite extends Sprite {
         int frameIndex = Math.round(time * fps) % frameCount;
         srcRect.set(frameIndex * frameWidth, sheetHeight - (frameHeight * (frameState + 1)), (frameIndex + 1) * frameWidth, sheetHeight - (frameHeight * frameState));
         canvas.drawBitmap(bitmap, srcRect, dstRect, null);
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

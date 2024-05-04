@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 
-public class UnitGenerator implements IGameObject {
+public class EnemyGenerator implements IGameObject {
     private float spawnTime = 0;
     @Override
     public void update(float elapsedSeconds) {

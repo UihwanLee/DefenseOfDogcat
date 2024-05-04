@@ -47,6 +47,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
 
     private void init(int index)
     {
+        setState(State.walking);
         this.hp = this.maxHp = resHP[index];
         this.atk = resATK[index];
         setPosition(1.0f, 4.0f, 1.5f, 1.5f);
@@ -55,9 +56,27 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
 
     @Override
     public void update(float elapsedSeconds) {
-        super.update(elapsedSeconds);
         if (dstRect.right > Metrics.width) {
             Scene.top().remove(InGameScene.Layer.friendly, this);
+        }
+
+        processState(elapsedSeconds);
+    }
+
+    private void processState(float elapsedSeconds)
+    {
+        switch (state) {
+            case walking:
+                float timedDx = dx * elapsedSeconds;
+                float timedDy = dy * elapsedSeconds;
+                x += timedDx;
+                y += timedDy;
+                dstRect.offset(timedDx, timedDy);
+                frameState = 0;
+                break;
+            case attacking:
+                frameState = 1;
+                break;
         }
     }
 

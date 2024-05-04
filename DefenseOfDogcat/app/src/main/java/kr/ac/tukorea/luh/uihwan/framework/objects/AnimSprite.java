@@ -13,7 +13,7 @@ public class AnimSprite extends Sprite {
     protected State state = State.idle;
     private float fps;
     private int frameWidth, frameHeight;
-    private int frameCount, frameState;
+    public int frameCount, frameState;
     private final long createdOn;
 
     private int sheetWidth, sheetHeight;

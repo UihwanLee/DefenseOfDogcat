@@ -84,6 +84,11 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
             setState(State.idle);
         }
 
+        processState(elapsedSeconds);
+    }
+
+    private void processState(float elapsedSeconds)
+    {
         switch (state) {
             case idle:
                 // idle animation 표시

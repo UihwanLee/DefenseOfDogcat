@@ -137,4 +137,9 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
     public RectF getCollisionRect() {
         return collisionRect;
     }
+
+    public void setState(State state)
+    {
+        this.state = state;
+    }
 }

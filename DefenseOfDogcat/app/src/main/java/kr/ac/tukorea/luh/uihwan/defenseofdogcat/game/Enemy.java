@@ -18,49 +18,52 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private float attackCoolTime;
 
     private float dyingTime = 0.5f;
-    private static final int[] resIds = {
-            R.mipmap.enemy_01_zomibe_animation_sheet, R.mipmap.enemy_02_skeleton_pirate_animation_sheet, R.mipmap.enemy_03_skeleton_ninja_animation_sheet,
-            R.mipmap.enemy_04_witch_animation_sheet, R.mipmap.enemy_05_frankenstein_animation_sheet,
-    };
 
-    private static final int[] resHP = {
-            10, 8, 30, 70, 120,
-    };
+    public enum EnemyType {
+        zombie, pirate, ninja, witch, frankenstein;
 
-    private static final int[] resATK = {
-            5, 8, 20, 30, 50,
-    };
-
-    public static final float[] resSpeed =  {
-            -1.0f, -0.5f, -1.0f,
-    };
-
-    private static final float[] resCoolTime = {
-            0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
-    };
-
-    private Enemy(int index, int frameCount) {
-        super(resIds[index], ANIM_FPS, frameCount);
-        init(index);
+        int getId() { return resIds[this.ordinal()]; }
+        int getHP() { return resHP[this.ordinal()];}
+        int getATK() { return resATK[this.ordinal()]; }
+        float getSpeed() { return resSpeed[this.ordinal()]; }
+        float getCoolTime() { return resCoolTime[this.ordinal()]; }
+        int getFrameCount(int state) { return resFrame[this.ordinal()][state]; }
+        static final int[] resIds = {
+                R.mipmap.enemy_01_zomibe_animation_sheet, R.mipmap.enemy_02_skeleton_pirate_animation_sheet, R.mipmap.enemy_03_skeleton_ninja_animation_sheet,
+                R.mipmap.enemy_04_witch_animation_sheet, R.mipmap.enemy_05_frankenstein_animation_sheet,
+        };
+        static final int[] resHP = { 10, 8, 30, 70, 120, };
+        static final int[] resATK = { 5, 8, 20, 30, 50, };
+        static final float[] resSpeed =  { -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, };
+        static final float[] resCoolTime = { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, };
+        static final int[][] resFrame = { {5, 3, 1}, {3, 3, 1}, {2, 3, 1}, {4, 2, 1}, {5, 4, 1}};
     }
-    public static Enemy get(int index, int frameCount) {
+    private EnemyType type;
+
+    private Enemy(EnemyType type, int frameCount) {
+        super(type.getId(), ANIM_FPS, frameCount);
+        init(type);
+    }
+    public static Enemy get(EnemyType type, int frameCount) {
         Enemy enemy = (Enemy) RecycleBin.get(Enemy.class);
         if (enemy != null) {
-            enemy.init(index);
+            enemy.init(type);
             return enemy;
         }
-        return new Enemy(index, frameCount);
+        return new Enemy(type, frameCount);
     }
 
-    private void init(int index)
+    private void init(EnemyType type)
     {
+        this.type = type;
         setState(State.walking);
-        this.hp = this.maxHp = resHP[index];
-        this.atk = resATK[index];
-        this.maxAttackCoolTime = resCoolTime[index];
-        this.attackCoolTime = resCoolTime[index];
+        this.hp = this.maxHp = type.getHP();
+        this.atk = type.getATK();
+        this.maxAttackCoolTime = type.getCoolTime();
+        this.attackCoolTime = type.getCoolTime();
         setPosition(16.0f, 4.0f, 1.5f, 1.5f);
-        setSpeed(resSpeed[index]);
+        setSpeed(type.getSpeed());
+        setBitmap(type.getId());
     }
 
     @Override
@@ -127,5 +130,11 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     public boolean decreaseLife(int atk) {
         hp -= atk;
         return hp <= 0;
+    }
+
+    public void setState(State state)
+    {
+        this.state = state;
+        this.frameCount = this.type.getFrameCount(state.ordinal() - 1);
     }
 }

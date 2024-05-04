@@ -19,12 +19,12 @@ public class EnemyGenerator implements IGameObject {
 
     private void generateEnemy()
     {
-        Scene.top().add(InGameScene.Layer.enemy, Enemy.get(0, 5));
+        Scene.top().add(InGameScene.Layer.enemy, Enemy.get(Enemy.EnemyType.zombie, 5));
     }
 
     private void generateFriendly()
     {
-        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(0, 3));
+        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(Friendly.FriendlyType.rat, 3));
     }
 
     @Override

@@ -49,8 +49,4 @@ public class AnimSprite extends Sprite {
         srcRect.set(frameIndex * frameWidth, sheetHeight - (frameHeight * (frameState + 1)), (frameIndex + 1) * frameWidth, sheetHeight - (frameHeight * frameState));
         canvas.drawBitmap(bitmap, srcRect, dstRect, null);
     }
-
-    public void setState(State state) {
-        this.state = state;
-    }
 }

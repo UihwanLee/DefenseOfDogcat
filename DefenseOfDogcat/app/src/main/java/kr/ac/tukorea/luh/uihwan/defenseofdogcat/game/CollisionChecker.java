@@ -28,8 +28,9 @@ public class CollisionChecker implements IGameObject {
                     Log.d(TAG, "Collision !!");
                     friendly.setState(AnimSprite.State.attacking);
                     enemy.setState(AnimSprite.State.attacking);
-                    boolean enemyDead = enemy.decreaseLife(friendly.getATK());
-                    boolean friendlyDead = friendly.decreaseLife(enemy.getATK());
+
+                    boolean enemyDead = friendly.attack(elapsedSeconds, enemy);
+                    boolean friendlyDead = enemy.attack(elapsedSeconds, friendly);
 
                     if(enemyDead)
                     {

@@ -14,6 +14,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final float ANIM_FPS = 10.0f;
     private int hp, maxHp;
     private int atk;
+    private float maxAttackCoolTime;
+    private float attackCoolTime;
     private static final int[] resIds = {
             R.mipmap.enemy_01_zomibe_animation_sheet, R.mipmap.enemy_02_skeleton_pirate_animation_sheet, R.mipmap.enemy_03_skeleton_ninja_animation_sheet,
             R.mipmap.enemy_04_witch_animation_sheet, R.mipmap.enemy_05_frankenstein_animation_sheet,
@@ -29,6 +31,10 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
 
     public static final float[] resSpeed =  {
             -1.0f, -0.5f, -1.0f,
+    };
+
+    private static final float[] resCoolTime = {
+            0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
     };
 
     private Enemy(int index, int frameCount) {
@@ -49,6 +55,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         setState(State.walking);
         this.hp = this.maxHp = resHP[index];
         this.atk = resATK[index];
+        this.maxAttackCoolTime = resCoolTime[index];
+        this.attackCoolTime = resCoolTime[index];
         setPosition(16.0f, 4.0f, 1.5f, 1.5f);
         setSpeed(resSpeed[index]);
     }
@@ -86,6 +94,18 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
                 }
                 break;
         }
+    }
+
+    public boolean attack(float elapsedSeconds, Friendly friendly)
+    {
+        InGameScene scene = (InGameScene) Scene.top();
+        if (scene == null) return false;
+        attackCoolTime -= elapsedSeconds;
+        if (attackCoolTime > 0) return false;
+
+        attackCoolTime = this.maxAttackCoolTime;
+
+        return friendly.decreaseLife(atk);
     }
 
     @Override

@@ -14,6 +14,9 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     private static final float ANIM_FPS = 10.0f;
     private int hp, maxHp;
     private int atk;
+
+    private float maxAttackCoolTime;
+    private float attackCoolTime;
     private static final int[] resIds = {
             R.mipmap.unit_01_rat_animation_sheet, R.mipmap.unit_02_rabbit_animation_sheet, R.mipmap.unit_03_bear_animation_sheet,
             R.mipmap.unit_04_turtle_animation_sheet, R.mipmap.unit_05_rhinoceros_animation_sheet, R.mipmap.unit_06_penguin_animation_sheet,
@@ -30,6 +33,10 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
 
     public static final float[] resSpeed =  {
             1.0f, 0.5f, 1.0f,
+    };
+
+    private static final float[] resCoolTime = {
+            0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f,
     };
 
     private Friendly(int index, int frameCount) {
@@ -50,6 +57,8 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         setState(State.walking);
         this.hp = this.maxHp = resHP[index];
         this.atk = resATK[index];
+        this.maxAttackCoolTime = resCoolTime[index];
+        this.attackCoolTime = resCoolTime[index];
         setPosition(1.0f, 4.0f, 1.5f, 1.5f);
         setSpeed(resSpeed[index]);
     }
@@ -88,6 +97,19 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
                 break;
         }
     }
+
+    public boolean attack(float elapsedSeconds, Enemy enemy)
+    {
+        InGameScene scene = (InGameScene) Scene.top();
+        if (scene == null) return false;
+        attackCoolTime -= elapsedSeconds;
+        if (attackCoolTime > 0) return false;
+
+        attackCoolTime = this.maxAttackCoolTime;
+
+        return enemy.decreaseLife(atk);
+    }
+
 
     @Override
     public RectF getCollisionRect() {

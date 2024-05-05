@@ -2,6 +2,8 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import android.graphics.RectF;
 
+import java.util.Random;
+
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
@@ -39,6 +41,12 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         static final int[][] resFrame = { {5, 3, 1}, {3, 3, 1}, {2, 3, 1}, {4, 2, 1}, {5, 4, 1}};
     }
     private EnemyType type;
+
+    public static EnemyType getRandomEnemyType() {
+        EnemyType[] values = EnemyType.values();
+        Random random = new Random();
+        return values[random.nextInt(values.length)];
+    }
 
     private Enemy(EnemyType type, int frameCount) {
         super(type.getId(), ANIM_FPS, frameCount);

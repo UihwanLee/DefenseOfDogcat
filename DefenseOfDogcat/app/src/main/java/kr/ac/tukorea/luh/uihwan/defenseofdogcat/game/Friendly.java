@@ -2,6 +2,8 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import android.graphics.RectF;
 
+import java.util.Random;
+
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IBoxCollidable;
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
@@ -40,6 +42,12 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     private float dyingTime = 0.5f;
 
     private Friendly.FriendlyType type;
+
+    public static Friendly.FriendlyType getRandomFriendlyType() {
+        Friendly.FriendlyType[] values = Friendly.FriendlyType.values();
+        Random random = new Random();
+        return values[random.nextInt(values.length)];
+    }
 
     private Friendly(FriendlyType type, int frameCount) {
         super(type.getId(), ANIM_FPS, frameCount);

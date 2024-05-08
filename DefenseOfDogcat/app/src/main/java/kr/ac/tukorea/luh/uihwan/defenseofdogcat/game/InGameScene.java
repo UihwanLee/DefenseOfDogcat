@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Background;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
+import kr.ac.tukorea.luh.uihwan.framework.res.Sound;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
@@ -47,6 +48,26 @@ public class InGameScene extends Scene {
 
         // UI 생성
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
+    }
+
+    @Override
+    protected void onStart() {
+        Sound.playMusic(R.raw.main);
+    }
+
+    @Override
+    protected void onEnd() {
+        Sound.stopMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        Sound.pauseMusic();
+    }
+
+    @Override
+    protected void onResume() {
+        Sound.resumeMusic();
     }
 
     @Override

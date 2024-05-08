@@ -23,7 +23,7 @@ public class StartScene extends Scene {
         add(StartScene.Layer.bg, new Background(R.mipmap.scene01_startpage_background));
 
         // Button 생성
-        add(Layer.touch, new Button(R.mipmap.scene01_startpage_background, 5.0f, 8.0f, 2.0f, 2.0f, new Button.Callback() {
+        add(Layer.touch, new Button(R.mipmap.button_play, 13.0f, 7.0f, 6.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
                 new LobbyScene().push();

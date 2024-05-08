@@ -7,6 +7,13 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 
 public class FriendlyGenerator implements IGameObject {
 
+    private Cost cost;
+
+    public FriendlyGenerator(Cost cost)
+    {
+        this.cost = cost;
+    }
+
     @Override
     public void update(float elapsedSeconds) {
 
@@ -20,7 +27,11 @@ public class FriendlyGenerator implements IGameObject {
     public void spawnFriendly(int id)
     {
         Friendly.FriendlyType type = Friendly.getTypeAtIndex(id);
-        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3));
+
+        if(cost.canSpawn(type.getCost()))
+        {
+            Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3));
+        }
     }
 
     @Override

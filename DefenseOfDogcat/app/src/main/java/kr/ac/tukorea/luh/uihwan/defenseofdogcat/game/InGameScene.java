@@ -51,8 +51,6 @@ public class InGameScene extends Scene {
         add(Layer.controller, new EnemyGenerator());
         add(Layer.controller, new CollisionChecker());
 
-        friendlyGenerator = new FriendlyGenerator();
-
         // joyStick 초기화
         this.joyStick = new JoyStick();
         add(Layer.controller, joyStick);
@@ -73,6 +71,8 @@ public class InGameScene extends Scene {
 
         // Button 생성
         createAllyButton();
+
+        friendlyGenerator = new FriendlyGenerator(cost);
     }
 
     private void createAllyButton()

@@ -20,6 +20,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     public enum FriendlyType {
         rat, rabbit, bear, kangaroo, turtle, rhinoceros, penguin, dragon;
         int getId() { return resIds[this.ordinal()]; }
+        int getCost() { return resCost[this.ordinal()]; }
         int getHP() { return resHP[this.ordinal()]; }
         int getATK() { return resATK[this.ordinal()]; }
         float getSpeed() { return resSpeed[this.ordinal()]; }
@@ -30,6 +31,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
                 R.mipmap.unit_04_turtle_animation_sheet, R.mipmap.unit_05_rhinoceros_animation_sheet, R.mipmap.unit_06_penguin_animation_sheet,
                 R.mipmap.unit_07_dragon_animation_sheet,
         };
+        static final int[] resCost = { 10, 20, 30, 50, 100, 150, 200, };
         static final int[] resHP = { 20, 15, 40, 50, 70, 90, 150, };
         static final int[] resATK = { 5, 8,	10,	20,	50,	60,	100, };
         static final float[] resSpeed =  { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };

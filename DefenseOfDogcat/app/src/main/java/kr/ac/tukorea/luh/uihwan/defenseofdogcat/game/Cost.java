@@ -29,6 +29,19 @@ public class Cost extends Sprite {
         setCost();
     }
 
+    public boolean canSpawn(int cost)
+    {
+        if(this.cost >= cost)
+        {
+            decreaseCost(cost);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public void decreaseCost(float decrease)
     {
         if(cost - decrease < 0.0f) return;

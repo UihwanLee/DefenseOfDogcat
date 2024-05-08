@@ -73,6 +73,6 @@ public class LobbyScene extends Scene {
 
     @Override
     protected int getTouchLayerIndex() {
-        return StartScene.Layer.touch.ordinal();
+        return LobbyScene.Layer.touch.ordinal();
     }
 }

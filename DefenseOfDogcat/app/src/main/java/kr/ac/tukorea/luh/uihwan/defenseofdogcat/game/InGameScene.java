@@ -18,6 +18,8 @@ public class InGameScene extends Scene {
 
     private final JoyStick joyStick;
 
+    private FriendlyGenerator friendlyGenerator;
+
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
@@ -44,7 +46,9 @@ public class InGameScene extends Scene {
 
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator());
-        //add(Layer.controller, new CollisionChecker());
+        add(Layer.controller, new CollisionChecker());
+
+        friendlyGenerator = new FriendlyGenerator();
 
         // joyStick 초기화
         this.joyStick = new JoyStick();
@@ -68,10 +72,11 @@ public class InGameScene extends Scene {
     {
         for(int i=0; i<UI_ALLY_IDS.length; i++)
         {
+            int finalI = i;
             add(InGameScene.Layer.touch, new Button(UI_ALLY_IDS[i], i * 1.6f + 1.1f, 6.7f, 1.6f, 1.6f, new Button.Callback() {
                 @Override
                 public boolean onTouch(Button.Action action) {
-
+                    friendlyGenerator.spawnFriendly(finalI);
                     return true;
                 }
             }));
@@ -107,6 +112,11 @@ public class InGameScene extends Scene {
     public void draw(Canvas canvas)
     {
         super.draw(canvas);
+    }
+
+    @Override
+    protected int getTouchLayerIndex() {
+        return InGameScene.Layer.touch.ordinal();
     }
 
     @Override

@@ -49,6 +49,15 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         return values[random.nextInt(values.length)];
     }
 
+    public static FriendlyType getTypeAtIndex(int index) {
+        FriendlyType[] types = FriendlyType.values();
+        if (index >= 0 && index < types.length) {
+            return types[index];
+        } else {
+            throw new IllegalArgumentException("Invalid index");
+        }
+    }
+
     private Friendly(FriendlyType type, int frameCount) {
         super(type.getId(), ANIM_FPS, frameCount);
         init(type);

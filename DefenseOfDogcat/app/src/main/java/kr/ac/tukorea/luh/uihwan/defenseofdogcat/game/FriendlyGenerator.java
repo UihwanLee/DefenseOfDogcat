@@ -17,6 +17,12 @@ public class FriendlyGenerator implements IGameObject {
         Scene.top().add(InGameScene.Layer.friendly, Friendly.get(Friendly.FriendlyType.rat, 3));
     }
 
+    public void spawnFriendly(int id)
+    {
+        Friendly.FriendlyType type = Friendly.getTypeAtIndex(id);
+        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3));
+    }
+
     @Override
     public void draw(Canvas canvas) {
 

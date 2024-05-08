@@ -103,11 +103,13 @@
 ## 게임 시스템
 
 > Cost 시스템
+
 ![cost drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/08261295-9958-4efb-b994-8bfed234dc16)
  - 아군 유닛을 소환할 수 있는 cost의 최대치는 200이며 초당 5씩 찬다.
  - cost가 최대치가 되면 200에서 넘아가지 않는다.
 
 > 전투 시스템
+
 ![fight drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/36e5d5ea-86a7-4407-b2ef-8f931c8d80a2)
 - 모든 전투는 아군 및 적군의 공격 범위에 도달하면 시작된다.
 - 근접 전투 유닛은 근접 충돌 시 원거리 전투 유닛은 특정 범위에 충돌되면 전투를 시작한다.
@@ -116,6 +118,7 @@
 - 플레이어 캐릭터 또한 공격을 할 수 있으며 HP가 0이 되면 게임이 종료된다.
 
 > 애니메이션 시스템
+
 ![statemachine drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/56853746-8ad0-4e55-9744-ca10e0d1607d)
  - 애니메이션은 stateMachine에 따라 동작한다.
  - state 종류는 Friendly, Enemy 모두 'walking', 'attack', 'dying'로 3종류이다.
@@ -139,6 +142,22 @@
 |8주차|게임 마무리 구현|-게임 결과 창 구현 & 캐릭터 Status 구현|0%|
 |9주차|코드 리펙토링 및 버그 수정|-전체 코드 리펙토링 및 버그 수정 & 플레이어 추가 기능 구현|0%|
 ||||40%|
+
+
+## COMMIT 내역
+
+![commit](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/6aef7ad0-8090-43e9-b6de-264f70929cea)
+
+|주차|횟수|
+|----|----:|
+|1주차|38회|
+|2주차|17회|
+|3주차|54회|
+|4주차|2회|
+|5주차|10회|
+|6주차|16회|
+|total|139회|
+
 
 
 ## 개발 일정

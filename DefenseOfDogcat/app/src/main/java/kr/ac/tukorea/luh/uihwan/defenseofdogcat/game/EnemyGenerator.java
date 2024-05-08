@@ -12,7 +12,6 @@ public class EnemyGenerator implements IGameObject {
         spawnTime -= elapsedSeconds;
         if (spawnTime < 0) {
             generateEnemy();
-            generateFriendly();
             spawnTime = 5.0f;
         }
     }
@@ -21,12 +20,6 @@ public class EnemyGenerator implements IGameObject {
     {
         Enemy.EnemyType type = Enemy.getRandomEnemyType();
         Scene.top().add(InGameScene.Layer.enemy, Enemy.get(type, 5));
-    }
-
-    private void generateFriendly()
-    {
-        Friendly.FriendlyType type = Friendly.getRandomFriendlyType();
-        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3));
     }
 
     @Override

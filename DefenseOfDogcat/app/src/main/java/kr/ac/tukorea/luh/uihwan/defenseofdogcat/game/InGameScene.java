@@ -32,8 +32,8 @@ public class InGameScene extends Scene {
         add(Layer.bg, new Background(stage));
 
         // Unit Generator 생성
-        add(Layer.controller, new EnemyGenerator());
-        add(Layer.controller, new CollisionChecker());
+        //add(Layer.controller, new EnemyGenerator());
+        //add(Layer.controller, new CollisionChecker());
 
         // joyStick 초기화
         this.joyStick = new JoyStick();

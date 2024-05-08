@@ -2,6 +2,7 @@ package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
@@ -121,6 +122,9 @@ public class InGameScene extends Scene {
 
     @Override
     public boolean onTouch(MotionEvent event) {
-        return joyStick.onTouch(event);
+        float[] pts = Metrics.fromScreen(event.getX(), event.getY());
+
+        if(pts[1] > 5.0f)  return super.onTouch(event);
+        else return joyStick.onTouch(event);
     }
 }

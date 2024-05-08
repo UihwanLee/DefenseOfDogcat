@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kr.ac.tukorea.luh.uihwan.framework.view.GameView;
+import kr.ac.tukorea.luh.uihwan.defenseofdogcat.game.StartScene;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.game.InGameScene;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.databinding.GameViewBinding;
@@ -36,31 +37,14 @@ public class GameActivity extends AppCompatActivity {
             R.id.unit_ally_slot_07,
     };
 
-    private static int[] STAGE_IDS = new int[] {
-            R.mipmap.scene03_background_type_1,
-            R.mipmap.scene03_background_type_2,
-            R.mipmap.scene03_background_type_3,
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        binding = GameViewBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        //setContentView(new GameView(this));
-
-        gameView = new GameView(this);
-
         activity = this;
-
-        new InGameScene(STAGE_IDS[0]).push();
-
-        // ally unit slot image 적용
-        init_unit_slot();
+        gameView = new GameView(this);
+        //gameView.setFullScreen();
+        setContentView(gameView);
+        //new InGameScene(STAGE_IDS[0]).push();
 
         getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
     }

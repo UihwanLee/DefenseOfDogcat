@@ -13,7 +13,12 @@
         android:theme="@style/Theme.DefenseOfDogcat"
         tools:targetApi="31">
         <activity
-            android:name="kr.ac.tukorea.luh.uihwan.framework.activity.GameActivity"
+            android:name=".app.DogcatActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:exported="false" />
+        <activity
+            android:name=".app.InGameActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="landscape"
             android:exported="false" />

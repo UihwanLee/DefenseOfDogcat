@@ -1,5 +1,6 @@
 package kr.ac.tukorea.luh.uihwan.framework.objects;
 
+import android.util.Log;
 import android.view.MotionEvent;
 
 import kr.ac.tukorea.luh.uihwan.framework.interfaces.ITouchable;
@@ -25,7 +26,7 @@ public class Button extends Sprite implements ITouchable {
         if (!dstRect.contains(pts[0], pts[1])) {
             return false;
         }
-        //Log.d(TAG, "Button.onTouch(" + System.identityHashCode(this) + ", " + e.getAction() + ", " + e.getX() + ", " + e.getY());
+        Log.d(TAG, "Button.onTouch(" + System.identityHashCode(this) + ", " + e.getAction() + ", " + e.getX() + ", " + e.getY());
         int action = e.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             processedDown = callback.onTouch(Action.pressed);

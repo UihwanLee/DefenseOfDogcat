@@ -72,26 +72,58 @@
 * 마지막 3단계 스테이지에서는 중간 보스와 최종 보스가 존재하며 최종 보스까지 클리어 시 게임이 종료된다.
 
 
+## 예상 게임 흐름
+
+![49d88598a18746f88bc4f381b3044b1f-2](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/c3d09c7d-500a-42ef-a429-fe5dad3d2482)
+
+
+## 클래스 다이어그램
+
+![classdiagram drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/38837ffc-7311-40e5-b0ae-1cd2a409c31a)
+
+> GameObject
+- Dogcat:        플레이어 주체, dogcat 캐릭터를 컨트롤 하는 클래스이다.
+- Friendly:      아군 유닛, 총 7개의 종류가 있으며 각각 다른 cost, hp, atk 속성을 갖고 있다.
+- Enemy:         적군 유닛, 총 5개의 종류가 있으며 각각 다른 hp, hp, atk 속성을 갖고 있다.
+
+> UI
+- Background:     배경을 담당하는 클래스, 16:9 사이즈의 화면의 꽉 찬 배경을 그린다.
+- Button:         버튼 UI 클래스, button 클릭 시 나타날 수 있는 상호작용을 관리한다.
+
+> System
+ - Cost:          아군 유닛 소환 비용을 담당하는 클래스
+ - CostGenerator: cost를 시간에 따라 증가시키는 클래스
+ - EnemyGenerator: 적군 유닛을 시간에 따라 소환하는 클래스
+ - FriendlyGenrator: 아군 유닛을 cost에 따라 소환할 수 있는지 관리하는 클래스
+
+> Controller
+ - JoyStick:      Dogcat 캐릭터의 조작을 담당하는 클래스
+
+
 ## 게임 시스템
 
 > Cost 시스템
- - 아군 유닛을 소환할 수 있는 cost의 최대치는 200이며 초당 10씩 찬다.
+![cost drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/08261295-9958-4efb-b994-8bfed234dc16)
+ - 아군 유닛을 소환할 수 있는 cost의 최대치는 200이며 초당 5씩 찬다.
  - cost가 최대치가 되면 200에서 넘아가지 않는다.
 
 > 전투 시스템
+![fight drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/36e5d5ea-86a7-4407-b2ef-8f931c8d80a2)
 - 모든 전투는 아군 및 적군의 공격 범위에 도달하면 시작된다.
 - 근접 전투 유닛은 근접 충돌 시 원거리 전투 유닛은 특정 범위에 충돌되면 전투를 시작한다.
 - 전투 시스템에 사용되는 애니메이이션은 총 3종류로 'walking', 'attack', 'dying' 이다.
 - 적군 유닛은 적군 스테이지마다 몬스터 타입별로 나타날 수 있는 확률을 각각 설정하고 2~10초 사이 랜덤으로 자동 생성된다.
 - 플레이어 캐릭터 또한 공격을 할 수 있으며 HP가 0이 되면 게임이 종료된다.
 
+> 애니메이션 시스템
+![statemachine drawio](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/56853746-8ad0-4e55-9744-ca10e0d1607d)
+ - 애니메이션은 stateMachine에 따라 동작한다.
+ - state 종류는 Friendly, Enemy 모두 'walking', 'attack', 'dying'로 3종류이다.
+
 > 조작방법
 - 플레이어 이동: 조이패드
 - 아군 유닛 소환: 유닛 슬롯 버튼
 
-## 예상 게임 흐름
-
-![49d88598a18746f88bc4f381b3044b1f-2](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/c3d09c7d-500a-42ef-a429-fe5dad3d2482)
 
 ## 진행율
 

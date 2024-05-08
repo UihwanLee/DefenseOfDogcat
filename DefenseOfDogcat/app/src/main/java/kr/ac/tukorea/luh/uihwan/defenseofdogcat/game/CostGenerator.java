@@ -9,17 +9,19 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.RecycleBin;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 
 public class CostGenerator implements IGameObject {
-    private final float MAX_TIME = 2.0f;
+    private final float MAX_TIME = 1.0f;
     private float updateTime = MAX_TIME;
-    private int cost = 0;
-    private final int COST_PER_INCREASE = 10;
+    private final int COST_PER_INCREASE = 5;
 
     private Paint cosPaint;
 
-    public CostGenerator() {
+    private Cost cost;
+
+    public CostGenerator(Cost cost) {
         cosPaint = new Paint();
         cosPaint.setColor(Color.BLUE);
         cosPaint.setTextSize(100f);
+        this.cost = cost;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class CostGenerator implements IGameObject {
 
     private void increaseCost()
     {
-        cost += COST_PER_INCREASE;
+        cost.increaseCost(COST_PER_INCREASE);
     }
 
     @Override

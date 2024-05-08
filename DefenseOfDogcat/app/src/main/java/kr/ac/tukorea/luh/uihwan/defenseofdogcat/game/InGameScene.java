@@ -9,6 +9,7 @@ import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Background;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Button;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
+import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.Sound;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
@@ -18,6 +19,7 @@ public class InGameScene extends Scene {
     private Dogcat player;
 
     private final JoyStick joyStick;
+    private Cost cost;
 
     private FriendlyGenerator friendlyGenerator;
 
@@ -55,15 +57,19 @@ public class InGameScene extends Scene {
         this.joyStick = new JoyStick();
         add(Layer.controller, joyStick);
 
-        // Cost System 초기화
-        add(Layer.controller, new CostGenerator());
-
         // player 초기화
         this.player = Dogcat.get(joyStick);
         add(Layer.player, player);
 
+        // Cost UI 생성
+        cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);
+        add(Layer.UI, cost);
+
         // UI 생성
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
+
+        // Cost System 초기화
+        add(Layer.controller, new CostGenerator(cost));
 
         // Button 생성
         createAllyButton();

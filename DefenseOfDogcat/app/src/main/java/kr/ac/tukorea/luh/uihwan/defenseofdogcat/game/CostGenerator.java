@@ -11,7 +11,7 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 public class CostGenerator implements IGameObject {
     private final float MAX_TIME = 1.0f;
     private float updateTime = MAX_TIME;
-    private final int COST_PER_INCREASE = 5;
+    private final int COST_PER_INCREASE = 20;
 
     private Paint cosPaint;
 

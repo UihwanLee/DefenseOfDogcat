@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import kr.ac.tukorea.luh.uihwan.defenseofdogcat.R;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Background;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Button;
+import kr.ac.tukorea.luh.uihwan.framework.objects.HorzScrollBackground;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.Sound;
@@ -44,9 +45,6 @@ public class InGameScene extends Scene {
         // Layer 초기화
         initLayers(Layer.COUNT);
 
-        // Background 생성
-        add(Layer.bg, new Background(stage));
-
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator());
         add(Layer.controller, new CollisionChecker());
@@ -58,6 +56,9 @@ public class InGameScene extends Scene {
         // player 초기화
         this.player = Dogcat.get(joyStick);
         add(Layer.player, player);
+
+        // Background 생성
+        add(Layer.bg, new HorzScrollBackground(stage, this.player));
 
         // Cost UI 생성
         cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);

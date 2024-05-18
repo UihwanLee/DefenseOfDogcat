@@ -18,7 +18,7 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
 
     private static final float RADIUS_X = 2.5f;
     private static final float RADIUS_Y = 1.5f;
-    private static final float SPEED = 8.0f;
+    private static final float SPEED = 4.0f;
     protected RectF collisionRect = new RectF();
     private RectF dstRect = new RectF();
     private float x, y, angle;
@@ -97,7 +97,7 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
                 break;
             case walking:
                 float distance = SPEED * joyStick.power * elapsedSeconds;
-                x += (float) (distance * Math.cos(joyStick.angle_radian));
+                x = getVelocity(distance);;
                 dstRect.set(x-RADIUS_X, y, x+RADIUS_X, y+2*RADIUS_Y);
                 angle = (float) Math.toDegrees(joyStick.angle_radian) + 90;
 
@@ -112,6 +112,19 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
                 frameCount = 6;
                 frameState = 1;
                 break;
+        }
+    }
+
+    private float getVelocity(float distance)
+    {
+        float velocity = (float) (distance * Math.cos(joyStick.angle_radian));
+        if((x + velocity) <= 0.5f || (x + velocity) >= 16.0f)
+        {
+            return x;
+        }
+        else
+        {
+            return x + velocity;
         }
     }
 
@@ -142,4 +155,6 @@ public class Dogcat extends AnimSprite implements IBoxCollidable {
     {
         this.state = state;
     }
+
+    public float getX() { return x; }
 }

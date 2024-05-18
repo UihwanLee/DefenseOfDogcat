@@ -61,12 +61,11 @@
 |---|:-----------:|
 |Image|![level_desing_select_stage](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/af9e8df1-21a6-48ac-bd69-db450764cccc)|
 
-|STAGE|stage_01|stage_02|stage_03|
-|---|:-----------:|:-----------:|:-----------:|
-|Select|![scene02_stage01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/d1da6d0d-fc5b-40e8-92ad-4b4c047ce769)|![scene02_stage02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/58a80984-9363-4a0b-aaea-34c6dc473bf2)|![scene02_stage03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/e9e0ed58-2cd1-4fa9-9128-2952c2c6afa1)|
-|InGame|![level_desing_01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4f4b2a7c-5a0d-4db1-8a13-e25f18b2c472)|![level_desing_02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/50f647c2-a734-47ed-9bd3-85dfa86478f7)|![level_desing_03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/dc0b7a2f-5acf-47e9-8e7e-d95471627401)|
-|Enemy|zombie|skel_pirate&skel_ninja|witch&frankenstein|
-|Boss|X|X|O|
+|STAGE|InGame|Enemy|Boss|
+|:----:|:----:|:------:|:--:|
+|![scene02_stage01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/d1da6d0d-fc5b-40e8-92ad-4b4c047ce769)|![level_desing_01](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/4f4b2a7c-5a0d-4db1-8a13-e25f18b2c472)|zombie & skel_pirate|X|
+|![scene02_stage02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/58a80984-9363-4a0b-aaea-34c6dc473bf2)|![level_desing_02](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/50f647c2-a734-47ed-9bd3-85dfa86478f7)|zombie & skel_pirate & witch|X|
+|![scene02_stage03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/e9e0ed58-2cd1-4fa9-9128-2952c2c6afa1)|![level_desing_03](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/dc0b7a2f-5acf-47e9-8e7e-d95471627401)|skel_pirate & skel_ninja & frankenstein|O|
 
 * 스테이지는 총 3가지 단계로 각각의 스테이지마다 소환되는 적군 유닛이 다르다.
 * 마지막 3단계 스테이지에서는 중간 보스와 최종 보스가 존재하며 최종 보스까지 클리어 시 게임이 종료된다.

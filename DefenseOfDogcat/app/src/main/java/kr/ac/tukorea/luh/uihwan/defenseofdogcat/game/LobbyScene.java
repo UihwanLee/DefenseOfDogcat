@@ -8,11 +8,6 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 
 public class LobbyScene extends Scene {
     private static final String TAG = Scene.class.getSimpleName();
-    private static int[] STAGE_IDS = new int[] {
-            R.mipmap.scene03_background_type_1,
-            R.mipmap.scene03_background_type_2,
-            R.mipmap.scene03_background_type_3,
-    };
     public enum Layer {
         bg, touch, COUNT
     }
@@ -26,7 +21,7 @@ public class LobbyScene extends Scene {
         add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage01, 8.0f, 5.0f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
-                new InGameScene(STAGE_IDS[0]).push();
+                new InGameScene(0).push();
                 add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }
@@ -35,7 +30,7 @@ public class LobbyScene extends Scene {
         add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage02, 5.3f, 2.7f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
-                new InGameScene(STAGE_IDS[1]).push();
+                new InGameScene(1).push();
                 add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }
@@ -44,7 +39,7 @@ public class LobbyScene extends Scene {
         add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage03, 12.1f, 2.1f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
-                new InGameScene(STAGE_IDS[2]).push();
+                new InGameScene(2).push();
                 add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }

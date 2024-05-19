@@ -30,8 +30,8 @@ public class HorzScrollBackground extends Sprite {
 
         // 배경의 스크롤 값을 클램프하여 월드의 경계를 벗어나지 않도록 함
         scrollX = clamp(playerX - halfWidth, 0, maxScrollX);
-        Log.d(TAG, "scrollX: " + scrollX);
-        setPosition(Metrics.width / 2 - scrollX, Metrics.height / 2, width, Metrics.height);
+        setPosition(-scrollX, Metrics.height / 2, width, Metrics.height);
+        Log.d(TAG, "x: " + scrollX);
     }
 
     private float clamp(float value, float min, float max) {

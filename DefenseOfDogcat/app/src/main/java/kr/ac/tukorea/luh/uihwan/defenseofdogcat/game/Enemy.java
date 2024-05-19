@@ -48,6 +48,12 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         return values[random.nextInt(values.length)];
     }
 
+    public static EnemyType getEnemyTypeByLevel(int[] level) {
+        EnemyType[] values = EnemyType.values();
+        Random random = new Random();
+        return values[random.nextInt(level.length)];
+    }
+
     private Enemy(EnemyType type, int frameCount) {
         super(type.getId(), ANIM_FPS, frameCount);
         init(type);

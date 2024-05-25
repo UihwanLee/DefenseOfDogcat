@@ -132,6 +132,18 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         return enemy.decreaseLife(atk);
     }
 
+    public boolean attack(float elapsedSeconds, Boss boss)
+    {
+        InGameScene scene = (InGameScene) Scene.top();
+        if (scene == null) return false;
+        attackCoolTime -= elapsedSeconds;
+        if (attackCoolTime > 0) return false;
+
+        attackCoolTime = this.maxAttackCoolTime;
+
+        return boss.decreaseLife(atk);
+    }
+
 
     @Override
     public RectF getCollisionRect() {

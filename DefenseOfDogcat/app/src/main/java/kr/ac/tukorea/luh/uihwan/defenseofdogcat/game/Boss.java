@@ -26,9 +26,9 @@ public class Boss extends Sprite implements IBoxCollidable {
         collisionRect.set(x + 3.8f, y - radius, x + radius, y + radius - 4.0f);
     }
 
-    public void decreaseHP(int atk)
-    {
-        hp = hp - atk;
+    public boolean decreaseLife(int atk) {
+        hp -= atk;
+        return hp <= 0;
     }
 
     @Override

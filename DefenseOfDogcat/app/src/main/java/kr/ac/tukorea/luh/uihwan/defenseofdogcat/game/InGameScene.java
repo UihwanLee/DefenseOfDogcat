@@ -74,10 +74,6 @@ public class InGameScene extends Scene {
         cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);
         add(Layer.UI, cost);
 
-        // UI 생성
-        add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
-        add(Layer.UI, new Background(R.mipmap.ui_state));
-
         // Cost System 초기화
         add(Layer.controller, new CostGenerator(cost));
 
@@ -85,6 +81,14 @@ public class InGameScene extends Scene {
         createAllyButton();
 
         friendlyGenerator = new FriendlyGenerator(cost);
+
+        // HP UI 생성
+        HP player_hp = new HP(R.mipmap.ui_hp_ally, 4.0f, 0.0f, 3.0f, 1.0f, 100f, true);
+        add(Layer.UI, player_hp);
+
+        // UI 생성
+        add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
+        add(Layer.UI, new Background(R.mipmap.ui_state));
 
         // Boss 생성
         add(Layer.boss, new Boss(STAGE_BOSS_HP[stage]));

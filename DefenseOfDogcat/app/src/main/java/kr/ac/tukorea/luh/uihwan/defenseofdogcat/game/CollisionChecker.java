@@ -22,6 +22,22 @@ public class CollisionChecker implements IGameObject {
         for (int e = friendlies.size() - 1; e >= 0; e--) {
             Friendly friendly = (Friendly)friendlies.get(e);
             ArrayList<IGameObject> enemies = scene.objectsAt(InGameScene.Layer.enemy);
+            ArrayList<IGameObject> bosses = scene.objectsAt(InGameScene.Layer.boss);
+            for (int h = bosses.size() - 1; h >= 0; h--) {
+                Boss boss = (Boss)bosses.get(h);
+                if (CollisionHelper.collides(friendly, boss)) {
+                    friendly.setState(AnimSprite.State.attacking);
+
+                    boolean bossDead = friendly.attack(elapsedSeconds, boss);
+
+                    if(bossDead)
+                    {
+                        // 게임 끝
+                        Log.d(TAG, "END");
+                        Scene.top().remove(InGameScene.Layer.boss, boss);
+                    }
+                }
+            }
             for (int b = enemies.size() - 1; b >= 0; b--) {
                 Enemy enemy = (Enemy)enemies.get(b);
                 if (CollisionHelper.collides(friendly, enemy)) {

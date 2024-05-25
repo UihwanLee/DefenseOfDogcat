@@ -27,6 +27,26 @@ public class InGameScene extends Scene {
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
+    public enum StageType {
+        stage1, stage2, stage3;
+        int getId() { return STAGE_IDS[this.ordinal()]; }
+        int getHP() { return STAGE_BOSS_HP[this.ordinal()]; }
+        int getAlly() { return STAGE_ALLY_COUNT[this.ordinal()]; }
+
+        static int[] STAGE_IDS = new int[] {
+                R.mipmap.scene03_background_type_1,
+                R.mipmap.scene03_background_type_2,
+                R.mipmap.scene03_background_type_3,
+        };
+
+        static int[] STAGE_BOSS_HP = new int[] {
+                1000, 2000, 3000,
+        };
+        static int[] STAGE_ALLY_COUNT = new int[] {
+                5, 6, 7,
+        };
+    }
+
     private static int[] UI_ALLY_IDS = new int[] {
             R.mipmap.ui_ally_01_rat,
             R.mipmap.ui_ally_02_rabbit,
@@ -35,6 +55,7 @@ public class InGameScene extends Scene {
             R.mipmap.ui_ally_05_rhinoceros,
             R.mipmap.ui_ally_06_penguin,
             R.mipmap.ui_ally_07_dragon,
+            R.mipmap.ui_ally_08_lock,
     };
 
     private static int[] STAGE_IDS = new int[] {
@@ -51,9 +72,22 @@ public class InGameScene extends Scene {
         bg, boss, player, enemy, friendly, controller, UI, touch, COUNT
     }
 
+    public StageType getTypeAtIndex(int index) {
+        InGameScene.StageType[] types = InGameScene.StageType.values();
+        if (index >= 0 && index < types.length) {
+            return types[index];
+        } else {
+            throw new IllegalArgumentException("Invalid index");
+        }
+    }
+
+    StageType stage;
+
     public InGameScene(int stage) {
         // Layer 초기화
         initLayers(Layer.COUNT);
+
+        this.stage = getTypeAtIndex(stage);
 
         // joyStick 초기화
         this.joyStick = new JoyStick();
@@ -64,7 +98,7 @@ public class InGameScene extends Scene {
         add(Layer.player, player);
 
         // Background 생성
-        add(Layer.bg, new Background(STAGE_IDS[stage]));
+        add(Layer.bg, new Background(this.stage.getId()));
 
         // Cost UI 생성
         cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);
@@ -78,7 +112,7 @@ public class InGameScene extends Scene {
 
         // HP UI 생성
         HP player_hp = new HP(R.mipmap.ui_hp_ally, 5.5f, -0.19f, 2.3f, 1.0f, 100f, true);
-        HP boss_hp = new HP(R.mipmap.ui_hp_enemy, 8.2f, -0.19f, 2.3f, 1.0f, STAGE_BOSS_HP[stage], false);
+        HP boss_hp = new HP(R.mipmap.ui_hp_enemy, 8.2f, -0.19f, 2.3f, 1.0f, this.stage.getHP(), false);
         add(Layer.UI, player_hp);
         add(Layer.UI, boss_hp);
 
@@ -87,7 +121,7 @@ public class InGameScene extends Scene {
         add(Layer.UI, new Background(R.mipmap.ui_state));
 
         // Boss 생성
-        add(Layer.boss, new Boss(STAGE_BOSS_HP[stage]));
+        add(Layer.boss, new Boss(this.stage.getHP()));
 
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator(stage, player_hp));

@@ -10,6 +10,7 @@ import kr.ac.tukorea.luh.uihwan.framework.objects.Background;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Button;
 import kr.ac.tukorea.luh.uihwan.framework.objects.HorzScrollBackground;
 import kr.ac.tukorea.luh.uihwan.framework.objects.JoyStick;
+import kr.ac.tukorea.luh.uihwan.framework.objects.Score;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 import kr.ac.tukorea.luh.uihwan.framework.res.Sound;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
@@ -82,6 +83,7 @@ public class InGameScene extends Scene {
     }
 
     StageType stage;
+    Score score; // package private
 
     public InGameScene(int stage) {
         // Layer 초기화
@@ -120,6 +122,10 @@ public class InGameScene extends Scene {
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
         add(Layer.UI, new Background(R.mipmap.ui_state));
 
+        this.score = new Score(R.mipmap.number_24x32, 14.0f, 0.1f, 0.4f);
+        score.setScore(0);
+        add(Layer.UI, score);
+
         // Boss 생성
         add(Layer.boss, new Boss(this.stage.getHP()));
         add(Layer.UI, new Background(R.mipmap.bose_background));
@@ -128,6 +134,10 @@ public class InGameScene extends Scene {
         add(Layer.controller, new EnemyGenerator(stage, player_hp));
         friendlyGenerator = new FriendlyGenerator(cost, boss_hp, this.stage.getAlly());
         add(Layer.controller, new CollisionChecker());
+    }
+
+    public void addScore(int amount) {
+        score.add(amount);
     }
 
     private void createAllyButton()

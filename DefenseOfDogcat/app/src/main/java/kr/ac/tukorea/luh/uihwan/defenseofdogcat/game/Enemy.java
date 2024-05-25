@@ -32,6 +32,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         float getSpeed() { return resSpeed[this.ordinal()]; }
         float getCoolTime() { return resCoolTime[this.ordinal()]; }
         int getFrameCount(int state) { return resFrame[this.ordinal()][state]; }
+        int getScore() { return resScore[this.ordinal()]; }
         static final int[] resIds = {
                 R.mipmap.enemy_01_zomibe_animation_sheet, R.mipmap.enemy_02_skeleton_pirate_animation_sheet, R.mipmap.enemy_03_skeleton_ninja_animation_sheet,
                 R.mipmap.enemy_04_witch_animation_sheet, R.mipmap.enemy_05_frankenstein_animation_sheet,
@@ -41,6 +42,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         static final float[] resSpeed =  { -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, };
         static final float[] resCoolTime = { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, };
         static final int[][] resFrame = { {5, 3, 1}, {3, 3, 1}, {2, 3, 1}, {4, 2, 1}, {5, 4, 1}};
+        static final int[] resScore = { 100, 200, 300, 400, 500, };
     }
     private EnemyType type;
 
@@ -156,5 +158,10 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     {
         this.state = state;
         this.frameCount = this.type.getFrameCount(state.ordinal() - 1);
+    }
+
+    public int getScore()
+    {
+        return type.getScore();
     }
 }

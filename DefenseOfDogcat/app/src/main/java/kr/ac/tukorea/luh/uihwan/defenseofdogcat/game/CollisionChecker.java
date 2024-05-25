@@ -15,7 +15,7 @@ public class CollisionChecker implements IGameObject {
 
     @Override
     public void update(float elapsedSeconds) {
-        Scene scene = Scene.top();
+        InGameScene scene = (InGameScene) Scene.top();
         if (scene == null) return;
 
         ArrayList<IGameObject> friendlies = scene.objectsAt(InGameScene.Layer.friendly);
@@ -51,6 +51,8 @@ public class CollisionChecker implements IGameObject {
                     if(enemyDead)
                     {
                         enemy.setState(AnimSprite.State.dying);
+                        // 점수 증가
+                        scene.addScore(enemy.getScore());
                     }
                     if(friendlyDead)
                     {

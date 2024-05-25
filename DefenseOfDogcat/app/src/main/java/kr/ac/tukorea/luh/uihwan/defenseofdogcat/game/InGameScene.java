@@ -68,7 +68,7 @@ public class InGameScene extends Scene {
         add(Layer.player, player);
 
         // Background 생성
-        add(Layer.bg, new HorzScrollBackground(STAGE_IDS[stage], this.player));
+        add(Layer.bg, new Background(STAGE_IDS[stage]));
 
         // Cost UI 생성
         cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);

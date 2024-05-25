@@ -43,8 +43,12 @@ public class InGameScene extends Scene {
             R.mipmap.scene03_background_type_3,
     };
 
+    private static int[] STAGE_BOSS_HP = new int[] {
+            1000, 2000, 3000,
+    };
+
     public enum Layer {
-        bg, player, enemy, friendly, controller, UI, touch, COUNT
+        bg, boss, player, enemy, friendly, controller, UI, touch, COUNT
     }
 
     public InGameScene(int stage) {
@@ -72,6 +76,7 @@ public class InGameScene extends Scene {
 
         // UI 생성
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
+        add(Layer.UI, new Background(R.mipmap.ui_state));
 
         // Cost System 초기화
         add(Layer.controller, new CostGenerator(cost));
@@ -80,6 +85,9 @@ public class InGameScene extends Scene {
         createAllyButton();
 
         friendlyGenerator = new FriendlyGenerator(cost);
+
+        // Boss 생성
+        add(Layer.boss, new Boss(STAGE_BOSS_HP[stage]));
     }
 
     private void createAllyButton()

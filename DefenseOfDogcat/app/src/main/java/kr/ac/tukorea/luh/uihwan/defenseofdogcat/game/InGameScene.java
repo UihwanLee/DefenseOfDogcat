@@ -122,6 +122,7 @@ public class InGameScene extends Scene {
 
         // Boss 생성
         add(Layer.boss, new Boss(this.stage.getHP()));
+        add(Layer.UI, new Background(R.mipmap.bose_background));
 
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator(stage, player_hp));

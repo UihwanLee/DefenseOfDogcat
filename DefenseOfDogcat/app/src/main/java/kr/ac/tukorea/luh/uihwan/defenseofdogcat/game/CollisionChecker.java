@@ -12,12 +12,14 @@ import kr.ac.tukorea.luh.uihwan.framework.util.CollisionHelper;
 
 public class CollisionChecker implements IGameObject {
     private static final String TAG = CollisionChecker.class.getSimpleName();
+    private final InGameScene scene;
+
+    public CollisionChecker(InGameScene scene) {
+        this.scene = scene;
+    }
 
     @Override
     public void update(float elapsedSeconds) {
-        InGameScene scene = (InGameScene) Scene.top();
-        if (scene == null) return;
-
         ArrayList<IGameObject> friendlies = scene.objectsAt(InGameScene.Layer.friendly);
         for (int e = friendlies.size() - 1; e >= 0; e--) {
             Friendly friendly = (Friendly)friendlies.get(e);

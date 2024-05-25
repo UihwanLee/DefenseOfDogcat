@@ -133,7 +133,7 @@ public class InGameScene extends Scene {
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator(stage, player_hp));
         friendlyGenerator = new FriendlyGenerator(cost, boss_hp, this.stage.getAlly());
-        add(Layer.controller, new CollisionChecker());
+        add(Layer.controller, new CollisionChecker(this));
     }
 
     public void addScore(int amount) {

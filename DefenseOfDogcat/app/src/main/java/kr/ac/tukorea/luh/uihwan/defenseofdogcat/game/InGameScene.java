@@ -125,19 +125,21 @@ public class InGameScene extends Scene {
 
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator(stage, player_hp));
-        friendlyGenerator = new FriendlyGenerator(cost, boss_hp);
+        friendlyGenerator = new FriendlyGenerator(cost, boss_hp, this.stage.getAlly());
         add(Layer.controller, new CollisionChecker());
     }
 
     private void createAllyButton()
     {
-        for(int i=0; i<UI_ALLY_IDS.length; i++)
+        for(int i=0; i<9; i++)
         {
             int finalI = i;
-            add(InGameScene.Layer.touch, new Button(UI_ALLY_IDS[i], i * 1.6f + 1.1f, 6.7f, 1.6f, 1.6f, new Button.Callback() {
+            finalI = (i < this.stage.getAlly()) ? i : 7;
+            int finalI1 = finalI;
+            add(InGameScene.Layer.touch, new Button(UI_ALLY_IDS[finalI1], i * 1.6f + 1.1f, 6.7f, 1.6f, 1.6f, new Button.Callback() {
                 @Override
                 public boolean onTouch(Button.Action action) {
-                    friendlyGenerator.spawnFriendly(finalI);
+                    friendlyGenerator.spawnFriendly(finalI1);
                     return true;
                 }
             }));

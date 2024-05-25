@@ -9,11 +9,13 @@ public class FriendlyGenerator implements IGameObject {
 
     private Cost cost;
     private HP bossHP;
+    private final int MAX_ALLY;
 
-    public FriendlyGenerator(Cost cost, HP bossHP)
+    public FriendlyGenerator(Cost cost, HP bossHP, int max_ally)
     {
         this.cost = cost;
         this.bossHP = bossHP;
+        this.MAX_ALLY = max_ally;
     }
 
     @Override
@@ -28,6 +30,8 @@ public class FriendlyGenerator implements IGameObject {
 
     public void spawnFriendly(int id)
     {
+        if(id > MAX_ALLY) return;
+
         Friendly.FriendlyType type = Friendly.getTypeAtIndex(id);
 
         if(cost.canSpawn(type.getCost()))

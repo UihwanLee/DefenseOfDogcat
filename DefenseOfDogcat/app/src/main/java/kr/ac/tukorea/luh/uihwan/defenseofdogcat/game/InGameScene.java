@@ -55,10 +55,6 @@ public class InGameScene extends Scene {
         // Layer 초기화
         initLayers(Layer.COUNT);
 
-        // Unit Generator 생성
-        add(Layer.controller, new EnemyGenerator(stage));
-        add(Layer.controller, new CollisionChecker());
-
         // joyStick 초기화
         this.joyStick = new JoyStick();
         add(Layer.controller, joyStick);
@@ -80,11 +76,11 @@ public class InGameScene extends Scene {
         // Button 생성
         createAllyButton();
 
-        friendlyGenerator = new FriendlyGenerator(cost);
-
         // HP UI 생성
-        HP player_hp = new HP(R.mipmap.ui_hp_ally, 4.0f, 0.0f, 3.0f, 1.0f, 100f, true);
+        HP player_hp = new HP(R.mipmap.ui_hp_ally, 5.5f, -0.19f, 2.3f, 1.0f, 100f, true);
+        HP boss_hp = new HP(R.mipmap.ui_hp_enemy, 8.2f, -0.19f, 2.3f, 1.0f, STAGE_BOSS_HP[stage], false);
         add(Layer.UI, player_hp);
+        add(Layer.UI, boss_hp);
 
         // UI 생성
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
@@ -92,6 +88,11 @@ public class InGameScene extends Scene {
 
         // Boss 생성
         add(Layer.boss, new Boss(STAGE_BOSS_HP[stage]));
+
+        // Unit Generator 생성
+        add(Layer.controller, new EnemyGenerator(stage, player_hp));
+        friendlyGenerator = new FriendlyGenerator(cost, boss_hp);
+        add(Layer.controller, new CollisionChecker());
     }
 
     private void createAllyButton()

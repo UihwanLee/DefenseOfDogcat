@@ -42,6 +42,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
     private float maxAttackCoolTime;
     private float attackCoolTime;
     private float dyingTime = 0.5f;
+    private HP bossHP;
 
     private Friendly.FriendlyType type;
 
@@ -60,21 +61,22 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         }
     }
 
-    private Friendly(FriendlyType type, int frameCount) {
+    private Friendly(FriendlyType type, int frameCount, HP bossHP) {
         super(type.getId(), ANIM_FPS, frameCount);
-        init(type);
+        init(type, bossHP);
     }
-    public static Friendly get(FriendlyType type, int frameCount) {
+    public static Friendly get(FriendlyType type, int frameCount, HP bossHP) {
         Friendly friendly = (Friendly) RecycleBin.get(Friendly.class);
         if (friendly != null) {
-            friendly.init(type);
+            friendly.init(type, bossHP);
             return friendly;
         }
-        return new Friendly(type, frameCount);
+        return new Friendly(type, frameCount, bossHP);
     }
 
-    private void init(FriendlyType type)
+    private void init(FriendlyType type, HP bossHP)
     {
+        this.bossHP = bossHP;
         this.type = type;
         setState(State.walking);
         this.hp = this.maxHp = type.getHP();
@@ -140,6 +142,9 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         if (attackCoolTime > 0) return false;
 
         attackCoolTime = this.maxAttackCoolTime;
+
+        // player hp decrease
+        this.bossHP.decreaseHP(atk);
 
         return boss.decreaseLife(atk);
     }

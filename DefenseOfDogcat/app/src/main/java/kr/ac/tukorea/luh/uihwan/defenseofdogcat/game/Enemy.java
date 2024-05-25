@@ -21,6 +21,8 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
 
     private float dyingTime = 0.5f;
 
+    private HP playerHP;
+
     public enum EnemyType {
         zombie, pirate, ninja, witch, frankenstein;
 
@@ -54,21 +56,22 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         return values[random.nextInt(level.length)];
     }
 
-    private Enemy(EnemyType type, int frameCount) {
+    private Enemy(EnemyType type, int frameCount, HP playerHP) {
         super(type.getId(), ANIM_FPS, frameCount);
-        init(type);
+        init(type, playerHP);
     }
-    public static Enemy get(EnemyType type, int frameCount) {
+    public static Enemy get(EnemyType type, int frameCount, HP playerHP) {
         Enemy enemy = (Enemy) RecycleBin.get(Enemy.class);
         if (enemy != null) {
-            enemy.init(type);
+            enemy.init(type, playerHP);
             return enemy;
         }
-        return new Enemy(type, frameCount);
+        return new Enemy(type, frameCount, playerHP);
     }
 
-    private void init(EnemyType type)
+    private void init(EnemyType type, HP playerHP)
     {
+        this.playerHP = playerHP;
         this.type = type;
         setState(State.walking);
         this.hp = this.maxHp = type.getHP();
@@ -84,6 +87,9 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     public void update(float elapsedSeconds) {
         if (dstRect.left < 0) {
             Scene.top().remove(InGameScene.Layer.enemy, this);
+
+            // player hp decrease
+            this.playerHP.decreaseHP(atk);
         }
 
         processState(elapsedSeconds);

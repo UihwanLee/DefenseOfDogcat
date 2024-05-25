@@ -5,6 +5,7 @@ import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 public class HP extends Sprite {
 
     boolean isPlayer;
+    final float MAX_X;
     final float MAX_HP;
     final float MAX_WIDTH;
     private float hp;
@@ -18,6 +19,7 @@ public class HP extends Sprite {
         MAX_HP = hp;
         this.hp = hp;
         this.isPlayer = isPlayer;
+        MAX_X = x + width;
 
         dstRect.set(x, y, x + width, y + height);
     }
@@ -44,7 +46,7 @@ public class HP extends Sprite {
 
         if (isPlayer)
         {
-            dstRect.set(x + width, y, x + MAX_HP, y + height);
+            dstRect.set(x + (MAX_WIDTH - width), y, MAX_X, y + height);
         }
         else
         {

@@ -8,10 +8,12 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 public class FriendlyGenerator implements IGameObject {
 
     private Cost cost;
+    private HP bossHP;
 
-    public FriendlyGenerator(Cost cost)
+    public FriendlyGenerator(Cost cost, HP bossHP)
     {
         this.cost = cost;
+        this.bossHP = bossHP;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class FriendlyGenerator implements IGameObject {
 
     private void generateFriendly()
     {
-        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(Friendly.FriendlyType.rat, 3));
+        Scene.top().add(InGameScene.Layer.friendly, Friendly.get(Friendly.FriendlyType.rat, 3, bossHP));
     }
 
     public void spawnFriendly(int id)
@@ -30,7 +32,7 @@ public class FriendlyGenerator implements IGameObject {
 
         if(cost.canSpawn(type.getCost()))
         {
-            Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3));
+            Scene.top().add(InGameScene.Layer.friendly, Friendly.get(type, 3, bossHP));
         }
     }
 

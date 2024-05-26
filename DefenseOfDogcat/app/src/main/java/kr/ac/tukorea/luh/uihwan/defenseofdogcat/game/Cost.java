@@ -4,19 +4,22 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
+import kr.ac.tukorea.luh.uihwan.framework.objects.Score;
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
 
 public class Cost extends Sprite {
 
     final float MAX_COST = 200.0f;
     float cost;
+    Score value_cost;
 
     private static final String TAG = Cost.class.getSimpleName();
 
-    public Cost(int mipmapId, float x, float y, float width, float height) {
+    public Cost(int mipmapId, float x, float y, float width, float height, Score value_cost) {
         super(mipmapId, x, y, width, height);
         cost = 0;
 
+        this.value_cost = value_cost;
         dstRect.set(x, y, x + width, y + height);
     }
 
@@ -25,6 +28,8 @@ public class Cost extends Sprite {
         if(cost + increase > MAX_COST) return;
 
         cost += increase;
+
+        value_cost.add((int)increase);
 
         setCost();
     }
@@ -47,6 +52,8 @@ public class Cost extends Sprite {
         if(cost - decrease < 0.0f) return;
 
         cost -= decrease;
+
+        value_cost.sub((int)decrease);
 
         setCost();
     }

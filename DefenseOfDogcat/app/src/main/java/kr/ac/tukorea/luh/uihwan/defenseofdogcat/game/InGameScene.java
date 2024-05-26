@@ -21,7 +21,7 @@ public class InGameScene extends Scene {
     private Dogcat player;
 
     private final JoyStick joyStick;
-    private Cost cost;
+    private Cost costbar;
 
     private FriendlyGenerator friendlyGenerator;
 
@@ -84,6 +84,7 @@ public class InGameScene extends Scene {
 
     StageType stage;
     Score score; // package private
+    Score cost;
 
     public InGameScene(int stage) {
         // Layer 초기화
@@ -103,11 +104,17 @@ public class InGameScene extends Scene {
         add(Layer.bg, new Background(this.stage.getId()));
 
         // Cost UI 생성
-        cost = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f);
+        Score MAX_COST = new Score(R.mipmap.number_24x32, 6.0f, 4.8f, 0.4f);
+        MAX_COST.setScore(200);
+        add(Layer.UI, MAX_COST);
+        cost = new Score(R.mipmap.number_24x32, 4.6f, 4.8f, 0.4f);
+        cost.setScore(0);
         add(Layer.UI, cost);
+        costbar = new Cost(R.mipmap.ui_cost, 0.9f, 5.1f, 0.0f, 1.0f, cost);
+        add(Layer.UI, costbar);
 
         // Cost System 초기화
-        add(Layer.controller, new CostGenerator(cost));
+        add(Layer.controller, new CostGenerator(costbar));
 
         // Button 생성
         createAllyButton();
@@ -132,7 +139,7 @@ public class InGameScene extends Scene {
 
         // Unit Generator 생성
         add(Layer.controller, new EnemyGenerator(stage, player_hp));
-        friendlyGenerator = new FriendlyGenerator(cost, boss_hp, this.stage.getAlly());
+        friendlyGenerator = new FriendlyGenerator(costbar, boss_hp, this.stage.getAlly());
         add(Layer.controller, new CollisionChecker(this));
     }
 

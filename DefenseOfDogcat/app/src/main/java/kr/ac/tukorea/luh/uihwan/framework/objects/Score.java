@@ -60,4 +60,6 @@ public class Score implements IGameObject {
     public void add(int amount) {
         score += amount;
     }
+
+    public void sub(int amount) { score -= amount; }
 }

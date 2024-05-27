@@ -130,7 +130,7 @@ public class InGameScene extends Scene {
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
         add(Layer.UI, new Background(R.mipmap.ui_state));
 
-        this.score = new Score(R.mipmap.number_24x32, 14.0f, 0.1f, 0.4f);
+        this.score = new Score(R.mipmap.gold_number, 14.0f, 0.1f, 0.4f);
         score.setScore(0);
         add(Layer.UI, score);
 

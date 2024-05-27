@@ -195,6 +195,30 @@ public class InGameScene extends Scene {
         super.draw(canvas);
     }
 
+    enum PauseLayer {
+        bg, COUNT
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        new Scene() {
+            @Override
+            protected void onStart() {
+                initLayers(PauseLayer.COUNT);
+                Sprite bg = new Sprite(R.mipmap.trans_50p);
+                float w = Metrics.width, h = Metrics.height;
+                bg.setPosition(w/2, h/2, w, h);
+                add(PauseLayer.bg, bg);
+            }
+
+            @Override
+            public boolean isTransparent() {
+                return true;
+            }
+        }.push();
+        return true;
+    }
+
     @Override
     protected int getTouchLayerIndex() {
         return InGameScene.Layer.touch.ordinal();

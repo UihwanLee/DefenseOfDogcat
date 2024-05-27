@@ -118,6 +118,7 @@ public class InGameScene extends Scene {
 
         // Button 생성
         createAllyButton();
+        createPauseButton();
 
         // HP UI 생성
         HP player_hp = new HP(R.mipmap.ui_hp_ally, 5.5f, -0.19f, 2.3f, 1.0f, 100f, true);
@@ -164,6 +165,17 @@ public class InGameScene extends Scene {
         }
     }
 
+    private void createPauseButton()
+    {
+        add(InGameScene.Layer.touch, new Button(UI_ALLY_IDS[0], 5.0f, 0.0f, 1.6f, 1.6f, new Button.Callback() {
+            @Override
+            public boolean onTouch(Button.Action action) {
+                pause();
+                return true;
+            }
+        }));
+    }
+
     @Override
     protected void onStart() {
         Sound.playMusic(R.raw.main);
@@ -196,7 +208,7 @@ public class InGameScene extends Scene {
     }
 
     enum PauseLayer {
-        bg, COUNT
+        bg, touch, COUNT
     }
 
     @Override
@@ -209,11 +221,53 @@ public class InGameScene extends Scene {
                 float w = Metrics.width, h = Metrics.height;
                 bg.setPosition(w/2, h/2, w, h);
                 add(PauseLayer.bg, bg);
+                add(PauseLayer.touch, new Button(UI_ALLY_IDS[0], 5.0f, 0.0f, 1.6f, 1.6f, new Button.Callback() {
+                    @Override
+                    public boolean onTouch(Button.Action action) {
+                        pop();
+                        Log.d(TAG, "Touch Button");
+                        return true;
+                    }
+                }));
             }
 
             @Override
             public boolean isTransparent() {
                 return true;
+            }
+        }.push();
+        return true;
+    }
+
+    public boolean pause()
+    {
+        new Scene() {
+            @Override
+            protected void onStart() {
+                initLayers(PauseLayer.COUNT);
+                Sprite bg = new Sprite(R.mipmap.trans_50p);
+                float w = Metrics.width, h = Metrics.height;
+                bg.setPosition(w/2, h/2, w, h);
+                add(PauseLayer.bg, bg);
+                add(PauseLayer.touch, new Button(UI_ALLY_IDS[0], 5.0f, 0.0f, 1.6f, 1.6f, new Button.Callback() {
+                    @Override
+                    public boolean onTouch(Button.Action action) {
+                        pop();
+                        return true;
+                    }
+                }));
+            }
+
+            @Override
+            public boolean isTransparent() {
+                return true;
+            }
+
+            @Override
+            public boolean onTouch(MotionEvent event) {
+                float[] pts = Metrics.fromScreen(event.getX(), event.getY());
+
+                return super.onTouch(event);
             }
         }.push();
         return true;
@@ -228,7 +282,7 @@ public class InGameScene extends Scene {
     public boolean onTouch(MotionEvent event) {
         float[] pts = Metrics.fromScreen(event.getX(), event.getY());
 
-        if(pts[1] > 5.0f)  return super.onTouch(event);
+        if(pts[1] > 5.0f || pts[1] < 0.2f)  return super.onTouch(event);
         else return joyStick.onTouch(event);
     }
 }

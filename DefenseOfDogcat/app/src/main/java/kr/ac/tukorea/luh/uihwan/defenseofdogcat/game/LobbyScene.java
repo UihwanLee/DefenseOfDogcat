@@ -9,16 +9,16 @@ import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 public class LobbyScene extends Scene {
     private static final String TAG = Scene.class.getSimpleName();
     public enum Layer {
-        bg, touch, COUNT
+        bg, bg2, touch, COUNT
     }
     public LobbyScene() {
-        initLayers(StartScene.Layer.COUNT);
+        initLayers(Layer.COUNT);
 
         // Background 생성
-        add(StartScene.Layer.bg, new Background(R.mipmap.scene02_stage_select));
+        add(Layer.bg2, new Background(R.mipmap.scene02_stage_select));
 
         // Stage 생성
-        add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage01, 8.0f, 5.0f, 3.0f, 3.0f, new Button.Callback() {
+        add(Layer.touch, new Button(R.mipmap.scene02_stage01, 8.0f, 5.0f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
                 new InGameScene(0).push();
@@ -27,20 +27,20 @@ public class LobbyScene extends Scene {
             }
         }));
 
-        add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage02, 5.3f, 2.7f, 3.0f, 3.0f, new Button.Callback() {
+        add(Layer.touch, new Button(R.mipmap.scene02_stage02, 5.3f, 2.7f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
                 new InGameScene(1).push();
-                add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
+                add(Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }
         }));
 
-        add(StartScene.Layer.touch, new Button(R.mipmap.scene02_stage03, 12.1f, 2.1f, 3.0f, 3.0f, new Button.Callback() {
+        add(Layer.touch, new Button(R.mipmap.scene02_stage03, 12.1f, 2.1f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
                 new InGameScene(2).push();
-                add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
+                add(Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }
         }));

@@ -170,7 +170,7 @@ public class InGameScene extends Scene {
         add(InGameScene.Layer.touch, new Button(UI_ALLY_IDS[0], 5.0f, 0.0f, 1.6f, 1.6f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
-                pause();
+                pop();
                 return true;
             }
         }));

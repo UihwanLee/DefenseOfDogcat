@@ -1,5 +1,6 @@
 package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
+import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import java.util.Random;
@@ -10,11 +11,12 @@ import kr.ac.tukorea.luh.uihwan.framework.interfaces.IRecyclable;
 import kr.ac.tukorea.luh.uihwan.framework.objects.AnimSprite;
 import kr.ac.tukorea.luh.uihwan.framework.scene.RecycleBin;
 import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
+import kr.ac.tukorea.luh.uihwan.framework.util.Gauge;
 import kr.ac.tukorea.luh.uihwan.framework.view.Metrics;
 
 public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     private static final float ANIM_FPS = 10.0f;
-    private int hp, maxHp;
+    private float hp, maxHp;
     private int atk;
     private float maxAttackCoolTime;
     private float attackCoolTime;
@@ -45,6 +47,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         static final int[] resScore = { 100, 200, 300, 400, 500, };
     }
     private EnemyType type;
+    private static Gauge gauge;
 
     public static EnemyType getRandomEnemyType() {
         EnemyType[] values = EnemyType.values();
@@ -95,6 +98,17 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         }
 
         processState(elapsedSeconds);
+    }
+
+    @Override
+    public void draw(Canvas canvas)
+    {
+        super.draw(canvas);
+        float size = width * 2 / 3;
+        if (gauge == null) {
+            gauge = new Gauge(0.2f, R.color.healthFg, R.color.healthBg);
+        }
+        gauge.draw(canvas, x - size / 2, y - size / 2 - 0.3f, size, hp / maxHp);
     }
 
     private void processState(float elapsedSeconds)

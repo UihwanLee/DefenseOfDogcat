@@ -15,6 +15,7 @@
 
 ![49d88598a18746f88bc4f381b3044b1f-1](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/ebad0b78-cf9f-4d57-8807-eaf640ece2ae)
 
+
 ## 유닛
 
 > 플레이어
@@ -143,6 +144,39 @@
 ||||40%|
 
 
+## 사용된 기술
+ - Game Framework
+ - GameObject class/interface, Sprite
+ - postDelayed(), Choreographer
+ - Frame Time, FPS
+ - GameObject Layering
+ - Touch Event handling
+ - Frame Animation (Animation Sheet)
+ - Object Lifecycle Management (recycle)
+ - Collision Check / Collision Handling
+ - Sound BGM
+ - JoyStick
+
+
+## 참고 사항 & 수업 시간 차용 사항
+ - Game Framework 모든 class 요소
+ - Frame Animation / Collision Check 등 애니메이션&충돌처리 알고리즘
+
+
+## 작접 개발 한 것
+ - Cost System        : 게임 내 Cost가 존재하여 Cost가 지속적으로 증가하며 Cost를 가지고 유닛을 뽑는 시스템 구현 
+ - Anim Sprite Invert : 기존 간단한 Sprite Sheet을 활용하여 이미지 반전을 통해 좌우 이동에 따른 애니메이션 구현
+ - Enemy State AI     : StateMachine을 따라 자동적으로 동작하는 적 AI 구현
+ - Game UI            : 현재 플레이 상태, 게임 상태에 따른 능동적인 Game UI 처리
+
+
+## 목표 사항 변경
+- 변경 사항
+ - 중간 보스 -> 중간 보스(X)
+- 변경 사항 이유
+ - Horizontal 스크롤 이동 구현 실패로 인한 맵 사이즈가 한정되었다. 따라서 중간 보스 기획을 삭제하고 한 보스만 구현하도록 변경하게 되었다.
+
+
 ## COMMIT 내역
 
 ![commit](https://github.com/UihwanLee/DefenseOfDogcat/assets/36596037/6aef7ad0-8090-43e9-b6de-264f70929cea)
@@ -162,5 +196,17 @@
 ## 개발 일정
 
 ![49d88598a18746f88bc4f381b3044b1f-3](https://github.com/UihwanLee/SmartPhoneGameProject/assets/36596037/3ddec8e6-598b-42b1-a941-516e5f3c7035)
+
+
+## 아쉬웠던 점 & 개발 못한 사항 & 보충 점
+ - Map 크기를 가로로 늘려 플레이어 이동에 따른 Horizontal Scroll을 구현하지 못하여 게임 기획에서 차질이 생긴 것이 아쉽다.
+ - Defense 게임의 가장 큰 재미인 밸런스 요소를 구체적으로 고려하고 레벨디자인을 보충해야 한다.
+ - 충돌 처리 부분에서 간단한 사각 충돌 처리를 이용했기에 중간중간 애니메이션 버그가 나타난다.
+
+
+## 수업 시간 기대한 것 & 얻지 못한 점 & 변화점
+ - 스마트폰 게임에서 활용 가능한 다방면의 기술&프레임워크 구조를 git을 통해 빠르게 학습 할 수 있어서 좋았다.
+ - 다만, 직접 같이 타이핑 하면서 개발하는 형식이 아니라 프로젝트에 기술을 활용할 때 다시 한번 복습하고 확인해보는 시간이 있어 많은 시간을 할애한다는 단점이 있는 것 같다.
+ - git을 이용한 빠른 학습은 만족하나 중요하다고 생각이 들만한 부분/기술은 초반 시간 처럼 같이 타이핑을 하며 진행하는 방식도 괜찮을 듯 하다.
 
 

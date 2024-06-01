@@ -167,10 +167,10 @@ public class InGameScene extends Scene {
 
     private void createPauseButton()
     {
-        add(InGameScene.Layer.touch, new Button(R.mipmap.button_play, 12.0f, 0.2f, 1.6f, 1.6f, new Button.Callback() {
+        add(InGameScene.Layer.touch, new Button(R.mipmap.ui_bt_pause, 15.5f, 0.4f, 1.6f, 1.6f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
-                new EndScene().push();
+                new PauseScene().push();
                 return true;
             }
         }));

@@ -182,7 +182,7 @@ public class InGameScene extends Scene {
         }));
     }
 
-    public void clearStage()
+    public void stageClear()
     {
         InGameScene.clearStage += 1;
         new EndScene(this.score.getScore()).push();

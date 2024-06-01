@@ -37,7 +37,7 @@ public class CollisionChecker implements IGameObject {
                         // 게임 끝
                         Log.d(TAG, "END");
                         Scene.top().remove(InGameScene.Layer.boss, boss);
-                        scene.clearStage();
+                        scene.stageClear();
                     }
                 }
             }

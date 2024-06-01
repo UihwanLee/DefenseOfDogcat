@@ -38,6 +38,7 @@ public class EndScene extends Scene {
         add(Layer.touch, new Button(R.mipmap.ui_endgame_bt_next, 12.0f, 8.0f, 5f, 1.6f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
+                LobbyScene.setStageBitmap();
                 pop();
                 pop();
                 Log.d(TAG, "Touch Button");

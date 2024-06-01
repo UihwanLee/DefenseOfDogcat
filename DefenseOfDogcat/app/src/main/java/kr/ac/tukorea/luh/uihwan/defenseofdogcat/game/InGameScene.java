@@ -25,7 +25,7 @@ public class InGameScene extends Scene {
 
     private FriendlyGenerator friendlyGenerator;
 
-    private static int currentStage = 1;
+    public static int currentStage = 0;
 
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);

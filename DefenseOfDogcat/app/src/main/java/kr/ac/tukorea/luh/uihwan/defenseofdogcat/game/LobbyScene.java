@@ -21,6 +21,8 @@ public class LobbyScene extends Scene {
         add(Layer.touch, new Button(R.mipmap.scene02_stage01, 8.0f, 5.0f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
+                if(false == checkStage(0)) return true;
+
                 new InGameScene(0).push();
                 add(StartScene.Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
@@ -30,6 +32,8 @@ public class LobbyScene extends Scene {
         add(Layer.touch, new Button(R.mipmap.scene02_stage02, 5.3f, 2.7f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
+                if(false == checkStage(1)) return true;
+
                 new InGameScene(1).push();
                 add(Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
@@ -39,11 +43,18 @@ public class LobbyScene extends Scene {
         add(Layer.touch, new Button(R.mipmap.scene02_stage03, 12.1f, 2.1f, 3.0f, 3.0f, new Button.Callback() {
             @Override
             public boolean onTouch(Button.Action action) {
+                if(false == checkStage(2)) return true;
+
                 new InGameScene(2).push();
                 add(Layer.bg, new Background(R.mipmap.scene03_background_type_1));
                 return true;
             }
         }));
+    }
+
+    private boolean checkStage(int stage)
+    {
+        return (InGameScene.currentStage >= stage);
     }
 
     @Override

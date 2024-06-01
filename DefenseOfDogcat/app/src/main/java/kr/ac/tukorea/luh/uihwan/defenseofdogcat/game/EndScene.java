@@ -51,7 +51,7 @@ public class EndScene extends Scene {
 
     @Override
     protected void onStart() {
-        Sound.playMusic(R.raw.menu);
+        Sound.playMusic(R.raw.victory);
     }
 
     @Override

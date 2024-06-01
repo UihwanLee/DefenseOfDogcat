@@ -25,6 +25,8 @@ public class InGameScene extends Scene {
 
     private FriendlyGenerator friendlyGenerator;
 
+    private static int currentStage = 1;
+
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
 
@@ -130,6 +132,7 @@ public class InGameScene extends Scene {
         add(Layer.UI, new Background(R.mipmap.scene03_ui_background));
         add(Layer.UI, new Background(R.mipmap.ui_state));
 
+        // Score
         this.score = new Score(R.mipmap.gold_number, 14.0f, 0.1f, 0.4f);
         score.setScore(0);
         add(Layer.UI, score);
@@ -174,6 +177,12 @@ public class InGameScene extends Scene {
                 return true;
             }
         }));
+    }
+
+    public void clearStage()
+    {
+        InGameScene.currentStage += 1;
+        new EndScene(this.score.getScore()).push();
     }
 
     @Override

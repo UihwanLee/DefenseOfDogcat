@@ -26,6 +26,7 @@ public class InGameScene extends Scene {
     private FriendlyGenerator friendlyGenerator;
 
     public static int currentStage = 0;
+    public static int clearStage = 0;
 
     RectF bgRect = new RectF(0, 0, Metrics.width, Metrics.height);
     RectF controlRect = new RectF(0, 0, Metrics.width, Metrics.height);
@@ -91,6 +92,8 @@ public class InGameScene extends Scene {
     public InGameScene(int stage) {
         // Layer 초기화
         initLayers(Layer.COUNT);
+
+        InGameScene.currentStage = stage;
 
         this.stage = getTypeAtIndex(stage);
 
@@ -181,7 +184,7 @@ public class InGameScene extends Scene {
 
     public void clearStage()
     {
-        InGameScene.currentStage += 1;
+        InGameScene.clearStage += 1;
         new EndScene(this.score.getScore()).push();
     }
 

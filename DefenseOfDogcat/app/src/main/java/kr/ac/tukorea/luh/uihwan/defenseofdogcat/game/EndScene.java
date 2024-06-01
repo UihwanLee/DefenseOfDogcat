@@ -19,6 +19,8 @@ public class EndScene extends Scene {
         bg, ui, touch, COUNT
     }
 
+    private final int[][] resScore = { {1500, 2000}, {2000, 2500}, {2500, 3000} };
+
     public EndScene(int score)
     {
         initLayers(Layer.COUNT);
@@ -42,6 +44,24 @@ public class EndScene extends Scene {
                 return true;
             }
         }));
+
+        calcScore(score);
+    }
+
+    private void calcScore(int score)
+    {
+        if(score >= resScore[InGameScene.currentStage][0])
+        {
+            Sprite star = new Sprite(R.mipmap.ui_star);
+            add(Layer.ui, star);
+            star.setPosition(8.0f, 5.5f, 3.3f, 3.3f);
+        }
+        if(score >= resScore[InGameScene.currentStage][1])
+        {
+            Sprite star = new Sprite(R.mipmap.ui_star);
+            add(Layer.ui, star);
+            star.setPosition(10.5f, 5.5f, 3.3f, 3.3f);
+        }
     }
 
     @Override

@@ -54,7 +54,7 @@ public class LobbyScene extends Scene {
 
     private boolean checkStage(int stage)
     {
-        return (InGameScene.currentStage >= stage);
+        return (InGameScene.clearStage >= stage);
     }
 
     @Override

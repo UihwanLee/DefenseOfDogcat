@@ -58,7 +58,9 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
     public static EnemyType getEnemyTypeByLevel(int[] level) {
         EnemyType[] values = EnemyType.values();
         Random random = new Random();
-        return values[random.nextInt(level.length)];
+        // level 배열에서 무작위로 하나의 값을 선택합니다.
+        int randomLevel = level[random.nextInt(level.length)];
+        return values[randomLevel];
     }
 
     private Enemy(EnemyType type, int frameCount, HP playerHP) {

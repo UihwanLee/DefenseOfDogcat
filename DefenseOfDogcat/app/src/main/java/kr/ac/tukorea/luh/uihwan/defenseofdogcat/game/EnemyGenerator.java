@@ -9,9 +9,9 @@ import kr.ac.tukorea.luh.uihwan.framework.interfaces.IGameObject;
 public class EnemyGenerator implements IGameObject {
 
     private static int[][] levels = new int[][] {
-            { 1, 2, 3, },
-            { 2, 3, 4, },
-            { 3, 4, 5, },
+            { 0, 1, 2 },
+            { 1, 2, 3 },
+            { 1, 2, 3, 4, },
     };
 
     private HP playerHP;

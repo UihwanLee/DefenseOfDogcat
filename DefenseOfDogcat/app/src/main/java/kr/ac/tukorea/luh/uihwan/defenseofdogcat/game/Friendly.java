@@ -36,7 +36,7 @@ public class Friendly extends AnimSprite implements IBoxCollidable, IRecyclable 
         static final int[] resCost = { 10, 20, 30, 50, 100, 150, 200, };
         static final int[] resHP = { 20, 15, 40, 50, 70, 90, 150, };
         static final int[] resATK = { 5, 8,	10,	20,	50,	60,	100, };
-        static final float[] resSpeed =  { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+        static final float[] resSpeed =  { 1.0f, 0.8f, 1.2f, 1.4f, 0.7f, 1.5f, 0.5f };
         static final float[] resCoolTime = { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, };
         static final int[][] resFrame = { {3, 2, 1}, {4, 5, 1}, {4, 4, 1}, {4, 6, 1}, {3, 4, 1}, {4, 4, 1}, {5, 4, 1}};
     }

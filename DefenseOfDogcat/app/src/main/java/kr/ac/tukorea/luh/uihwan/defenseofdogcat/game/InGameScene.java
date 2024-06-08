@@ -126,8 +126,8 @@ public class InGameScene extends Scene {
         createPauseButton();
 
         // HP UI 생성
-        HP player_hp = new HP(R.mipmap.ui_hp_ally, 5.5f, -0.19f, 2.3f, 1.0f, 100f, true);
-        HP boss_hp = new HP(R.mipmap.ui_hp_enemy, 8.2f, -0.19f, 2.3f, 1.0f, this.stage.getHP(), false);
+        HP player_hp = new HP(R.mipmap.ui_hp_ally, 5.5f, -0.19f, 2.3f, 1.0f, 100f, true, this);
+        HP boss_hp = new HP(R.mipmap.ui_hp_enemy, 8.2f, -0.19f, 2.3f, 1.0f, this.stage.getHP(), false, this);
         add(Layer.UI, player_hp);
         add(Layer.UI, boss_hp);
 
@@ -186,6 +186,11 @@ public class InGameScene extends Scene {
     {
         InGameScene.clearStage += 1;
         new EndScene(this.score.getScore()).push();
+    }
+
+    public void stageFail()
+    {
+        new FailScene().push();
     }
 
     @Override

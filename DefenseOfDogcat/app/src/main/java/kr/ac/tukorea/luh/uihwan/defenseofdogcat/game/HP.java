@@ -1,6 +1,7 @@
 package kr.ac.tukorea.luh.uihwan.defenseofdogcat.game;
 
 import kr.ac.tukorea.luh.uihwan.framework.objects.Sprite;
+import kr.ac.tukorea.luh.uihwan.framework.scene.Scene;
 
 public class HP extends Sprite {
 
@@ -9,8 +10,9 @@ public class HP extends Sprite {
     final float MAX_HP;
     final float MAX_WIDTH;
     private float hp;
+    private InGameScene scene;
 
-    public HP(int mipmapId, float x, float y, float width, float height, float hp, boolean isPlayer)
+    public HP(int mipmapId, float x, float y, float width, float height, float hp, boolean isPlayer, InGameScene scene)
     {
         super(mipmapId, x, y, width, height);
 
@@ -22,15 +24,29 @@ public class HP extends Sprite {
         MAX_X = x + width;
 
         dstRect.set(x, y, x + width, y + height);
+
+        this.scene = scene;
     }
 
     public void decreaseHP(float decrease)
     {
+        checkPlayerDead(decrease);
         if(hp - decrease < 0.0f) return;
 
         hp -= decrease;
 
         setHP();
+    }
+
+    private void checkPlayerDead(float decrease)
+    {
+        if(isPlayer == false) return;
+
+        if(hp - decrease < 0.0f)
+        {
+            // player 사망 미션 실패
+            this.scene.stageFail();
+        }
     }
 
     private void setHP()
@@ -53,4 +69,6 @@ public class HP extends Sprite {
             dstRect.set(x, y, x + width, y + height);
         }
     }
+
+    public float getHP() { return hp; }
 }

@@ -41,7 +41,7 @@ public class Enemy extends AnimSprite implements IBoxCollidable, IRecyclable {
         };
         static final int[] resHP = { 10, 8, 30, 70, 120, };
         static final int[] resATK = { 5, 8, 20, 30, 50, };
-        static final float[] resSpeed =  { -1.0f, -1.0f, -1.0f, -1.0f, -1.0f, };
+        static final float[] resSpeed =  { -1.0f, -0.8f, -1.3f, -1.2f, -0.5f, };
         static final float[] resCoolTime = { 0.5f, 0.5f, 0.5f, 0.5f, 0.5f, };
         static final int[][] resFrame = { {5, 3, 1}, {3, 3, 1}, {2, 3, 1}, {4, 2, 1}, {5, 4, 1}};
         static final int[] resScore = { 100, 200, 300, 400, 500, };

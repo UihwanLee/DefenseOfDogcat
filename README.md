@@ -163,7 +163,7 @@
  - Frame Animation / Collision Check 등 애니메이션&충돌처리 알고리즘
 
 
-## 작접 개발 한 것
+## 직접 개발 한 것
  - Cost System        : 게임 내 Cost가 존재하여 Cost가 지속적으로 증가하며 Cost를 가지고 유닛을 뽑는 시스템 구현 
  - Anim Sprite Invert : 기존 간단한 Sprite Sheet을 활용하여 이미지 반전을 통해 좌우 이동에 따른 애니메이션 구현
  - Enemy State AI     : StateMachine을 따라 자동적으로 동작하는 적 AI 구현
@@ -189,7 +189,7 @@
 |7주차|2회|
 |8주차|16회|
 |9주차|16회|
-|total|181회|
+|total|182회|
 
 
 

@@ -12,9 +12,9 @@
 
  ## 개발 영상
 
- * [1차 발표](https://youtu.be/TWSnwY8wrn0?si=78FPl2OVtfK8IALY](https://youtu.be/a3vMRUNkJLQ?si=8r7QtiYxbPuxIeOV)
+ * [1차 발표](https://youtu.be/a3vMRUNkJLQ?si=8r7QtiYxbPuxIeOV)
 
- * [2차 발표](https://youtu.be/a2Abnsx1ubY?si=wHQJFvMQjsO0c53W)](https://youtu.be/IDLNLbNPApk?si=d2YXB935_Z66oO5g)
+ * [2차 발표](https://youtu.be/IDLNLbNPApk?si=d2YXB935_Z66oO5g)
  
  * [3차 발표](https://youtu.be/D5LWvmmKIls?si=Ww0mdm7H0_9DNpJY)
   

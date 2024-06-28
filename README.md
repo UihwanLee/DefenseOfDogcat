@@ -10,6 +10,13 @@
  * high_concept: 2011년 안드로이드용 국산 게임으로 출시된 '팔라독' 게임 컨셉을 기반으로 한 디펜스 게임
  * 핵심 매커니즘: 다양한 유닛을 소환하여 적의 기지를 부셔 각기 다른 난이도의 스테이즈를 클리어하자!
 
+ ## 개발 영상
+
+ * [1차 발표](https://youtu.be/TWSnwY8wrn0?si=78FPl2OVtfK8IALY](https://youtu.be/a3vMRUNkJLQ?si=8r7QtiYxbPuxIeOV)
+
+ * [2차 발표](https://youtu.be/a2Abnsx1ubY?si=wHQJFvMQjsO0c53W)](https://youtu.be/IDLNLbNPApk?si=d2YXB935_Z66oO5g)
+ 
+ * [3차 발표](https://youtu.be/D5LWvmmKIls?si=Ww0mdm7H0_9DNpJY)
   
 ## 개발 범위
 
